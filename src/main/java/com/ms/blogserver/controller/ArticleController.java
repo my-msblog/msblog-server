@@ -30,9 +30,9 @@ public class ArticleController {
     private ArticleService articleService;
 
     @PostMapping(value = "/get")
-    public Result getArticle(){
+    public Result getArticle(Long id){
         try {
-            return ResultFactory.buildSuccessResult(articleService.getArticleById(1l));
+            return ResultFactory.buildSuccessResult(articleService.getArticleById(id));
         }catch (Exception e){
             throw new CustomException(e.getMessage());
         }

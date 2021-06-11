@@ -3,6 +3,8 @@ package com.ms.blogserver.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ms.blogserver.entity.Category;
 
+import java.util.List;
+
 /**
  * @description:
  * @author: zhh
@@ -11,4 +13,6 @@ import com.ms.blogserver.entity.Category;
 public interface CategoryService extends IService<Category> {
 
     String getCategoryByCid(Integer categoryId);
+
+    List<Category> getList();
 }

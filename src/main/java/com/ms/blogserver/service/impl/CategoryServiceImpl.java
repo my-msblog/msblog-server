@@ -1,11 +1,14 @@
 package com.ms.blogserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ms.blogserver.entity.Category;
 import com.ms.blogserver.mapper.CategoryMapper;
 import com.ms.blogserver.service.CategoryService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @description:
@@ -19,5 +22,10 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         Category category = baseMapper.selectOne(new LambdaQueryWrapper<Category>()
                 .eq(Category::getCategoryId,categoryId));
         return category.getCategory();
+    }
+
+    @Override
+    public List<Category> getList() {
+        return baseMapper.selectList(new QueryWrapper<>());
     }
 }
