@@ -1,6 +1,7 @@
 package com.ms.blogserver.controller;
 
 import com.ms.blogserver.config.exception.CustomException;
+import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.dto.GetCommentDTO;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequestMapping(value = "article")
-public class ArticleController {
+public class ArticleController extends BaseController {
 
     @Autowired
     private CommentService commentService;
@@ -30,25 +31,34 @@ public class ArticleController {
     private ArticleService articleService;
 
     @PostMapping(value = "/get")
-    public Result getArticle(Long id){
+    public Result getArticle(Long id) throws Exception {
         try {
             return ResultFactory.buildSuccessResult(articleService.getArticleById(id));
         }catch (Exception e){
-            throw new CustomException(e.getMessage());
+            throw this.exceptionHandle(e);
         }
     }
 
     @PostMapping(value = "/comment")
-    public Result getComment(@RequestBody GetCommentDTO dto){
+    public Result getComment(@RequestBody GetCommentDTO dto) throws Exception {
         try {
             return ResultFactory.buildSuccessResult(commentService.getPageByArticle(dto));
         }catch (Exception e){
-            throw new CustomException(e.getMessage());
+            throw this.exceptionHandle(e);
         }
     }
 
     @PostMapping(value = "/user/comment")
     public Result getUserComment(){
         return null;
+    }
+
+    @PostMapping(value = "/date")
+    public Result getByDate() throws Exception {
+        try {
+            return null;
+        }catch (Exception e){
+            throw this.exceptionHandle(e);
+        }
     }
 }

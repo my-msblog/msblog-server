@@ -3,6 +3,7 @@ package com.ms.blogserver.controller;
 import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.contexts.VerifyContexts;
 import com.ms.blogserver.config.exception.CustomException;
+import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @Slf4j
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -74,12 +75,12 @@ public class UserController {
     }
 
     @PostMapping(value = "/update")
-    public Result userUpdate(@RequestBody UserDTO u) throws CustomException {
+    public Result userUpdate(@RequestBody UserDTO u) throws Exception {
         try {
             userService.updateUser(u);
             return ResultFactory.buildSuccessResult(userService.findAll());
         }catch (Exception e){
-            throw new CustomException(e.getMessage());
+            throw this.exceptionHandle(e);
         }
 
     }
@@ -94,7 +95,7 @@ public class UserController {
 
     @GetMapping(value = "/logout")
     public Result logout(HttpServletRequest request) {
-        String token = request.getHeader("token");
+        String token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXJyZW50VGltZSI6MTYyMzQwMzIxNjY0OCwiaXNzIjoiYXV0aDAiLCJleHAiOjE2MjM0MDM1MTYsImFjY291bnQiOiJhZG1pbiJ9.hKtOoeYNt624e2HutXOWeqQcWqidaUkfdblVUaL18rc"; //request.getHeader("token");
         return tokenService.removeToken(token) ?
                 ResultFactory.buildSuccessResult(LoginContexts.LOGOUT_SUCCESS) :
                 ResultFactory.buildFailResult(LoginContexts.NO_LOGIN_USER);

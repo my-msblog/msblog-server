@@ -1,5 +1,6 @@
 package com.ms.blogserver.service.impl;
 
+import com.ms.blogserver.config.exception.ProgramException;
 import com.ms.blogserver.constant.contexts.DigitalContexts;
 import com.ms.blogserver.constant.contexts.RedisKeyContexts;
 import com.ms.blogserver.constant.contexts.VerifyContexts;
@@ -52,7 +53,7 @@ public class TokenServiceImpl implements TokenService {
             }
             return false;
         } catch (Exception e) {
-            throw new CustomException(e.getMessage());
+            throw new ProgramException(e.getMessage());
         }
     }
 

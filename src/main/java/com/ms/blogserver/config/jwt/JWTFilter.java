@@ -51,10 +51,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             try {
                 return executeLogin(request, response);
             } catch (Exception e) {
-                System.out.println("错误" + e);
                 throw new ShiroException(e.getMessage());
-                //responseError(response, "shiro fail");
-                //return false;
             }
         }
         return true;
@@ -113,10 +110,9 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      * @param request
      * @param response
      * @return
-     * @throws Exception
      */
     @Override
-    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
+    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) {
         logger.debug("onLoginSuccess：");
         String jwttoken= (String) token.getPrincipal();
         if (jwttoken!=null){
@@ -186,8 +182,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             if (currentTimeMillisRedis.equals(currentTime)) {
                 // 获取当前最新时间戳
                 Long currentTimeMillis =System.currentTimeMillis();
-                redisUtils.set(account, currentTimeMillis,
-                        TokenUtils.REFRESH_EXPIRE_TIME);
+                redisUtils.set(account, currentTimeMillis, TokenUtils.REFRESH_EXPIRE_TIME);
                 // 刷新AccessToken，设置时间戳为当前最新时间戳
                 token = TokenUtils.sign(account, currentTimeMillis);
                 HttpServletResponse httpServletResponse = (HttpServletResponse) response;

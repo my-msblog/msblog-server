@@ -1,6 +1,7 @@
 package com.ms.blogserver.utils;
 
 import com.ms.blogserver.config.exception.CustomException;
+import com.ms.blogserver.config.exception.ProgramException;
 import com.ms.blogserver.constant.contexts.ErrorContexts;
 import com.ms.blogserver.vo.FileSimpleVO;
 import lombok.extern.slf4j.Slf4j;
@@ -73,7 +74,7 @@ public class FileUtils {
             return stringBuffer.toString();
         } catch (Exception e) {
             log.error(e.getMessage(),e);
-            throw new CustomException(ErrorContexts.FILE_ERR);
+            throw new ProgramException(ErrorContexts.FILE_ERR);
         }
     };
 }

@@ -20,6 +20,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @time: 2021/5/25
  */
 
+
+@Configuration
 public class RedisConfig {
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
@@ -29,6 +31,7 @@ public class RedisConfig {
         template.setConnectionFactory(factory);
 
         //使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值（默认使用JDK的序列化方式）
+        @SuppressWarnings("rawtypes")
         Jackson2JsonRedisSerializer jacksonSeial = new Jackson2JsonRedisSerializer(Object.class);
 
         ObjectMapper om = new ObjectMapper();

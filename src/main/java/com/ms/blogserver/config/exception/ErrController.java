@@ -23,7 +23,7 @@ public class ErrController implements ErrorController {
     /**
      * 404页面
      */
-    @RequestMapping("/error")
+    @RequestMapping("/eror")
     public Result handlerError(){
         log.warn(ResultCode.NOT_FOUND.CODE+":"+ResultString.PAGE_NO_FOUND.DATA);
         return ResultFactory.buildResult(ResultCode.NOT_FOUND, ResultString.PAGE_NO_FOUND.DATA);
