@@ -14,4 +14,6 @@ public interface ErrorContexts {
     String NO_FILE = "文件不存在";
 
     String FILE_NO_DELETE = "文件无法删除，需要管理员权限或尝试关闭文件";
+
+    String ID_IS_NULL = "传入id不能为空";
 }

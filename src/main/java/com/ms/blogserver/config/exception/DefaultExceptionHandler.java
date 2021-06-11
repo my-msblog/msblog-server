@@ -48,6 +48,19 @@ public class DefaultExceptionHandler {
         return ResultFactory.buildFailResult(e.getMessage());
     }
 
+    /**
+     * 定义ProgramException程序异常捕获
+     *
+     * @param e
+     * @return 返回500
+     */
+    @ExceptionHandler(ProgramException.class)
+    @ResponseBody
+    public Result handleProgramException(ProgramException e){
+        log.error(e.getMessage(),e);
+        return ResultFactory.buildResult(ResultCode.INTERNAL_SERVER_ERROR,ResultString.INTERNAL_ERROR.DATA,e.toString());
+    }
+
     @ExceptionHandler({UnauthorizedException.class})
     @ResponseBody
     public Result handleUnauthorizedException(UnauthorizedException unauthorizedException) {
@@ -65,7 +78,7 @@ public class DefaultExceptionHandler {
     /**
      * 其他异常
      * @param e
-     * @return 返回400
+     * @return 返回500
      */
     @ExceptionHandler(Exception.class)
     @ResponseBody
@@ -74,6 +87,6 @@ public class DefaultExceptionHandler {
         if (e instanceof NoHandlerFoundException){
             return ResultFactory.buildResult(ResultCode.NOT_FOUND,ResultString.PAGE_NO_FOUND.DATA);
         }
-        return ResultFactory.buildFailResult(e.getMessage());
+        return ResultFactory.buildResult(ResultCode.INTERNAL_SERVER_ERROR,e.getMessage());
     }
 }

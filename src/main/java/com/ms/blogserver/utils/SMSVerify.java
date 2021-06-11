@@ -2,6 +2,7 @@ package com.ms.blogserver.utils;
 
 
 import com.ms.blogserver.config.exception.CustomException;
+import com.ms.blogserver.config.exception.ProgramException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -36,7 +37,7 @@ public class SMSVerify {
             return code;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new CustomException("SMS Send Error:"+"服务器异常，请联系管理人员");
+            throw new ProgramException("SMS Send Error:"+"服务器异常，请联系管理人员");
         }
     }
 

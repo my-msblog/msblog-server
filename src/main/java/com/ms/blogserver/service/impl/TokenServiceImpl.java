@@ -40,16 +40,20 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public boolean removeToken(String token) {
-        String account = TokenUtils.getAccount(token);
-        Long currentTime= TokenUtils.getCurrentTime(token);
-        if (redisUtils.hasKey(account)) {
-            Long currentTimeMillisRedis = (Long) redisUtils.get(account);
-            if (currentTimeMillisRedis.equals(currentTime)) {
-                redisUtils.del(account);
-                return true;
+        try {
+            String account = TokenUtils.getAccount(token);
+            Long currentTime= TokenUtils.getCurrentTime(token);
+            if (redisUtils.hasKey(account)) {
+                Long currentTimeMillisRedis = (Long) redisUtils.get(account);
+                if (currentTimeMillisRedis.equals(currentTime)) {
+                    redisUtils.del(account);
+                    return true;
+                }
             }
+            return false;
+        } catch (Exception e) {
+            throw new CustomException(e.getMessage());
         }
-        return false;
     }
 
     @Override
