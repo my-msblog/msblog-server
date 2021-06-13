@@ -21,6 +21,7 @@ import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 
 @RestController
 @Slf4j
@@ -44,19 +45,23 @@ public class UserController extends BaseController {
     }
 
     @PostMapping(value = "/login")
-    public Result userLogin(@RequestBody LoginDTO loginDTO, HttpServletResponse response){
-        String username = loginDTO.getUsername();
-        String pwd = loginDTO.getPassword();
-        //判断验证码
-        //captchaService.verifyArithmetic(loginDTO.getKey(), loginDTO.getCode());
-        String realPassword =userService.getPassword(username);
-        if (realPassword == null){
-            return ResultFactory.buildFailResult(LoginContexts.USER_IS_NOT_EXIST);
-        }else if (realPassword.equals(EncryptPassword.encrypt(pwd))){
-            UserVO userVO = tokenService.setToken(userService.findByUserName(username),tokenService.CreateToken(username,response));
-            return ResultFactory.buildSuccessResult(userVO);
+    public Result userLogin(@RequestBody LoginDTO loginDTO, HttpServletResponse response) throws Exception {
+        try {
+            String username = loginDTO.getUsername();
+            String pwd = loginDTO.getPassword();
+            //判断验证码
+            //captchaService.verifyArithmetic(loginDTO.getKey(), loginDTO.getCode());
+            String realPassword =userService.getPassword(username);
+            if (realPassword == null){
+                return ResultFactory.buildFailResult(LoginContexts.USER_IS_NOT_EXIST);
+            }else if (realPassword.equals(EncryptPassword.encrypt(pwd))){
+                UserVO userVO = tokenService.setToken(userService.findByUserName(username),tokenService.CreateToken(username,response));
+                return ResultFactory.buildSuccessResult(userVO);
+            }
+            return ResultFactory.buildFailResult(LoginContexts.PASSWORD_IS_ERROR);
+        } catch (Exception e) {
+           throw this.exceptionHandle(e);
         }
-        return ResultFactory.buildFailResult(LoginContexts.PASSWORD_IS_ERROR);
     }
 
     @PostMapping(value = "/add")
@@ -95,7 +100,7 @@ public class UserController extends BaseController {
 
     @GetMapping(value = "/logout")
     public Result logout(HttpServletRequest request) {
-        String token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjdXJyZW50VGltZSI6MTYyMzQwMzIxNjY0OCwiaXNzIjoiYXV0aDAiLCJleHAiOjE2MjM0MDM1MTYsImFjY291bnQiOiJhZG1pbiJ9.hKtOoeYNt624e2HutXOWeqQcWqidaUkfdblVUaL18rc"; //request.getHeader("token");
+        String token = request.getHeader("token");
         return tokenService.removeToken(token) ?
                 ResultFactory.buildSuccessResult(LoginContexts.LOGOUT_SUCCESS) :
                 ResultFactory.buildFailResult(LoginContexts.NO_LOGIN_USER);

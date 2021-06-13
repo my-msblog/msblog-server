@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @description: jwt 过滤
@@ -110,6 +111,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      * @param request
      * @param response
      * @return
+     * @throws Exception
      */
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) {
@@ -122,17 +124,21 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
                     String account = TokenUtils.getAccount(jwttoken);
                     Long currentTime= TokenUtils.getCurrentTime(jwttoken);
                     if (redisUtils.hasKey(account)) {
-                        Long currentTimeMillisRedis = (Long) redisUtils.get(account);
-                        if (currentTimeMillisRedis.equals(currentTime)) {
-                            return true;
-                        }
+                        Long currentTimeMillisRedis;
+                        Object o = redisUtils.get(account);
+                        currentTimeMillisRedis= (Long) o;
+                        return currentTimeMillisRedis.equals(currentTime);
                     }
                 }
                 return false;
             }catch (Exception e){
                 logger.error("token验证："+e.getClass());
                 if (e instanceof TokenExpiredException){
-                    return refreshToken(request, response);
+                    try {
+                        return refreshToken(request, response);
+                    } catch (UnsupportedEncodingException unsupportedEncodingException) {
+                        unsupportedEncodingException.printStackTrace();
+                    }
                 }
             }
         }
@@ -170,7 +176,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      * @param response
      * @return
      */
-    private boolean refreshToken(ServletRequest request, ServletResponse response) {
+    private boolean refreshToken(ServletRequest request, ServletResponse response) throws UnsupportedEncodingException {
         String token = ((HttpServletRequest)request).getHeader("token");
         String account = TokenUtils.getAccount(token);
         Long currentTime= TokenUtils.getCurrentTime(token);

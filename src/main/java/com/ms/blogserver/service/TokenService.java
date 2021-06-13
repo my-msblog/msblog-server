@@ -5,6 +5,7 @@ import com.ms.blogserver.entity.User;
 import com.ms.blogserver.vo.UserVO;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @description:
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface TokenService {
 
-    String CreateToken(String username, HttpServletResponse response);
+    String CreateToken(String username, HttpServletResponse response) throws UnsupportedEncodingException;
 
     boolean removeToken(String token);
 

@@ -101,7 +101,7 @@ public class RedisUtils {
      */
     public boolean set(String key,Object value) {
         try {
-            redisTemplate.opsForValue().set(key, value);
+            redisTemplate.opsForValue().set(key, value,-1,TimeUnit.SECONDS);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,7 +119,7 @@ public class RedisUtils {
     public boolean set(String key,Object value,long time){
         try {
             if(time>0){
-                redisTemplate.opsForValue().set(key, value, time);
+                redisTemplate.opsForValue().set(key, value, time,TimeUnit.SECONDS);
             }else{
                 set(key, value);
             }
