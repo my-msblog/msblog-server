@@ -107,9 +107,13 @@ public class UserController extends BaseController {
     }
 
     @PostMapping(value = "/delete")
-    public Result phyDelete(){
-        userService.deleteById(1392754664565116930L);
-        return ResultFactory.buildSuccessResult(userService.findAll());
+    public Result phyDelete() throws Exception {
+        try {
+            userService.deleteById(1392754664565116930L);
+            return ResultFactory.buildSuccessResult(userService.findAll());
+        } catch (Exception e) {
+            throw this.exceptionHandle(e);
+        }
     }
 
 

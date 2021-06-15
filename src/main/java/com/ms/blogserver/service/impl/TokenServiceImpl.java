@@ -67,6 +67,9 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public boolean hasLogin(String token) {
+        if (token == null){
+            throw new CustomException(LoginContexts.TOKEN_ERROR);
+        }
         String account = TokenUtils.getAccount(token);
         return redisUtils.hasKey(account);
     }
