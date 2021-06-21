@@ -2,9 +2,9 @@ package com.ms.blogserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ms.blogserver.entity.Menu;
-import com.ms.blogserver.entity.PermissionMenu;
-import com.ms.blogserver.entity.RolePermission;
+import com.ms.blogserver.model.entity.Menu;
+import com.ms.blogserver.model.entity.PermissionMenu;
+import com.ms.blogserver.model.entity.RolePermission;
 import com.ms.blogserver.mapper.MenuMapper;
 import com.ms.blogserver.service.*;
 import org.springframework.beans.factory.annotation.Autowired;

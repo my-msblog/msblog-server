@@ -1,7 +1,7 @@
 package com.ms.blogserver.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ms.blogserver.entity.Role;
+import com.ms.blogserver.model.entity.Role;
 import com.ms.blogserver.mapper.RoleMapper;
 import com.ms.blogserver.service.RoleService;
 import org.springframework.stereotype.Service;

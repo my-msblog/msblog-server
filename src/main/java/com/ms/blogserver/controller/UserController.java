@@ -2,14 +2,14 @@ package com.ms.blogserver.controller;
 
 import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.contexts.VerifyContexts;
-import com.ms.blogserver.config.exception.CustomException;
+import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
-import com.ms.blogserver.dto.LoginDTO;
-import com.ms.blogserver.dto.UserDTO;
-import com.ms.blogserver.vo.UserVO;
+import com.ms.blogserver.model.dto.LoginDTO;
+import com.ms.blogserver.model.dto.UserDTO;
+import com.ms.blogserver.model.vo.UserVO;
 import com.ms.blogserver.service.CaptchaService;
 import com.ms.blogserver.service.TokenService;
 import com.ms.blogserver.service.UserService;
@@ -21,7 +21,6 @@ import org.springframework.web.util.HtmlUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
 
 @RestController
 @Slf4j

@@ -1,7 +1,7 @@
 package com.ms.blogserver.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ms.blogserver.entity.Tag;
+import com.ms.blogserver.model.entity.Tag;
 import com.ms.blogserver.mapper.TagMapper;
 import com.ms.blogserver.service.TagService;
 import org.springframework.stereotype.Service;

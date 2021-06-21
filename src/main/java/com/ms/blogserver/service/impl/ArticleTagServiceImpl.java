@@ -2,12 +2,12 @@ package com.ms.blogserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ms.blogserver.config.exception.CustomException;
+import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.constant.contexts.ErrorContexts;
-import com.ms.blogserver.entity.ArticleTag;
+import com.ms.blogserver.model.entity.ArticleTag;
 import com.ms.blogserver.mapper.ArticleTagMapper;
 import com.ms.blogserver.service.ArticleTagService;
-import com.ms.blogserver.vo.TagVO;
+import com.ms.blogserver.model.vo.TagVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

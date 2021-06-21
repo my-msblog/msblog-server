@@ -1,14 +1,14 @@
 package com.ms.blogserver.service.impl;
 
-import com.ms.blogserver.config.exception.ProgramException;
+import com.ms.blogserver.exception.ProgramException;
 import com.ms.blogserver.constant.contexts.DigitalContexts;
 import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.contexts.RedisKeyContexts;
 import com.ms.blogserver.constant.contexts.VerifyContexts;
-import com.ms.blogserver.config.exception.CustomException;
+import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.converter.vo.UserVOConverter;
-import com.ms.blogserver.entity.User;
-import com.ms.blogserver.vo.UserVO;
+import com.ms.blogserver.model.entity.User;
+import com.ms.blogserver.model.vo.UserVO;
 import com.ms.blogserver.service.TokenService;
 import com.ms.blogserver.utils.RedisUtils;
 import com.ms.blogserver.utils.RegularUtils;

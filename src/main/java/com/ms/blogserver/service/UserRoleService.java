@@ -1,8 +1,8 @@
 package com.ms.blogserver.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ms.blogserver.config.exception.CustomException;
-import com.ms.blogserver.entity.UserRole;
+import com.ms.blogserver.exception.CustomException;
+import com.ms.blogserver.model.entity.UserRole;
 
 /**
  * @description:
@@ -13,5 +13,5 @@ public interface UserRoleService extends IService<UserRole> {
 
     Long getRidByUid(Long uid) throws CustomException;
 
-    
+
 }

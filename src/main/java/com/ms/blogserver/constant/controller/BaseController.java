@@ -1,7 +1,7 @@
 package com.ms.blogserver.constant.controller;
 
-import com.ms.blogserver.config.exception.CustomException;
-import com.ms.blogserver.config.exception.ProgramException;
+import com.ms.blogserver.exception.CustomException;
+import com.ms.blogserver.exception.ProgramException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

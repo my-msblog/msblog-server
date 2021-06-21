@@ -1,7 +1,7 @@
 package com.ms.blogserver.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ms.blogserver.entity.Role;
+import com.ms.blogserver.model.entity.Role;
 
 /**
  * @description:

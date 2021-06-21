@@ -1,7 +1,7 @@
 package com.ms.blogserver.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ms.blogserver.entity.RolePermission;
+import com.ms.blogserver.model.entity.RolePermission;
 
 import java.util.List;
 

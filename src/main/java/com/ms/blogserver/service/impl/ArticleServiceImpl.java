@@ -1,21 +1,20 @@
 package com.ms.blogserver.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.converter.vo.ArticleVOConverter;
-import com.ms.blogserver.dto.ArticleDTO;
-import com.ms.blogserver.dto.GetCommentDTO;
-import com.ms.blogserver.entity.Article;
+import com.ms.blogserver.model.dto.ArticleDTO;
+import com.ms.blogserver.model.dto.GetCommentDTO;
+import com.ms.blogserver.model.entity.Article;
 import com.ms.blogserver.service.CategoryService;
 import com.ms.blogserver.service.CommentService;
 import com.ms.blogserver.utils.PageInfoUtil;
-import com.ms.blogserver.vo.ArticleVO;
+import com.ms.blogserver.model.vo.ArticleVO;
 import com.ms.blogserver.mapper.ArticleMapper;
 import com.ms.blogserver.service.ArticleService;
-import com.ms.blogserver.vo.CommentVO;
+import com.ms.blogserver.model.vo.CommentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
 package com.ms.blogserver.converter.vo;
 
 import com.ms.blogserver.converter.Converter;
-import com.ms.blogserver.bo.CommentBO;
-import com.ms.blogserver.vo.CommentVO;
+import com.ms.blogserver.model.bo.CommentBO;
+import com.ms.blogserver.model.vo.CommentVO;
 import org.mapstruct.factory.Mappers;
 
 /**

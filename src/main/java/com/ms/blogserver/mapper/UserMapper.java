@@ -1,11 +1,9 @@
 package com.ms.blogserver.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ms.blogserver.entity.User;
+import com.ms.blogserver.model.entity.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Component;
 
 
 public interface UserMapper extends BaseMapper<User> {

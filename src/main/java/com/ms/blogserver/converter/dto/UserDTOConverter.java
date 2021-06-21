@@ -1,11 +1,8 @@
 package com.ms.blogserver.converter.dto;
 
 import com.ms.blogserver.converter.Converter;
-import com.ms.blogserver.entity.User;
-import com.ms.blogserver.dto.UserDTO;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import com.ms.blogserver.model.entity.User;
+import com.ms.blogserver.model.dto.UserDTO;
 import org.mapstruct.factory.Mappers;
 
 /**

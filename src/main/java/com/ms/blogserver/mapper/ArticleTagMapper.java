@@ -1,7 +1,7 @@
 package com.ms.blogserver.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ms.blogserver.entity.ArticleTag;
+import com.ms.blogserver.model.entity.ArticleTag;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

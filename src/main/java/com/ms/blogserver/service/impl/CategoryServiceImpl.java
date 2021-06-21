@@ -3,7 +3,7 @@ package com.ms.blogserver.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ms.blogserver.entity.Category;
+import com.ms.blogserver.model.entity.Category;
 import com.ms.blogserver.mapper.CategoryMapper;
 import com.ms.blogserver.service.CategoryService;
 import org.springframework.stereotype.Service;

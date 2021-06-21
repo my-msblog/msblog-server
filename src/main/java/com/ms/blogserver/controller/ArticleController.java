@@ -1,10 +1,9 @@
 package com.ms.blogserver.controller;
 
-import com.ms.blogserver.config.exception.CustomException;
 import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
-import com.ms.blogserver.dto.GetCommentDTO;
+import com.ms.blogserver.model.dto.GetCommentDTO;
 import com.ms.blogserver.service.ArticleService;
 import com.ms.blogserver.service.CommentService;
 import lombok.extern.slf4j.Slf4j;

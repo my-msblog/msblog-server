@@ -2,10 +2,9 @@ package com.ms.blogserver.config.shiro;
 
 import com.ms.blogserver.config.jwt.JWTToken;
 
-import com.ms.blogserver.entity.Permission;
-import com.ms.blogserver.entity.Role;
-import com.ms.blogserver.entity.RolePermission;
-import com.ms.blogserver.entity.User;
+import com.ms.blogserver.model.entity.Role;
+import com.ms.blogserver.model.entity.RolePermission;
+import com.ms.blogserver.model.entity.User;
 import com.ms.blogserver.service.*;
 import com.ms.blogserver.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;

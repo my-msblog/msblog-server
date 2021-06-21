@@ -2,9 +2,9 @@ package com.ms.blogserver.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
-import com.ms.blogserver.dto.ArticleDTO;
-import com.ms.blogserver.entity.Article;
-import com.ms.blogserver.vo.ArticleVO;
+import com.ms.blogserver.model.dto.ArticleDTO;
+import com.ms.blogserver.model.entity.Article;
+import com.ms.blogserver.model.vo.ArticleVO;
 
 /**
  * @description:

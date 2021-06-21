@@ -1,9 +1,9 @@
 package com.ms.blogserver.service;
 
 import com.github.pagehelper.PageInfo;
-import com.ms.blogserver.dto.BaseDTO;
-import com.ms.blogserver.vo.FileSimpleVO;
-import com.ms.blogserver.vo.LogVO;
+import com.ms.blogserver.model.dto.BaseDTO;
+import com.ms.blogserver.model.vo.FileSimpleVO;
+import com.ms.blogserver.model.vo.LogVO;
 
 /**
  * @description:

@@ -1,8 +1,8 @@
 package com.ms.blogserver.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ms.blogserver.entity.ArticleTag;
-import com.ms.blogserver.vo.TagVO;
+import com.ms.blogserver.model.entity.ArticleTag;
+import com.ms.blogserver.model.vo.TagVO;
 
 import java.util.List;
 

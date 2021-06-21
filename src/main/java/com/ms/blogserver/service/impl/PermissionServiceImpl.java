@@ -1,7 +1,7 @@
 package com.ms.blogserver.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ms.blogserver.entity.Permission;
+import com.ms.blogserver.model.entity.Permission;
 import com.ms.blogserver.mapper.PermissionMapper;
 import com.ms.blogserver.service.PermissionService;
 import org.springframework.stereotype.Service;

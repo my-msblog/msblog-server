@@ -1,7 +1,7 @@
 package com.ms.blogserver.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ms.blogserver.entity.Menu;
+import com.ms.blogserver.model.entity.Menu;
 
 import java.util.List;
 

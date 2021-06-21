@@ -1,8 +1,8 @@
 package com.ms.blogserver.service;
 
-import com.ms.blogserver.config.exception.CustomException;
-import com.ms.blogserver.entity.User;
-import com.ms.blogserver.vo.UserVO;
+import com.ms.blogserver.exception.CustomException;
+import com.ms.blogserver.model.entity.User;
+import com.ms.blogserver.model.vo.UserVO;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;

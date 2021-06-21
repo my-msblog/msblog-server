@@ -1,9 +1,9 @@
 package com.ms.blogserver.controller;
 
-import com.ms.blogserver.config.exception.CustomException;
+import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
-import com.ms.blogserver.vo.CaptchaVO;
+import com.ms.blogserver.model.vo.CaptchaVO;
 import com.ms.blogserver.service.CaptchaService;
 import com.ms.blogserver.service.TokenService;
 import lombok.extern.slf4j.Slf4j;
