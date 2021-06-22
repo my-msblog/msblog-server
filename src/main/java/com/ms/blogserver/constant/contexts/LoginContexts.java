@@ -29,6 +29,8 @@ public interface LoginContexts {
 
     String TOKEN_ERROR = "token验证失败";
 
+    String TOKEN_INVALID = "无效token";
+
     String ID_IS_NULL = "传入id不能为空";
 
     String INSUFFICIENT_USER_PERMISSIONS = "用户权限不足";

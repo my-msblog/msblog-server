@@ -210,7 +210,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             httpServletResponse.setCharacterEncoding("UTF-8");
             httpServletResponse.setContentType("application/json; charset=utf-8");
             PrintWriter out =  httpServletResponse.getWriter();
-            String data = JSONObject.toJSONString(ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA,LoginContexts.TOKEN_ERROR));
+            String data = JSONObject.toJSONString(ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA,LoginContexts.TOKEN_INVALID));
             out.append(data);
             System.out.println("responseError:"+message);
         } catch (IOException e) {
