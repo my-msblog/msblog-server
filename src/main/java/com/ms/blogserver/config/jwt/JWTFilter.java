@@ -27,7 +27,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 /**
- * @description: jwt 过滤
+ * @description: jwt 过滤器
  * @author: zhh
  * @time: 2021/5/24
  */
@@ -47,7 +47,8 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-        System.out.println("isAccessAllowed方法");
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        System.out.println("请求路径:["+httpServletRequest.getRequestURI()+"]");
         if (this.isLoginAttempt(request,response)) {
             try {
                 return executeLogin(request, response);
