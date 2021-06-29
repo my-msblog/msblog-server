@@ -9,6 +9,7 @@ import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.constant.contexts.RoleContexts;
 import com.ms.blogserver.converter.dto.UserDTOConverter;
 import com.ms.blogserver.converter.vo.UserVOConverter;
+import com.ms.blogserver.exception.ProgramException;
 import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.dto.UserDTO;
 import com.ms.blogserver.model.entity.UserRole;
@@ -25,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
@@ -47,24 +49,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userDTO.setPwd(EncryptPassword.encrypt(userDTO.getPwd()));
         User user = UserDTOConverter.INSTANCE.fromData(userDTO);
         String email = user.getEmail();
-        if (StringUtils.isNotEmpty(email)){
-            if (!RegularUtils.isEmail(email)){
+        if (StringUtils.isNotEmpty(email)) {
+            if (!RegularUtils.isEmail(email)) {
                 throw new CustomException(LoginContexts.EMAIL_ERROR);
             }
         }
         baseMapper.insert(user);
         // 新用户添加权限，默认权限为2
         User newUser = findByUserName(user.getUsername());
-        userRoleService.save(new UserRole(newUser.getId(),RoleContexts.CONTENT_MANAGER_ID));
+        userRoleService.save(new UserRole(newUser.getId(), RoleContexts.CONTENT_MANAGER_ID));
     }
 
     @Override
     public void updateUser(UserDTO userDTO) {
         if (userDTO == null || userDTO.getId() == 0) {
-            throw new CustomException("UserService-updateUser:"+LoginContexts.AUTHENTIC_FAIL);
+            throw new CustomException("UserService-updateUser:" + LoginContexts.AUTHENTIC_FAIL);
         }
         User user = getUserByID(userDTO.getId());
-        UserDTOConverter.INSTANCE.fromDataNoNull(userDTO,user);
+        UserDTOConverter.INSTANCE.fromDataNoNull(userDTO, user);
         baseMapper.updateById(user);
     }
 
@@ -92,16 +94,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public String getPassword(String username) {
-        return findByUserName(username).getPwd();
+        User byUserName = findByUserName(username);
+        if (byUserName == null) {
+            throw new CustomException(LoginContexts.USER_IS_NOT_EXIST);
+        }
+        try {
+            return byUserName.getPwd();
+        } catch (Exception e) {
+            throw new ProgramException(e.getMessage());
+        }
     }
 
     @Override
     public PageInfo<UserVO> getPage(BaseDTO dto) {
-        PageHelper.startPage(dto.getPage(),dto.getSize());
-        List<User> userList =findAll();
+        PageHelper.startPage(dto.getPage(), dto.getSize());
+        List<User> userList = findAll();
         List<UserVO> voList = UserVOConverter.INSTANCE.toDataList(userList);
         PageInfo<UserVO> userVOPageInfo = new PageInfo<>();
-        PageInfoUtil.transform(new PageInfo<>(userList),userVOPageInfo);
+        PageInfoUtil.transform(new PageInfo<>(userList), userVOPageInfo);
         userVOPageInfo.setList(voList);
         return userVOPageInfo;
     }

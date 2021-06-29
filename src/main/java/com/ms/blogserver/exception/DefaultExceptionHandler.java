@@ -87,6 +87,6 @@ public class DefaultExceptionHandler {
         if (e instanceof NoHandlerFoundException){
             return ResultFactory.buildResult(ResultCode.NOT_FOUND,ResultString.PAGE_NO_FOUND.DATA);
         }
-        return ResultFactory.buildResult(ResultCode.INTERNAL_SERVER_ERROR,e.getMessage());
+        return ResultFactory.buildResult(ResultCode.INTERNAL_SERVER_ERROR,ResultString.INTERNAL_ERROR.DATA,e.getMessage());
     }
 }

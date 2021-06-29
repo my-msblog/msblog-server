@@ -51,9 +51,7 @@ public class UserController extends BaseController {
             //判断验证码
             //captchaService.verifyArithmetic(loginDTO.getKey(), loginDTO.getCode());
             String realPassword =userService.getPassword(username);
-            if (realPassword == null){
-                return ResultFactory.buildFailResult(LoginContexts.USER_IS_NOT_EXIST);
-            }else if (realPassword.equals(EncryptPassword.encrypt(pwd))){
+            if (realPassword.equals(EncryptPassword.encrypt(pwd))){
                 UserVO userVO = tokenService.setToken(userService.findByUserName(username),tokenService.CreateToken(username,response));
                 return ResultFactory.buildSuccessResult(userVO);
             }
