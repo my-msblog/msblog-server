@@ -4,23 +4,17 @@ import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.contexts.VerifyContexts;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.constant.controller.BaseController;
-import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
-import com.ms.blogserver.model.dto.LoginDTO;
 import com.ms.blogserver.model.dto.UserDTO;
-import com.ms.blogserver.model.vo.UserVO;
 import com.ms.blogserver.service.CaptchaService;
 import com.ms.blogserver.service.TokenService;
 import com.ms.blogserver.service.UserService;
-import com.ms.blogserver.utils.EncryptPassword;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @Slf4j
@@ -32,34 +26,6 @@ public class UserController extends BaseController {
     @Autowired
     private TokenService tokenService;
 
-    @Autowired
-    private CaptchaService captchaService;
-
-    @PostMapping(value = "api/authentication")
-    public Result authentication(HttpServletRequest request){
-        String token = request.getHeader("token");
-        return tokenService.hasLogin(token)?
-                ResultFactory.buildSuccessResult("") :
-                ResultFactory.buildResult(ResultCode.UNAUTHORIZED,LoginContexts.NO_LOGIN_USER);
-    }
-
-    @PostMapping(value = "/login")
-    public Result userLogin(@RequestBody LoginDTO loginDTO, HttpServletResponse response) throws Exception {
-        try {
-            String username = loginDTO.getUsername();
-            String pwd = loginDTO.getPassword();
-            //判断验证码
-            //captchaService.verifyArithmetic(loginDTO.getKey(), loginDTO.getCode());
-            String realPassword =userService.getPassword(username);
-            if (realPassword.equals(EncryptPassword.encrypt(pwd))){
-                UserVO userVO = tokenService.setToken(userService.findByUserName(username),tokenService.CreateToken(username,response));
-                return ResultFactory.buildSuccessResult(userVO);
-            }
-            return ResultFactory.buildFailResult(LoginContexts.PASSWORD_IS_ERROR);
-        } catch (Exception e) {
-           throw this.exceptionHandle(e);
-        }
-    }
 
     @PostMapping(value = "/add")
     public Result userAdd(@RequestBody UserDTO userDTO,Integer code){
@@ -93,14 +59,6 @@ public class UserController extends BaseController {
         }
         throw new CustomException("There is no data with ID "+ id+" in the database");
 
-    }
-
-    @GetMapping(value = "/logout")
-    public Result logout(HttpServletRequest request) {
-        String token = request.getHeader("token");
-        return tokenService.removeToken(token) ?
-                ResultFactory.buildSuccessResult(LoginContexts.LOGOUT_SUCCESS) :
-                ResultFactory.buildFailResult(LoginContexts.NO_LOGIN_USER);
     }
 
     @PostMapping(value = "/delete")
