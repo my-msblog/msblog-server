@@ -8,7 +8,6 @@ import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -34,26 +33,24 @@ public class ShiroConfig {
 
         Map<String, Filter> filterMap=new LinkedHashMap<>();
         filterMap.put("jwt",jwtFilterBean());
-        factoryBean.setFilters(filterMap);
         factoryBean.setSecurityManager(securityManager);
-        Map<String, String> filterRuleMap = new HashMap<>();
+        Map<String, String> filterRuleMap = new LinkedHashMap<>();
         // 放行不需要权限认证的接口
         //放行Swagger接口
         filterRuleMap.put("/v2/api-docs","anon");
         filterRuleMap.put("/swagger-resources/configuration/ui","anon");
         filterRuleMap.put("/swagger-resources","anon");
         filterRuleMap.put("/swagger-resources/configuration/security","anon");
-        filterRuleMap.put("/swagger-ui.html","anon");
         filterRuleMap.put("/swagger-ui.html/**","anon");
         filterRuleMap.put("/webjars/**","anon");
         //放行登录接口和其他不需要权限的接口
         filterRuleMap.put("/login", "anon");
         filterRuleMap.put("/logout", "anon");
-        filterRuleMap.put("/code/**","anon");
-        filterRuleMap.put("/err/**","anon");
+        filterRuleMap.put("/code/captcha/spec","anon");
         // 所有请求通过JWT Filter
         filterRuleMap.put("/**", "jwt");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);
+        factoryBean.setFilters(filterMap);
         return factoryBean;
 
     }
@@ -75,7 +72,11 @@ public class ShiroConfig {
         return securityManager;
     }
 
-    @Bean("jwtFilter")
+    /**
+     * jwtFilter不能交由spring容器管理，否则shiro中配置的anon过滤无效
+     *
+     * @return
+     */
     public JWTFilter jwtFilterBean() {
         return new JWTFilter();
     }

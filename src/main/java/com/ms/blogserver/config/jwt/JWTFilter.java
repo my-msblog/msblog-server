@@ -67,7 +67,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
-        logger.debug("isLoginAttempt方法");
+        //logger.debug("isLoginAttempt方法");
         String token=((HttpServletRequest)request).getHeader("token");
         return token != null;
     }
