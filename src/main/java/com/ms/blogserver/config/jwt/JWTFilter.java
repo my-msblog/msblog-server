@@ -53,7 +53,9 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             try {
                 return executeLogin(request, response);
             } catch (Exception e) {
-                throw new ShiroException(e.getMessage());
+                //throw new ShiroException(e.getMessage());
+                //responseError(response,e.getMessage());
+                return false;
             }
         }
         return true;
