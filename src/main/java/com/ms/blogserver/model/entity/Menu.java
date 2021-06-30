@@ -26,6 +26,7 @@ public class Menu implements Serializable {
     private String nameZh;
     private String component;
     private Integer parentId;
+    private String icon;
     @TableLogic
     private int deleted;
     @TableField(exist = false)
