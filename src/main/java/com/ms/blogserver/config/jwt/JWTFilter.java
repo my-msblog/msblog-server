@@ -105,8 +105,6 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         return false;
     }
 
-
-
     /**
      * shiro验证成功调用
      * @param token

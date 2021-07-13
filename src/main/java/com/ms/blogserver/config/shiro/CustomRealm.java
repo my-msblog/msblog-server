@@ -92,7 +92,6 @@ public class CustomRealm extends AuthorizingRealm {
                 .map(RolePermission::getPid)
                 .collect(Collectors.toList());
         pid.forEach(item -> {
-            //Permission permission = permissionService.getById(item);
             permissionSet.add(permissionService.getNameById(item));
         });
         roleSet.add(role.getName());
