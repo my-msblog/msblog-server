@@ -44,7 +44,7 @@ public class LoginController extends BaseController {
     public Result authentication(HttpServletRequest request){
         String token = request.getHeader("token");
         return tokenService.hasLogin(token)?
-                ResultFactory.buildSuccessResult("") :
+                ResultFactory.buildSuccessResult() :
                 ResultFactory.buildResult(ResultCode.UNAUTHORIZED,LoginContexts.NO_LOGIN_USER);
     }
 
