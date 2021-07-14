@@ -111,9 +111,6 @@ public class DefaultExceptionHandler implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        if (serverHttpRequest instanceof ServletServerHttpRequest && serverHttpResponse instanceof ServletServerHttpResponse) {
-            System.out.println("请求路径:["+((ServletServerHttpRequest) serverHttpRequest).getServletRequest().getRequestURI()+"]");
-        }
         return o;
     }
 }

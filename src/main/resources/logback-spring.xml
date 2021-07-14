@@ -24,9 +24,11 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
 			%n是换行符
 			%cyan([%thread])
         -->
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <pattern>%green(%d{yyyy-MM-dd HH:mm:ss}) |  %highlight%-5level %blue(%logger{50}) - %yellow(%msg%n)</pattern>
-        </layout>
+        <withJansi>true</withJansi>
+        <encoder>
+            <pattern>%green(%d{yyyy-MM-dd HH:mm:ss}) | %highlight(%-5level) | %yellow(%logger{50}) - %highlight(%msg%n)</pattern>
+          <!--  <pattern>%green(%d{yyyy-MM-dd HH:mm:ss}) |%highlight(%-5level)| %yellow(%logger{15}) - %highlight(%msg) %n</pattern>-->
+        </encoder>
     </appender>
 
     <!-- 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件 -->

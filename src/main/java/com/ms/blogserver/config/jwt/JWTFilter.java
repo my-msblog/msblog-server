@@ -47,6 +47,11 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        String requestUrl = httpServletRequest.getRequestURI();
+        if (!"/websocket".equals(requestUrl)){
+            logger.info("\033[2;36m"+"请求方法:"+httpServletRequest.getMethod()+", 请求路径:["+httpServletRequest.getRequestURI()+"]"+" \033[0m");
+        }
         if (this.isLoginAttempt(request,response)) {
             try {
                 return executeLogin(request, response);
@@ -210,7 +215,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             PrintWriter out =  httpServletResponse.getWriter();
             String data = JSONObject.toJSONString(ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA,LoginContexts.TOKEN_INVALID));
             out.append(data);
-            System.out.println("responseError:"+message);
+            logger.error("responseError:"+message);
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
