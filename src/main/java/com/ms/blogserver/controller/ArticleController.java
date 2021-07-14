@@ -29,6 +29,13 @@ public class ArticleController extends BaseController {
     @Autowired
     private ArticleService articleService;
 
+    /**
+     * 获取指定文章
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @PostMapping(value = "/get")
     public Result getArticle(Long id) throws Exception {
         try {
@@ -38,6 +45,13 @@ public class ArticleController extends BaseController {
         }
     }
 
+    /**
+     * 获取文章评论
+     *
+     * @param dto
+     * @return
+     * @throws Exception
+     */
     @PostMapping(value = "/comment")
     public Result getComment(@RequestBody GetCommentDTO dto) throws Exception {
         try {
@@ -47,6 +61,11 @@ public class ArticleController extends BaseController {
         }
     }
 
+    /**
+     * 用户评论
+     *
+     * @return
+     */
     @PostMapping(value = "/user/comment")
     public Result getUserComment(){
         return null;

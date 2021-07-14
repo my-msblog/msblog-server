@@ -37,6 +37,12 @@ public class UserInfoController extends BaseController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 用户权限菜单
+     *
+     * @return
+     * @throws Exception
+     */
     @PostMapping(value = "/menu")
     @RequiresRoles(value = {RoleContexts.SYSTEM_ADMIN,RoleContexts.CONTENT_MANAGER},logical = Logical.OR)
     public Result getMenu() throws Exception {
@@ -52,6 +58,14 @@ public class UserInfoController extends BaseController {
             throw exceptionHandle(e);
         }
     }
+
+    /**
+     * 用户列表分页
+     *
+     * @param dto
+     * @return
+     * @throws Exception
+     */
     @PostMapping(value = "/user/page")
     @RequiresPermissions(logical = Logical.AND, value = {PermissionContexts.USERS_MANAGEMENT})
     public Result getByPage(BaseDTO dto) throws Exception {

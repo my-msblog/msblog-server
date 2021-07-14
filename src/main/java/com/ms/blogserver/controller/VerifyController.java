@@ -29,6 +29,12 @@ public class VerifyController {
     @Autowired
     private CaptchaService captchaService;
 
+    /**
+     * 发送手机验证码
+     *
+     * @param phone
+     * @return
+     */
     @PostMapping(value = "/sms")
     public Result sendSMSCode(String phone){
         try {
@@ -40,6 +46,11 @@ public class VerifyController {
 
     }
 
+    /**
+     * 获取算式验证码
+     *
+     * @return
+     */
     @GetMapping(value = "/captcha/arithmetic")
     public Result arithmetic(){
         try {
@@ -50,6 +61,11 @@ public class VerifyController {
         }
     }
 
+    /**
+     * 获取验证码（字母+数字）
+     *
+     * @return
+     */
     @GetMapping(value = "/captcha/spec")
     public Result spec(){
         try {

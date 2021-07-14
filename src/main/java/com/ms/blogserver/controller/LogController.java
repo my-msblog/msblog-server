@@ -27,6 +27,13 @@ public class LogController extends BaseController {
     @Autowired
     private FileService fileService;
 
+    /**
+     * 所有日志文件列表
+     *
+     * @param dto
+     * @return
+     * @throws Exception
+     */
     @GetMapping(value = "/find/list")
     public Result getAllLog(BaseDTO dto) throws Exception {
         try {
@@ -36,8 +43,15 @@ public class LogController extends BaseController {
         }
     }
 
+    /**
+     * 获取日志文件内容
+     *
+     * @param fileName 文件名
+     * @return
+     * @throws Exception
+     */
     @PostMapping(value = "/get/context")
-    public Result getLog(String fileName, HttpServletRequest request) throws Exception {
+    public Result getLog(String fileName) throws Exception {
         try {
             return ResultFactory.buildSuccessResult(fileService.getLog(fileName));
         } catch (Exception e) {
@@ -45,6 +59,13 @@ public class LogController extends BaseController {
         }
     }
 
+    /**
+     * 删除文件
+     *
+     * @param fileName
+     * @return
+     * @throws Exception
+     */
     @PostMapping(value = "/delete")
     public Result deleteLog(String fileName) throws Exception {
         try {

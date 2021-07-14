@@ -40,6 +40,12 @@ public class LoginController extends BaseController {
     @Autowired
     private CaptchaService captchaService;
 
+    /**
+     * 验证登录
+     *
+     * @param request
+     * @return
+     */
     @PostMapping(value = "api/authentication")
     public Result authentication(HttpServletRequest request){
         String token = request.getHeader("token");
@@ -48,6 +54,14 @@ public class LoginController extends BaseController {
                 ResultFactory.buildResult(ResultCode.UNAUTHORIZED,LoginContexts.NO_LOGIN_USER);
     }
 
+    /**
+     * 账号密码登录
+     *
+     * @param loginDTO
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @PostMapping(value = "/login")
     public Result userLogin(@RequestBody LoginDTO loginDTO, HttpServletResponse response) throws Exception {
         try {
@@ -65,6 +79,12 @@ public class LoginController extends BaseController {
         }
     }
 
+    /**
+     * 登出
+     *
+     * @param request
+     * @return
+     */
     @GetMapping(value = "/logout")
     public Result logout(HttpServletRequest request) {
         String token = request.getHeader("token");

@@ -26,7 +26,13 @@ public class UserController extends BaseController {
     @Autowired
     private TokenService tokenService;
 
-
+    /**
+     * 新增用户
+     *
+     * @param userDTO 用户信息
+     * @param code 手机验证码
+     * @return
+     */
     @PostMapping(value = "/add")
     public Result userAdd(@RequestBody UserDTO userDTO,Integer code){
         if (!tokenService.getVerifyCode(code)){
@@ -42,6 +48,13 @@ public class UserController extends BaseController {
         return ResultFactory.buildSuccessResult(LoginContexts.REGISTER_SUCCESS);
     }
 
+    /**
+     * 修改用户信息
+     *
+     * @param u
+     * @return
+     * @throws Exception
+     */
     @PostMapping(value = "/update")
     public Result userUpdate(@RequestBody UserDTO u) throws Exception {
         try {
@@ -52,6 +65,14 @@ public class UserController extends BaseController {
         }
 
     }
+
+    /**
+     * 删除用户
+     *
+     * @param id
+     * @return
+     * @throws CustomException
+     */
     @PostMapping(value = "/remove")
     public Result userDelete(@RequestBody Long id) throws CustomException {
         if (userService.removeById(id) == 1){
