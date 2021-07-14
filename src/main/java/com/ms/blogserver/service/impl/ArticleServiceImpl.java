@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.converter.vo.ArticleVOConverter;
+import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.model.dto.ArticleDTO;
 import com.ms.blogserver.model.dto.GetCommentDTO;
 import com.ms.blogserver.model.entity.Article;
@@ -37,12 +38,19 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Override
     public ArticleVO getArticleById(Long id) {
-        Article article = baseMapper.selectById(id);
-        ArticleVO articleVO = ArticleVOConverter.INSTANCE.toData(article);
-        articleVO.setTypeName(categoryService.getCategoryByCid(article.getType()));
-        PageInfo<CommentVO> commentVOPageInfo = commentService.getPageByArticle(new GetCommentDTO(id));
-        articleVO.setCommentVOS(commentVOPageInfo);
-        return articleVO;
+        try {
+            Article article = baseMapper.selectById(id);
+            if (Objects.isNull(article)){
+                throw new CustomException("未找到指定文章");
+            }
+            ArticleVO articleVO = ArticleVOConverter.INSTANCE.toData(article);
+            articleVO.setTypeName(categoryService.getCategoryByCid(article.getType()));
+            PageInfo<CommentVO> commentVOPageInfo = commentService.getPageByArticle(new GetCommentDTO(id));
+            articleVO.setCommentVOS(commentVOPageInfo);
+            return articleVO;
+        } catch (Exception e) {
+           throw new CustomException(e.getMessage());
+        }
     }
 
     @Override

@@ -9,10 +9,23 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;
 
 import org.apache.shiro.authz.AuthorizationException;
+import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpInputMessage;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.server.ServerHttpRequest;
+import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.http.server.ServletServerHttpRequest;
+import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdviceAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
+
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Type;
 
 /**
  * @description:
@@ -21,7 +34,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
  */
 @ControllerAdvice
 @Slf4j
-public class DefaultExceptionHandler {
+public class DefaultExceptionHandler implements ResponseBodyAdvice<Object> {
+
 
     /**
      * 捕获认证异常
@@ -88,5 +102,18 @@ public class DefaultExceptionHandler {
             return ResultFactory.buildResult(ResultCode.NOT_FOUND,ResultString.PAGE_NO_FOUND.DATA);
         }
         return ResultFactory.buildResult(ResultCode.INTERNAL_SERVER_ERROR,ResultString.INTERNAL_ERROR.DATA,e.getMessage());
+    }
+
+    @Override
+    public boolean supports(MethodParameter methodParameter, Class aClass) {
+        return true;
+    }
+
+    @Override
+    public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+        if (serverHttpRequest instanceof ServletServerHttpRequest && serverHttpResponse instanceof ServletServerHttpResponse) {
+            System.out.println("请求路径:["+((ServletServerHttpRequest) serverHttpRequest).getServletRequest().getRequestURI()+"]");
+        }
+        return o;
     }
 }
