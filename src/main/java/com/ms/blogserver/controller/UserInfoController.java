@@ -4,11 +4,9 @@ import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.contexts.PermissionContexts;
 import com.ms.blogserver.constant.contexts.RoleContexts;
 import com.ms.blogserver.constant.controller.BaseController;
-import com.ms.blogserver.exception.CustomException;
-import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultCode;
+import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
-import com.ms.blogserver.constant.result.ResultString;
 import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.service.MenuService;
 import com.ms.blogserver.service.UserService;
@@ -50,7 +48,7 @@ public class UserInfoController extends BaseController {
             String token = getHeaderToken();
             String username = TokenUtils.getAccount(token);
             if (StringUtils.isEmpty(username)){
-                throw new CustomException(LoginContexts.USER_IS_NOT_EXIST);
+                return ResultFactory.buildResult(ResultCode.UNAUTHORIZED,LoginContexts.USER_ERROR);
             }
             Long uid = userService.findByUserName(username).getId();
             return ResultFactory.buildSuccessResult(menuService.getMenusByCurrentUser(uid));

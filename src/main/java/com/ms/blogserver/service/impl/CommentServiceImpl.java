@@ -14,10 +14,12 @@ import com.ms.blogserver.mapper.CommentMapper;
 import com.ms.blogserver.service.CommentService;
 import com.ms.blogserver.service.UserService;
 import com.ms.blogserver.utils.PageInfoUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,6 +49,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     public PageInfo<CommentVO> getPageByArticle(GetCommentDTO dto) {
         PageHelper.startPage(dto.getPage(), dto.getSize());
         List<Comment> allComment = getAllCommentByArticleId(dto.getArticleId());
+        if (CollectionUtils.isEmpty(allComment)){
+            return new PageInfo<>(new ArrayList<>());
+        }
         List<CommentBO> commentBOList = CommentBOConverter.INSTANCE.toDataList(allComment);
         List<CommentVO> commentVOList = setString(commentBOList);
         handle(commentVOList);

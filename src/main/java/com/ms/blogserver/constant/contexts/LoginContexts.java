@@ -9,9 +9,11 @@ import com.ms.blogserver.aspect.annotation.PermissionCheck;
  */
 public interface LoginContexts {
 
-    String INPUT_USER_NAME = "请输入用户名";
+    String USER_ERROR = "用户状态异常，请重新登录";
 
-    String INPUT_PASSWORD = "请输入密码";
+    String INPUT_USER_NAME = "用户名不能为空";
+
+    String INPUT_PASSWORD = "密码不能为空";
 
     String USER_IS_NOT_EXIST = "用户不存在";
 

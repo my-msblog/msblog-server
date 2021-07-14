@@ -11,6 +11,7 @@ import com.ms.blogserver.utils.FileUtils;
 import com.ms.blogserver.model.vo.FileSimpleVO;
 import com.ms.blogserver.model.vo.LogVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -37,6 +38,9 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public LogVO getLog(String fileName) {
+        if (StringUtils.isEmpty(fileName)){
+            throw new CustomException(ErrorContexts.NO_FILE);
+        }
         String url = URLContexts.LOG_ABSOLUTE_URL +URLContexts.SLASH +fileName;
         LogVO logVO = new LogVO();
         logVO.setFileName(fileName);
