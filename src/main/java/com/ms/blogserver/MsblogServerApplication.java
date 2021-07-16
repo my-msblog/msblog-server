@@ -26,12 +26,13 @@ public class MsblogServerApplication extends SpringBootServletInitializer {
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
+
     @Bean
     public ServletRegistrationBean dispatcherRegistration() {
         return new ServletRegistrationBean(dispatcherServlet());
     }
+
     @Bean(name = DispatcherServletAutoConfiguration.DEFAULT_DISPATCHER_SERVLET_BEAN_NAME)
     public DispatcherServlet dispatcherServlet() {
         return new LogInterceptorAdapter();
