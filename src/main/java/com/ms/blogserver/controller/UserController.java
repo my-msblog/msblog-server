@@ -18,6 +18,7 @@ import org.springframework.web.util.HtmlUtils;
 
 @RestController
 @Slf4j
+@RequestMapping("/user")
 public class UserController extends BaseController {
 
     @Autowired
