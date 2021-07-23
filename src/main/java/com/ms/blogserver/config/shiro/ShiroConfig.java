@@ -46,8 +46,6 @@ public class ShiroConfig {
         filterRuleMap.put("/login", "anon");
         filterRuleMap.put("/logout", "anon");
         filterRuleMap.put("/code/**","anon");
-        filterRuleMap.put("/article/**","anon");
-        filterRuleMap.put("/user","anon");
         // 所有请求通过JWT Filter
         filterRuleMap.put("/**", "jwt");
         factoryBean.setFilterChainDefinitionMap(filterRuleMap);
