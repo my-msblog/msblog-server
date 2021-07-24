@@ -5,12 +5,12 @@ package com.ms.blogserver.exception;
  * @author: zhh
  * @time: 2021/5/21
  */
-public class UnauthorizedException extends RuntimeException{
-    public UnauthorizedException(String msg) {
+public class CustomAuthorizedException extends RuntimeException{
+    public CustomAuthorizedException(String msg) {
         super(msg);
     }
 
-    public UnauthorizedException() {
+    public CustomAuthorizedException() {
         super();
     }
 }
