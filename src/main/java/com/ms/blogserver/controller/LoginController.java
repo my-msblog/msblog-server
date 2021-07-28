@@ -3,17 +3,13 @@ package com.ms.blogserver.controller;
 import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.Result;
-import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.ResultFactory;
-import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.model.dto.LoginDTO;
 import com.ms.blogserver.model.entity.User;
 import com.ms.blogserver.model.vo.UserVO;
 import com.ms.blogserver.service.CaptchaService;
 import com.ms.blogserver.service.LoginService;
 import com.ms.blogserver.service.TokenService;
-import com.ms.blogserver.service.UserService;
-import com.ms.blogserver.utils.EncryptPassword;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Objects;
 
 /**
  * @description:
@@ -71,7 +65,7 @@ public class LoginController extends BaseController {
         try {
             User user = loginService.commonLogin(loginDTO.getUsername(), loginDTO.getPassword());
             //判断验证码
-            //captchaService.verifyArithmetic(loginDTO.getKey(), loginDTO.getCode());
+            captchaService.verifyArithmetic(loginDTO.getKey(), loginDTO.getCode());
             UserVO userVO = tokenService.setToken(user, tokenService.CreateToken(user.getUsername(), response));
             return ResultFactory.buildSuccessResult(userVO);
         } catch (Exception e) {
