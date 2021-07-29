@@ -35,7 +35,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public void userLogout(String token) {
-        if (!tokenService.removeToken(token)) {
+        if (tokenService.removeToken(token)) {
             throw new CustomException(LoginContexts.NO_LOGIN_USER);
         }
     }

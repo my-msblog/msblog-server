@@ -6,6 +6,7 @@ import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.constant.result.ResultString;
+import com.ms.blogserver.exception.CustomAuthorizedException;
 import com.ms.blogserver.utils.RedisUtils;
 import com.ms.blogserver.utils.TokenUtils;
 import org.apache.shiro.ShiroException;
@@ -106,6 +107,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
         this.sendChallenge(request,response);
         responseError(response,"token verify fail");
         return false;
+        //throw new CustomAuthorizedException("sfrzyc");
     }
 
     /**
