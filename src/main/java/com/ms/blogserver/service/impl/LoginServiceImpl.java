@@ -8,6 +8,7 @@ import com.ms.blogserver.service.LoginService;
 import com.ms.blogserver.service.TokenService;
 import com.ms.blogserver.service.UserService;
 import com.ms.blogserver.utils.EncryptPassword;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,10 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public void userLogout(String token) {
-        if (tokenService.removeToken(token)) {
+        if(StringUtils.isEmpty(token)){
+            throw new CustomException(LoginContexts.TOKEN_INVALID);
+        }
+        if (!tokenService.removeToken(token)) {
             throw new CustomException(LoginContexts.NO_LOGIN_USER);
         }
     }

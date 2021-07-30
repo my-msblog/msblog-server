@@ -37,7 +37,6 @@ public class TokenServiceImpl implements TokenService {
     public String CreateToken(String username, HttpServletResponse response) throws UnsupportedEncodingException {
         Long currentTimeMillis = System.currentTimeMillis();
         String token= TokenUtils.sign(username,currentTimeMillis);
-        System.out.println(currentTimeMillis);
         redisUtils.set(username,currentTimeMillis, TokenUtils.REFRESH_EXPIRE_TIME);
         response.setHeader("Authorization", token);
         response.setHeader("Access-Control-Expose-Headers", "Authorization");
