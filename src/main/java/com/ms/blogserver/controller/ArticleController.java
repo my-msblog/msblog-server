@@ -3,15 +3,13 @@ package com.ms.blogserver.controller;
 import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
+import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.model.dto.GetCommentDTO;
-import com.ms.blogserver.service.ArticleService;
-import com.ms.blogserver.service.CommentService;
+import com.ms.blogserver.service.entity.ArticleService;
+import com.ms.blogserver.service.entity.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @description:
@@ -30,7 +28,7 @@ public class ArticleController extends BaseController {
     private ArticleService articleService;
 
     /**
-     * 获取指定文章
+     * 获取指定id文章
      *
      * @param id
      * @return
@@ -62,6 +60,20 @@ public class ArticleController extends BaseController {
     }
 
     /**
+     * 当前用户文章总数
+     *
+     * @return
+     */
+    @GetMapping("/user/count")
+    public Result getUserArticle() {
+        try {
+            return ResultFactory.buildSuccessResult();
+        }catch (Exception e) {
+            throw new CustomException(e.getMessage());
+        }
+    }
+
+    /**
      * 用户评论
      *
      * @return
@@ -71,6 +83,12 @@ public class ArticleController extends BaseController {
         return null;
     }
 
+    /**
+     * 根据日期获取标题
+     *
+     * @return
+     * @throws Exception
+     */
     @PostMapping(value = "/date")
     public Result getByDate() throws Exception {
         try {
