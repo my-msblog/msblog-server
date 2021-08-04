@@ -17,6 +17,8 @@ public class User implements Serializable {
     private String username;
     private String pwd;
     private String phone;
+    private String introduction;
+    private int sex;
     private String email;
     @TableField(value = "create_time",fill = FieldFill.INSERT)
     private LocalDateTime createTime;

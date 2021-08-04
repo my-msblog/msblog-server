@@ -1,7 +1,10 @@
 package com.ms.blogserver.model.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.ToString;
+
+import java.time.LocalDateTime;
 
 /**
  * @description:
@@ -16,4 +19,8 @@ public class UserVO {
     private String phone;
     private String email;
     private String token;
+    private String introduction;
+    private int sex;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
 }
