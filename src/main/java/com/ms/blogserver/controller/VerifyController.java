@@ -1,17 +1,16 @@
 package com.ms.blogserver.controller;
 
+import com.ms.blogserver.constant.contexts.VerifyContexts;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
+import com.ms.blogserver.model.dto.PhoneDTO;
 import com.ms.blogserver.model.vo.CaptchaVO;
 import com.ms.blogserver.service.api.CaptchaService;
 import com.ms.blogserver.service.api.TokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @description:
@@ -32,14 +31,14 @@ public class VerifyController {
     /**
      * 发送手机验证码
      *
-     * @param phone
+     * @param dto
      * @return
      */
     @PostMapping(value = "/sms")
-    public Result sendSMSCode(String phone){
+    public Result sendSMSCode(@RequestBody PhoneDTO dto){
         try {
-            tokenService.sendSMS(phone);
-            return ResultFactory.buildSuccessResult("");
+            tokenService.sendSMS(dto.getPhone());
+            return ResultFactory.buildSuccessResult(VerifyContexts.VERIFY_SUCCESS);
         }catch (Exception e){
             throw new CustomException(e.getMessage());
         }

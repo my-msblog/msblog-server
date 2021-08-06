@@ -7,6 +7,8 @@ package com.ms.blogserver.constant.contexts;
  */
 public interface VerifyContexts {
 
+    String VERIFY_SUCCESS = "验证码发送成功";
+
     String VERIFY_NO_FOUND_ERROR = "验证异常,请重新发送验证码";
 
     String VERIFY_ERROR = "验证码错误";
