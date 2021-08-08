@@ -2,11 +2,15 @@ package com.ms.blogserver.controller;
 
 import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.contexts.VerifyContexts;
+import com.ms.blogserver.converter.vo.UserVOConverter;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.model.dto.UserDTO;
+import com.ms.blogserver.model.dto.UserTableChangeDTO;
+import com.ms.blogserver.model.entity.User;
+import com.ms.blogserver.model.vo.UserVO;
 import com.ms.blogserver.service.api.TokenService;
 import com.ms.blogserver.service.entity.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,41 +33,40 @@ public class UserController extends BaseController {
     /**
      * 新增用户
      *
-     * @param userDTO 用户信息
-     * @param code 手机验证码
+     * @param dto 用户信息
      * @return
      */
     @PostMapping(value = "/add")
-    public Result userAdd(@RequestBody UserDTO userDTO,Integer code){
-        if (!tokenService.getVerifyCode(code)){
-            return ResultFactory.buildFailResult(VerifyContexts.VERIFY_ERROR);
+    public Result userAdd(@RequestBody UserTableChangeDTO dto) throws Exception{
+        try {
+            tokenService.getVerifyCode(dto.getCode());
+            dto.setUsername( HtmlUtils.htmlEscape(dto.getUsername()));
+            // 判断用户名是否存在
+            userService.hasUserName(dto.getUsername());
+            userService.insertUser(dto);
+            return ResultFactory.buildSuccessResult(LoginContexts.REGISTER_SUCCESS);
+        } catch (Exception e) {
+           throw exceptionHandle(e);
         }
-        String username = userDTO.getUsername();
-        username = HtmlUtils.htmlEscape(username);
-        userDTO.setUsername(username);
-        if (userService.hasUserName(username)){
-            return ResultFactory.buildFailResult(LoginContexts.NAME_HAS_EXIST);
-        }
-        userService.insertUser(userDTO);
-        return ResultFactory.buildSuccessResult(LoginContexts.REGISTER_SUCCESS);
     }
 
     /**
      * 修改用户信息
      *
-     * @param u
+     * @param dto
      * @return
      * @throws Exception
      */
     @PostMapping(value = "/update")
-    public Result userUpdate(@RequestBody UserDTO u) throws Exception {
+    public Result userUpdate(@RequestBody UserTableChangeDTO dto) throws Exception {
         try {
-            userService.updateUser(u);
-            return ResultFactory.buildSuccessResult(userService.findAll());
+            tokenService.getVerifyCode(dto.getCode());
+            userService.updateUser(dto);
+            UserVO userVO = UserVOConverter.INSTANCE.toData(userService.getUserByID(dto.getId()));
+            return ResultFactory.buildSuccessResult(userVO);
         }catch (Exception e){
             throw this.exceptionHandle(e);
         }
-
     }
 
     /**

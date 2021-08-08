@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @description:
+ * @description: Converter转换接口
  * @author: zhh
  * @time: 2021/5/31
  */

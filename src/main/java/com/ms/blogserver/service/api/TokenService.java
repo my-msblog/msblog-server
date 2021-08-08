@@ -24,7 +24,7 @@ public interface TokenService {
 
     void saveCode(Integer code);
 
-    boolean getVerifyCode(Integer code) throws CustomException;
+    void getVerifyCode(String code) throws CustomException;
 
     void sendSMS(String phone);
 }

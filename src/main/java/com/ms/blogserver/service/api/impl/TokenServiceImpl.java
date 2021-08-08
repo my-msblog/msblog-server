@@ -1,5 +1,6 @@
 package com.ms.blogserver.service.api.impl;
 
+import com.ms.blogserver.exception.CustomAuthorizedException;
 import com.ms.blogserver.exception.ProgramException;
 import com.ms.blogserver.constant.contexts.DigitalContexts;
 import com.ms.blogserver.constant.contexts.LoginContexts;
@@ -49,9 +50,7 @@ public class TokenServiceImpl implements TokenService {
             String account = TokenUtils.getAccount(token);
             Long currentTime= TokenUtils.getCurrentTime(token);
             if (redisUtils.hasKey(account)) {
-                Long currentTimeMillisRedis;
-                Object o = redisUtils.get(account);
-                currentTimeMillisRedis = (Long) o;
+                Long currentTimeMillisRedis = (Long) redisUtils.get(account);
                 if (currentTimeMillisRedis.equals(currentTime)) {
                     redisUtils.del(account);
                     log.info(LoginContexts.LOGOUT_SUCCESS);
@@ -60,7 +59,7 @@ public class TokenServiceImpl implements TokenService {
             }
             return false;
         } catch (Exception e) {
-            throw new ProgramException(e.getMessage());
+            throw new CustomAuthorizedException();
         }
     }
 
@@ -86,12 +85,14 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public boolean getVerifyCode(Integer code) throws CustomException {
-        Integer verifyCode = (Integer) redisUtils.get(RedisKeyContexts.SMS_CODE);
+    public void getVerifyCode(String code) throws CustomException {
+        String verifyCode = redisUtils.get(RedisKeyContexts.SMS_CODE).toString();
         if (verifyCode == null){
             throw new CustomException(VerifyContexts.VERIFY_NO_FOUND_ERROR);
         }
-        return code.equals(verifyCode);
+        if (!code.equals(verifyCode)){
+            throw new CustomException(VerifyContexts.VERIFY_ERROR);
+        }
     }
 
     @Override

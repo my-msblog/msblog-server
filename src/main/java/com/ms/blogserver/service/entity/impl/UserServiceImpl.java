@@ -5,13 +5,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.constant.contexts.LoginContexts;
+import com.ms.blogserver.converter.dto.UserTableChangeDTOConverter;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.constant.contexts.RoleContexts;
 import com.ms.blogserver.converter.dto.UserDTOConverter;
 import com.ms.blogserver.converter.vo.UserVOConverter;
 import com.ms.blogserver.exception.ProgramException;
 import com.ms.blogserver.model.dto.BaseDTO;
-import com.ms.blogserver.model.dto.UserDTO;
+import com.ms.blogserver.model.dto.UserTableChangeDTO;
 import com.ms.blogserver.model.entity.UserRole;
 import com.ms.blogserver.service.entity.UserRoleService;
 import com.ms.blogserver.utils.RegularUtils;
@@ -26,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
@@ -34,8 +36,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private UserRoleService userRoleService;
 
     @Override
-    public boolean hasUserName(String username) {
-        return findByUserName(username) == null;
+    public void hasUserName(String username) {
+        if (findByUserName(username) == null){
+            throw new CustomException(LoginContexts.NAME_HAS_EXIST);
+        }
     }
 
     @Override
@@ -44,28 +48,32 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public void insertUser(UserDTO userDTO) {
+    public void insertUser(UserTableChangeDTO userDTO) {
         userDTO.setPwd(EncryptPassword.encrypt(userDTO.getPwd()));
-        User user = UserDTOConverter.INSTANCE.fromData(userDTO);
+        User user = UserTableChangeDTOConverter.INSTANCE.fromData(userDTO);
         String email = user.getEmail();
         if (StringUtils.isNotEmpty(email)) {
             if (!RegularUtils.isEmail(email)) {
                 throw new CustomException(LoginContexts.EMAIL_ERROR);
             }
         }
-        baseMapper.insert(user);
-        // 新用户添加权限，默认权限为2
-        User newUser = findByUserName(user.getUsername());
-        userRoleService.save(new UserRole(newUser.getId(), RoleContexts.CONTENT_MANAGER_ID));
+        try {
+            baseMapper.insert(user);
+            // 新用户添加权限，默认权限为2
+            User newUser = findByUserName(user.getUsername());
+            userRoleService.save(new UserRole(newUser.getId(), RoleContexts.CONTENT_MANAGER_ID));
+        } catch (Exception e) {
+           throw new ProgramException(e.getMessage());
+        }
     }
 
     @Override
-    public void updateUser(UserDTO userDTO) {
-        if (userDTO == null || userDTO.getId() == 0) {
+    public void updateUser(UserTableChangeDTO dto) {
+        User user = getUserByID(dto.getId());
+        if (Objects.isNull(user)) {
             throw new CustomException("UserService-updateUser:" + LoginContexts.AUTHENTIC_FAIL);
         }
-        User user = getUserByID(userDTO.getId());
-        UserDTOConverter.INSTANCE.fromDataNoNull(userDTO, user);
+        UserTableChangeDTOConverter.INSTANCE.fromDataNoNull(dto, user);
         baseMapper.updateById(user);
     }
 

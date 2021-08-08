@@ -16,4 +16,6 @@ public interface ErrorContexts {
     String FILE_NO_DELETE = "文件无法删除，需要管理员权限或尝试关闭文件";
 
     String ID_IS_NULL = "传入id不能为空";
+
+    String ADD_NEW_ACCOUNT_ERROR = "添加用户异常";
 }
