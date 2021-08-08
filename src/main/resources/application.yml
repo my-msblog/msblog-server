@@ -43,6 +43,10 @@ spring:
         min-idle: 0
     # 连接超时时间（10秒）
     timeout: PT10S
+  #设置全局，Null值不返回到前端
+  jackson:
+    default-property-inclusion: non_null
+
 
 # 正式环境取消logging配置，默认加载resources文件下logback-spring.xml
 logging:
