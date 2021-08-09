@@ -9,7 +9,7 @@ public class Result<T> {
 
     private int code;
     private String msg;
-    private T data;
+    private T data = (T) "";
 
     public Result(int code, String msg, T data) {
         this.code = code;
