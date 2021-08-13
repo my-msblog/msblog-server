@@ -86,11 +86,11 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public void getVerifyCode(String code) throws CustomException {
-        String verifyCode = redisUtils.get(RedisKeyContexts.SMS_CODE).toString();
+        Integer verifyCode = (Integer)redisUtils.get(RedisKeyContexts.SMS_CODE);
         if (verifyCode == null){
             throw new CustomException(VerifyContexts.VERIFY_NO_FOUND_ERROR);
         }
-        if (!code.equals(verifyCode)){
+        if (!code.equals(verifyCode.toString())){
             throw new CustomException(VerifyContexts.VERIFY_ERROR);
         }
     }
