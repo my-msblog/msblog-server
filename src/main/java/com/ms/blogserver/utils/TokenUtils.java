@@ -18,8 +18,8 @@ import java.util.Date;
  */
 @Slf4j
 public class TokenUtils {
-    public static final long EXPIRE_TIME= 60*60*1000;//token到期时间60分钟，毫秒为单位
-    public static final long REFRESH_EXPIRE_TIME=30*60*2;//RefreshToken到期时间为60分钟，秒为单位
+    public static final long EXPIRE_TIME= 60*60*1000*3;//token到期时间，毫秒为单位(60分钟*3)
+    public static final long REFRESH_EXPIRE_TIME=60*60*3;//RefreshToken到期时间，秒为单位(60分钟*3)
     private static final String TOKEN_SECRET="ljdyaishijin**3nkjnj??";  //密钥盐
 
     /**
