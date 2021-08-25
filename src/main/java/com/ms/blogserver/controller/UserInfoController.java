@@ -51,7 +51,7 @@ public class UserInfoController extends BaseController {
                 return ResultFactory.buildResult(ResultCode.UNAUTHORIZED,LoginContexts.USER_ERROR);
             }
             Long uid = userService.findByUserName(username).getId();
-            return ResultFactory.buildSuccessResult(menuService.getMenusByCurrentUser(uid));
+            return ResultFactory.buildSuccessResult(menuService.filterMenuList(uid));
         } catch (Exception e) {
             throw exceptionHandle(e);
         }
