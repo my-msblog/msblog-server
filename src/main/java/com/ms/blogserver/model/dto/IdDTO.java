@@ -4,6 +4,11 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * @description:
+ * @author: zhh
+ * @time: 2021/6/11
+ */
 @Data
 public class IdDTO {
     private Long id;

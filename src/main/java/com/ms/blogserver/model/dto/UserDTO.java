@@ -17,5 +17,5 @@ public class UserDTO extends BaseDTO{
     private String phone;
     private String email;
     private String introduction;
-    private int sex;
+    private Integer sex;
 }

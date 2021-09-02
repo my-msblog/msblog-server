@@ -5,8 +5,13 @@ import com.ms.blogserver.model.entity.Menu;
 import com.ms.blogserver.model.vo.MenuVO;
 import org.mapstruct.factory.Mappers;
 
+/**
+ * @description:
+ * @author: zhh
+ * @time: 2021/6/11
+ */
 @org.mapstruct.Mapper
-public interface MenuVOConverter extends Converter<Menu, MenuVO> {
+public interface MenuVoConverter extends Converter<Menu, MenuVO> {
 
-    MenuVOConverter INSTANCE = Mappers.getMapper(MenuVOConverter.class);
+    MenuVoConverter INSTANCE = Mappers.getMapper(MenuVoConverter.class);
 }

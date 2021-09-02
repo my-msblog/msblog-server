@@ -32,9 +32,9 @@ public enum ResultString {
      */
     FORBIDDEN("禁止访问"),
     ;
-    public String DATA;
+    public String data;
 
     ResultString(String date) {
-        this.DATA = date;
+        this.data = date;
     }
 }

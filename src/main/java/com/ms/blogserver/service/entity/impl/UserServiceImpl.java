@@ -5,11 +5,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.constant.contexts.LoginContexts;
-import com.ms.blogserver.converter.dto.UserTableChangeDTOConverter;
+import com.ms.blogserver.converter.dto.UserTableChangeDtoConverter;
+import com.ms.blogserver.converter.vo.UserVoConverter;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.constant.contexts.RoleContexts;
-import com.ms.blogserver.converter.dto.UserDTOConverter;
-import com.ms.blogserver.converter.vo.UserVOConverter;
 import com.ms.blogserver.exception.ProgramException;
 import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.dto.UserTableChangeDTO;
@@ -29,6 +28,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @description:
+ * @author: zhh
+ * @time: 2021/6/11
+ */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
@@ -43,14 +47,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public User getUserByID(Long id) {
+    public User getUserById(Long id) {
         return baseMapper.selectById(id);
     }
 
     @Override
     public void insertUser(UserTableChangeDTO userDTO) {
         userDTO.setPwd(EncryptPassword.encrypt(userDTO.getPwd()));
-        User user = UserTableChangeDTOConverter.INSTANCE.fromData(userDTO);
+        User user = UserTableChangeDtoConverter.INSTANCE.fromData(userDTO);
         String email = user.getEmail();
         if (StringUtils.isNotEmpty(email)) {
             if (!RegularUtils.isEmail(email)) {
@@ -69,11 +73,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public void updateUser(UserTableChangeDTO dto) {
-        User user = getUserByID(dto.getId());
+        User user = getUserById(dto.getId());
         if (Objects.isNull(user)) {
             throw new CustomException("UserService-updateUser:" + LoginContexts.AUTHENTIC_FAIL);
         }
-        UserTableChangeDTOConverter.INSTANCE.fromDataNoNull(dto, user);
+        UserTableChangeDtoConverter.INSTANCE.fromDataNoNull(dto, user);
         baseMapper.updateById(user);
     }
 
@@ -116,10 +120,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public PageInfo<UserVO> getPage(BaseDTO dto) {
         PageHelper.startPage(dto.getPage(), dto.getSize());
         List<User> userList = findAll();
-        List<UserVO> voList = UserVOConverter.INSTANCE.toDataList(userList);
-        PageInfo<UserVO> userVOPageInfo = new PageInfo<>();
-        PageInfoUtil.transform(new PageInfo<>(userList), userVOPageInfo);
-        userVOPageInfo.setList(voList);
-        return userVOPageInfo;
+        List<UserVO> voList = UserVoConverter.INSTANCE.toDataList(userList);
+        PageInfo<UserVO> userVoPageInfo = new PageInfo<>();
+        PageInfoUtil.transform(new PageInfo<>(userList), userVoPageInfo);
+        userVoPageInfo.setList(voList);
+        return userVoPageInfo;
     }
 }

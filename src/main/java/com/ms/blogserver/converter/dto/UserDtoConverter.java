@@ -11,14 +11,8 @@ import org.mapstruct.factory.Mappers;
  * @time: 2021/5/31
  */
 @org.mapstruct.Mapper()
-public interface UserDTOConverter extends Converter<User, UserDTO> {
+public interface UserDtoConverter extends Converter<User, UserDTO> {
 
-    UserDTOConverter INSTANCE = Mappers.getMapper(UserDTOConverter.class);
-
-    @Override
-    UserDTO toData(User user);
-
-    @Override
-    User fromData(UserDTO userDTO);
+    UserDtoConverter INSTANCE = Mappers.getMapper(UserDtoConverter.class);
 
 }

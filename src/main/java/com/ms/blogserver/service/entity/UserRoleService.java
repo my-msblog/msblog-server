@@ -11,6 +11,12 @@ import com.ms.blogserver.model.entity.UserRole;
  */
 public interface UserRoleService extends IService<UserRole> {
 
+    /**
+     * 根据用户id获取角色id
+     * @param uid
+     * @return
+     * @throws CustomException
+     */
     Long getRidByUid(Long uid) throws CustomException;
 
 

@@ -11,7 +11,7 @@ import lombok.ToString;
 @Data
 @ToString
 public class TagVO {
-    private Long tageID;
-    //private String name;
+    private Long tageId;
+    private String name;
     private String nameZh;
 }

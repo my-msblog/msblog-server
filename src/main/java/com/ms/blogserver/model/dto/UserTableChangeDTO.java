@@ -3,6 +3,11 @@ package com.ms.blogserver.model.dto;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * @description:
+ * @author: zhh
+ * @time: 2021/7/1
+ */
 @Data
 @ToString
 public class UserTableChangeDTO {
@@ -12,6 +17,6 @@ public class UserTableChangeDTO {
     private String phone;
     private String email;
     private String introduction;
-    private int sex;
+    private Integer sex;
     private String code;
 }

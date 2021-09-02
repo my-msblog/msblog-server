@@ -24,8 +24,12 @@ public class ArticleVO {
     private Integer type;
     private String typeName;
 
-    //文章评论
-    private PageInfo<CommentVO> commentVOS;
-    //文章标签
-    private List<TagVO> tagVOS;
+    /**
+     * 文章评论
+     */
+    private PageInfo<CommentVO> commentVoS;
+    /**
+     * 文章标签
+     */
+    private List<TagVO> tagVoS;
 }

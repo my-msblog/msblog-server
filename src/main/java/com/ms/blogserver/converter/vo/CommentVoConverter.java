@@ -11,8 +11,8 @@ import org.mapstruct.factory.Mappers;
  * @time: 2021/6/2
  */
 @org.mapstruct.Mapper
-public interface CommentVOConverter extends Converter<CommentBO, CommentVO> {
+public interface CommentVoConverter extends Converter<CommentBO, CommentVO> {
 
-    CommentVOConverter INSTANCE = Mappers.getMapper(CommentVOConverter.class);
+    CommentVoConverter INSTANCE = Mappers.getMapper(CommentVoConverter.class);
 
 }

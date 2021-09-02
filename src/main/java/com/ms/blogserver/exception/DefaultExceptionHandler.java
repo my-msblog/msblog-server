@@ -38,7 +38,7 @@ public class DefaultExceptionHandler implements ResponseBodyAdvice<Object> {
     @ResponseBody
     public Result handleShiroException(ShiroException e) {
         log.error("handleShiroException:shiro authorized error",e);
-        return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA);
+        return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.data);
     }
     /**
      * 自定义CustomException异常捕获
@@ -62,19 +62,18 @@ public class DefaultExceptionHandler implements ResponseBodyAdvice<Object> {
     @ResponseBody
     public Result handleProgramException(ProgramException e){
         log.error(e.getMessage(),e);
-        return ResultFactory.buildResult(ResultCode.INTERNAL_SERVER_ERROR,ResultString.INTERNAL_ERROR.DATA,e.toString());
+        return ResultFactory.buildResult(ResultCode.INTERNAL_SERVER_ERROR,ResultString.INTERNAL_ERROR.data,e.toString());
     }
 
     @ExceptionHandler({CustomAuthorizedException.class})
     @ResponseBody
     public Result handleUnauthorizedException(CustomAuthorizedException customAuthorizedException) {
         log.error(customAuthorizedException.getMessage(), customAuthorizedException);
-        return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA);
+        return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.data);
     }
     @ExceptionHandler(AuthorizationException.class)
     @ResponseBody
     public Result handleAuthorizationException(AuthorizationException e){
-        //e.printStackTrace();
         log.error("handleAuthorizationException:"+LoginContexts.INSUFFICIENT_USER_PERMISSIONS,e);
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, LoginContexts.INSUFFICIENT_USER_PERMISSIONS);
     }
@@ -89,9 +88,9 @@ public class DefaultExceptionHandler implements ResponseBodyAdvice<Object> {
     public Result handleException(Exception e) {
         log.error(e.getMessage(),e);
         if (e instanceof NoHandlerFoundException){
-            return ResultFactory.buildResult(ResultCode.NOT_FOUND,ResultString.PAGE_NO_FOUND.DATA);
+            return ResultFactory.buildResult(ResultCode.NOT_FOUND,ResultString.PAGE_NO_FOUND.data);
         }
-        return ResultFactory.buildResult(ResultCode.INTERNAL_SERVER_ERROR,ResultString.INTERNAL_ERROR.DATA,e.getMessage());
+        return ResultFactory.buildResult(ResultCode.INTERNAL_SERVER_ERROR,ResultString.INTERNAL_ERROR.data,e.getMessage());
     }
 
     @Override

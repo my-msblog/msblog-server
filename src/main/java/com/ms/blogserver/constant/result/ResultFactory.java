@@ -1,4 +1,9 @@
 package com.ms.blogserver.constant.result;
+/**
+ * @description:
+ * @author: zhh
+ * @time: 2021/6/11
+ */
 
 public class ResultFactory {
 
@@ -15,7 +20,7 @@ public class ResultFactory {
     }
 
     public static Result buildResult(ResultCode resultCode, String message, Object data) {
-        return buildResult(resultCode.CODE, message, data);
+        return buildResult(resultCode.code, message, data);
     }
     public static Result buildResult(ResultCode resultCode, String message){
         return buildResult(resultCode,message,"");

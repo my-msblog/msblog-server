@@ -11,6 +11,11 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.DispatcherServlet;
 
+/**
+ * @description:
+ * @author: zhh
+ * @time: 2021/6/11
+ */
 @SpringBootApplication
 public class MsblogServerApplication extends SpringBootServletInitializer {
 
@@ -20,7 +25,6 @@ public class MsblogServerApplication extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) {
-        //SpringApplication.run(MsblogServerApplication.class, args);
         try{
             SpringApplication.run(MsblogServerApplication.class, args);
         }catch(Exception e){

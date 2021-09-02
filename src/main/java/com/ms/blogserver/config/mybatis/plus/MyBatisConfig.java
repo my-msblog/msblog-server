@@ -1,10 +1,7 @@
 package com.ms.blogserver.config.mybatis.plus;
 
 import com.baomidou.mybatisplus.annotation.DbType;
-import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;
-import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
@@ -12,6 +9,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * @description: mybatis-plus配置类
+ * @author: zhh
+ * @time: 2021/6/11
+ */
 @EnableTransactionManagement
 @Configuration
 @MapperScan("com.ms.blogserver.mapper")
@@ -36,8 +38,8 @@ public class MyBatisConfig {
 
     }
 
-    @Bean
-    public ConfigurationCustomizer configurationCustomizer() {
-        return configuration -> configuration.setUseDeprecatedExecutor(false);
-    }
+//    @Bean
+//    public ConfigurationCustomizer configurationCustomizer() {
+//        return configuration -> configuration.setUseDeprecatedExecutor(false);
+//    }
 }

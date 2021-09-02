@@ -7,12 +7,17 @@ import lombok.ToString;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * @description:
+ * @author: zhh
+ * @time: 2021/6/11
+ */
 @Data
 @ToString
 @TableName(value = "ms_user")
 public class User implements Serializable {
 
-    @TableId(type = IdType.ID_WORKER)
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id ;
     private String username;
     private String pwd;

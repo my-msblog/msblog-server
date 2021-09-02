@@ -12,5 +12,10 @@ import java.util.List;
  */
 public interface PermissionMenuService extends IService<PermissionMenu> {
 
+    /**
+     * 根据权限id获取对应的权限菜单
+     * @param list
+     * @return
+     */
     List<PermissionMenu> getMenuIdByPid(List<Long> list);
 }

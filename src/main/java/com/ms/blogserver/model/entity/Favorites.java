@@ -8,6 +8,11 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
+/**
+ * @description:
+ * @author: zhh
+ * @time: 2021/6/11
+ */
 @Data
 @ToString
 @TableName("ms_favorites")

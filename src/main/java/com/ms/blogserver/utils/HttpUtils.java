@@ -4,6 +4,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import com.ms.blogserver.constant.contexts.UrlContexts;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -282,7 +283,7 @@ public class HttpUtils {
 
     private static HttpClient wrapClient(String host) {
         HttpClient httpClient = new DefaultHttpClient();
-        if (host.startsWith("https://")) {
+        if (host.startsWith(UrlContexts.HTTPS)) {
             sslClient(httpClient);
         }
 
@@ -293,14 +294,15 @@ public class HttpUtils {
         try {
             SSLContext ctx = SSLContext.getInstance("TLS");
             X509TrustManager tm = new X509TrustManager() {
+                @Override
                 public X509Certificate[] getAcceptedIssuers() {
                     return null;
                 }
-
+                @Override
                 public void checkClientTrusted(X509Certificate[] xcs, String str) {
 
                 }
-
+                @Override
                 public void checkServerTrusted(X509Certificate[] xcs, String str) {
 
                 }
@@ -311,9 +313,7 @@ public class HttpUtils {
             ClientConnectionManager ccm = httpClient.getConnectionManager();
             SchemeRegistry registry = ccm.getSchemeRegistry();
             registry.register(new Scheme("https", 443, ssf));
-        } catch (KeyManagementException ex) {
-            throw new RuntimeException(ex);
-        } catch (NoSuchAlgorithmException ex) {
+        } catch (KeyManagementException | NoSuchAlgorithmException ex) {
             throw new RuntimeException(ex);
         }
     }

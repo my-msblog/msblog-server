@@ -9,6 +9,4 @@ import com.ms.blogserver.model.entity.Role;
  * @time: 2021/5/21
  */
 public interface RoleService extends IService<Role> {
-
-    Role findByID(Long id);
 }

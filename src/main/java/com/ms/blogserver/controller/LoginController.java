@@ -66,7 +66,7 @@ public class LoginController extends BaseController {
             User user = loginService.commonLogin(loginDTO.getUsername(), loginDTO.getPassword());
             //判断验证码
             captchaService.verifyArithmetic(loginDTO.getKey(), loginDTO.getCode());
-            UserVO userVO = tokenService.setToken(user, tokenService.CreateToken(user.getUsername(), response));
+            UserVO userVO = tokenService.setToken(user, tokenService.createToken(user.getUsername(), response));
             return ResultFactory.buildSuccessResult(userVO);
         } catch (Exception e) {
             throw this.exceptionHandle(e);

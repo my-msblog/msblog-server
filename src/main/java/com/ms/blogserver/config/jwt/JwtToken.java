@@ -9,10 +9,10 @@ import java.io.Serializable;
  * @author: zhh
  * @time: 2021/5/24
  */
-public class JWTToken implements AuthenticationToken, Serializable {
+public class JwtToken implements AuthenticationToken, Serializable {
     private String token;
 
-    public JWTToken(String token) {
+    public JwtToken(String token) {
         this.token = token;
     }
 

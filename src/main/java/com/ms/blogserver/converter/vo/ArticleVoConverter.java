@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
  * @time: 2021/6/4
  */
 @org.mapstruct.Mapper
-public interface ArticleVOConverter extends Converter<Article, ArticleVO> {
+public interface ArticleVoConverter extends Converter<Article, ArticleVO> {
 
-    ArticleVOConverter INSTANCE = Mappers.getMapper(ArticleVOConverter.class);
+    ArticleVoConverter INSTANCE = Mappers.getMapper(ArticleVoConverter.class);
 }

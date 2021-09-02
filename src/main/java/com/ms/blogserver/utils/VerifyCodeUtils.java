@@ -29,7 +29,8 @@ public class VerifyCodeUtils {
      */
     public static SpecCaptcha digitalCaptcha() throws IOException, FontFormatException {
         SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 5);
-        specCaptcha.setFont(Captcha.FONT_1); //设置字体
+        //设置字体
+        specCaptcha.setFont(Captcha.FONT_1);
         //specCaptcha.setCharType(Captcha.TYPE_ONLY_NUMBER); //设置字符类型
         return specCaptcha;
     }
@@ -41,7 +42,8 @@ public class VerifyCodeUtils {
      */
     public static ArithmeticCaptcha arithmeticCaptcha(){
         ArithmeticCaptcha captcha = new ArithmeticCaptcha(130, 48);
-        captcha.setLen(2);  // 几位数运算，默认是两位
+        // 几位数运算，默认是两位
+        captcha.setLen(2);
         //captcha.getArithmeticString();  // 获取运算的公式：3+2=?
         //captcha.text();  // 获取运算的结果：5
         return captcha;

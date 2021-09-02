@@ -1,6 +1,6 @@
 package com.ms.blogserver.config.shiro;
 
-import com.ms.blogserver.config.jwt.JWTToken;
+import com.ms.blogserver.config.jwt.JwtToken;
 
 import com.ms.blogserver.model.entity.Role;
 import com.ms.blogserver.model.entity.RolePermission;
@@ -55,7 +55,7 @@ public class CustomRealm extends AuthorizingRealm {
      */
     @Override
     public boolean supports(AuthenticationToken token) {
-        return token instanceof JWTToken;
+        return token instanceof JwtToken;
     }
 
     /**
@@ -86,7 +86,7 @@ public class CustomRealm extends AuthorizingRealm {
         Set<String> permissionSet = new HashSet<>();
         User user = userService.findByUserName(username);
         //获得该用户角色
-        Role role = roleService.findByID(userRoleService.getRidByUid(user.getId()));
+        Role role = roleService.getById(userRoleService.getRidByUid(user.getId()));
         List<Long> pid = rolePermissionService.getAllPermissionByRoleId(role.getId())
                 .stream()
                 .map(RolePermission::getPid)

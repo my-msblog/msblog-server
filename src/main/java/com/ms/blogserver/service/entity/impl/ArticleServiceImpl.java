@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ms.blogserver.converter.vo.ArticleVOConverter;
+import com.ms.blogserver.converter.vo.ArticleVoConverter;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.model.dto.ArticleDTO;
 import com.ms.blogserver.model.dto.GetCommentDTO;
@@ -43,10 +43,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             if (Objects.isNull(article)){
                 throw new CustomException("未找到指定文章");
             }
-            ArticleVO articleVO = ArticleVOConverter.INSTANCE.toData(article);
+            ArticleVO articleVO = ArticleVoConverter.INSTANCE.toData(article);
             articleVO.setTypeName(categoryService.getCategoryByCid(article.getType()));
-            PageInfo<CommentVO> commentVOPageInfo = commentService.getPageByArticle(new GetCommentDTO(id));
-            articleVO.setCommentVOS(commentVOPageInfo);
+            PageInfo<CommentVO> commentVoPageInfo = commentService.getPageByArticle(new GetCommentDTO(id));
+            articleVO.setCommentVoS(commentVoPageInfo);
             return articleVO;
         } catch (Exception e) {
            throw new CustomException(e.getMessage());
@@ -61,7 +61,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 .eq(Objects.nonNull(dto.getType()),Article::getType,dto.getType())
                 .eq(Objects.nonNull(dto.getTime()),Article::getCreateTime,dto.getTime()));
         // entity转vo
-        List<ArticleVO> list = ArticleVOConverter.INSTANCE.toDataList(articleList);
+        List<ArticleVO> list = ArticleVoConverter.INSTANCE.toDataList(articleList);
         // 添加分类
         list.forEach(articleVO -> {
             articleVO.setTypeName(categoryService.getCategoryByCid(articleVO.getType()));

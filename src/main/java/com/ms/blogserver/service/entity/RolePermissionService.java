@@ -11,6 +11,10 @@ import java.util.List;
  * @time: 2021/5/21
  */
 public interface RolePermissionService extends IService<RolePermission> {
-
+    /**
+     * 获取角色权限列表
+     * @param roleId
+     * @return
+     */
     List<RolePermission> getAllPermissionByRoleId(Long roleId);
 }

@@ -1,5 +1,6 @@
 package com.ms.blogserver.constant.controller;
 
+import com.ms.blogserver.constant.contexts.WebContexts;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.exception.ProgramException;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,8 @@ import java.util.Map;
  */
 @Slf4j
 public class BaseController {
+
+    private final String windows = "Windows NT";
 
     /**
      * 获取request对象
@@ -43,10 +46,10 @@ public class BaseController {
      */
     public String getClientIp(){
         HttpServletRequest request = getRequest();
-        if (request.getHeader("x-forwarded-for") == null) {
+        if (request.getHeader(WebContexts.X_FORWARDED_FOR) == null) {
             return request.getRemoteAddr();
         }
-        return request.getHeader("x-forwarded-for");
+        return request.getHeader(WebContexts.X_FORWARDED_FOR);
     }
     /**
      * 判断请求来源
@@ -56,7 +59,7 @@ public class BaseController {
     public String getTerminal(){
         HttpServletRequest request = getRequest();
         String terminal = request.getHeader("User-Agent");
-        if(terminal.contains("Windows NT")){
+        if(terminal.contains(windows)){
             terminal = "pc";
         }else{
             terminal = "mobile";
@@ -86,7 +89,7 @@ public class BaseController {
      * @return
      */
     protected HashMap<String, Object> getRequestMapSingle(HttpServletRequest request) {
-        HashMap<String, Object> conditions = new HashMap<String, Object>();
+        HashMap<String, Object> conditions = new HashMap<String, Object>(12);
         Map map = request.getParameterMap();
         for (Object o : map.keySet()) {
             String key = (String) o;

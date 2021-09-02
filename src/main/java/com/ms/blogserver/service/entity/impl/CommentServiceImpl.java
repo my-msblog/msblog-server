@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.constant.contexts.DigitalContexts;
-import com.ms.blogserver.converter.bo.CommentBOConverter;
-import com.ms.blogserver.converter.vo.CommentVOConverter;
+import com.ms.blogserver.converter.bo.CommentBoConverter;
+import com.ms.blogserver.converter.vo.CommentVoConverter;
 import com.ms.blogserver.model.entity.Comment;
 import com.ms.blogserver.model.bo.CommentBO;
 import com.ms.blogserver.model.dto.GetCommentDTO;
@@ -41,7 +41,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     @Override
     public List<CommentVO> getParentId(Long pid) {
         List<Comment> list = baseMapper.selectList(new QueryWrapper<Comment>().eq("parent_id", pid));
-        List<CommentBO> commentBOList = CommentBOConverter.INSTANCE.toDataList(list);
+        List<CommentBO> commentBOList = CommentBoConverter.INSTANCE.toDataList(list);
         return setString(commentBOList);
     }
 
@@ -52,24 +52,24 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         if (CollectionUtils.isEmpty(allComment)){
             return new PageInfo<>(new ArrayList<>());
         }
-        List<CommentBO> commentBOList = CommentBOConverter.INSTANCE.toDataList(allComment);
+        List<CommentBO> commentBOList = CommentBoConverter.INSTANCE.toDataList(allComment);
         List<CommentVO> commentVOList = setString(commentBOList);
         handle(commentVOList);
-        PageInfo<CommentVO> commentVOPageInfo = new PageInfo<>();
-        PageInfoUtil.transform(new PageInfo<>(allComment),commentVOPageInfo);
-        commentVOPageInfo.setList(commentVOList);
-        return commentVOPageInfo;
+        PageInfo<CommentVO> commentVoPageInfo = new PageInfo<>();
+        PageInfoUtil.transform(new PageInfo<>(allComment),commentVoPageInfo);
+        commentVoPageInfo.setList(commentVOList);
+        return commentVoPageInfo;
     }
 
     private  List<CommentVO> setString(List<CommentBO> commentBOList) {
         commentBOList.forEach(commentBO -> {
-            commentBO.setCommenter(userService.getUserByID(commentBO.getCommenterId()).getUsername());
-            Long resID = commentBO.getRespondentId();
-            if (!resID.equals(DigitalContexts.ZERO_LONG)){
-                commentBO.setRespondent(userService.getUserByID(resID).getUsername());
+            commentBO.setCommenter(userService.getUserById(commentBO.getCommenterId()).getUsername());
+            Long resId = commentBO.getRespondentId();
+            if (!resId.equals(DigitalContexts.ZERO_LONG)){
+                commentBO.setRespondent(userService.getUserById(resId).getUsername());
             }
         });
-        return CommentVOConverter.INSTANCE.toDataList(commentBOList);
+        return CommentVoConverter.INSTANCE.toDataList(commentBOList);
     }
 
     private void handle(List<CommentVO> list){

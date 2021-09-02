@@ -20,5 +20,5 @@ public class CommentBO implements Serializable {
     private Long respondentId;
     private Long parentId;
     private Integer likes;
-    private LocalTime create_time;
+    private LocalTime createTime;
 }

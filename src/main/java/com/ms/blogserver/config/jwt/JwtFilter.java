@@ -3,13 +3,12 @@ package com.ms.blogserver.config.jwt;
 import com.alibaba.fastjson.JSONObject;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.ms.blogserver.constant.contexts.LoginContexts;
+import com.ms.blogserver.constant.contexts.UrlContexts;
 import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.constant.result.ResultString;
-import com.ms.blogserver.exception.CustomAuthorizedException;
 import com.ms.blogserver.utils.RedisUtils;
 import com.ms.blogserver.utils.TokenUtils;
-import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
@@ -33,7 +32,7 @@ import java.io.UnsupportedEncodingException;
  * @time: 2021/5/24
  */
 
-public class JWTFilter extends BasicHttpAuthenticationFilter {
+public class JwtFilter extends BasicHttpAuthenticationFilter {
 
     @Autowired
     private RedisUtils redisUtils;
@@ -50,15 +49,13 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String requestUrl = httpServletRequest.getRequestURI();
-        if (!"/websocket".equals(requestUrl)){
+        if (!UrlContexts.WEBSOCKET.equals(requestUrl)){
             logger.info("\033[2;36m"+"请求方法:"+httpServletRequest.getMethod()+", 请求路径:["+httpServletRequest.getRequestURI()+"]"+" \033[0m");
         }
         if (this.isLoginAttempt(request,response)) {
             try {
                 return executeLogin(request, response);
             } catch (Exception e) {
-                //throw new ShiroException(e.getMessage());
-                //responseError(response,e.getMessage());
                 return false;
             }
         }
@@ -73,7 +70,6 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
-        //logger.debug("isLoginAttempt方法");
         String token=((HttpServletRequest)request).getHeader("token");
         return token != null;
     }
@@ -88,9 +84,9 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
         logger.debug("createToken方法");
         String jwtToken = ((HttpServletRequest)request).getHeader("token");
-        if(jwtToken!=null)
-            return new JWTToken(jwtToken);
-
+        if(jwtToken!=null) {
+            return new JwtToken(jwtToken);
+        }
         return null;
     }
 
@@ -215,7 +211,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             httpServletResponse.setCharacterEncoding("UTF-8");
             httpServletResponse.setContentType("application/json; charset=utf-8");
             PrintWriter out =  httpServletResponse.getWriter();
-            String data = JSONObject.toJSONString(ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.DATA,LoginContexts.TOKEN_INVALID));
+            String data = JSONObject.toJSONString(ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.data,LoginContexts.TOKEN_INVALID));
             out.append(data);
             logger.error("responseError:"+message);
         } catch (IOException e) {

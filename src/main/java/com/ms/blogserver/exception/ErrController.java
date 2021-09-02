@@ -43,15 +43,15 @@ public class ErrController extends BasicErrorController {
         getErrorProperties().setIncludeStacktrace(ErrorProperties.IncludeStacktrace.ALWAYS);
         Map<String, Object> body = getErrorAttributes(request, getErrorAttributeOptions(request, MediaType.ALL));
         HttpStatus status = getStatus(request);
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<String, Object>(12);
         map.put("code", body.get("status"));
         switch (status.value()){
             case 404:
-                map.put("msg", ResultString.PAGE_NO_FOUND.DATA);
+                map.put("msg", ResultString.PAGE_NO_FOUND.data);
                 map.put("data", "");
                 break;
             case 401:
-                map.put("msg", ResultString.NO_AUTHORIZED.DATA);
+                map.put("msg", ResultString.NO_AUTHORIZED.data);
                 map.put("data", "");
                 break;
             default:

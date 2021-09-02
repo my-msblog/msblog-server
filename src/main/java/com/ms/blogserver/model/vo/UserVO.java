@@ -20,7 +20,7 @@ public class UserVO {
     private String email;
     private String token;
     private String introduction;
-    private int sex;
+    private Integer sex;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 }

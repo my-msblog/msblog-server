@@ -34,7 +34,10 @@ public class SwaggerConfig {
                 .build();
     }
 
-    //基本信息，页面展示
+    /**
+     * 基本信息，页面展示
+     * @return
+     */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("测试项目标题")

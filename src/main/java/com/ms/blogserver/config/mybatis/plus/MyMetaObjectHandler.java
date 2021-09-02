@@ -6,6 +6,11 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+/**
+ * @description: mybatis-plus 更新配置
+ * @author: zhh
+ * @time: 2021/6/11
+ */
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
 

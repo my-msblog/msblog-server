@@ -1,19 +1,18 @@
 package com.ms.blogserver.service.api.impl;
 
 import com.ms.blogserver.exception.CustomAuthorizedException;
-import com.ms.blogserver.exception.ProgramException;
 import com.ms.blogserver.constant.contexts.DigitalContexts;
 import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.contexts.RedisKeyContexts;
 import com.ms.blogserver.constant.contexts.VerifyContexts;
 import com.ms.blogserver.exception.CustomException;
-import com.ms.blogserver.converter.vo.UserVOConverter;
+import com.ms.blogserver.converter.vo.UserVoConverter;
 import com.ms.blogserver.model.entity.User;
 import com.ms.blogserver.model.vo.UserVO;
 import com.ms.blogserver.service.api.TokenService;
 import com.ms.blogserver.utils.RedisUtils;
 import com.ms.blogserver.utils.RegularUtils;
-import com.ms.blogserver.utils.SMSVerify;
+import com.ms.blogserver.utils.SmsVerify;
 import com.ms.blogserver.utils.TokenUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,7 @@ public class TokenServiceImpl implements TokenService {
     private RedisUtils redisUtils;
 
     @Override
-    public String CreateToken(String username, HttpServletResponse response) throws UnsupportedEncodingException {
+    public String createToken(String username, HttpServletResponse response) throws UnsupportedEncodingException {
         Long currentTimeMillis = System.currentTimeMillis();
         String token= TokenUtils.sign(username,currentTimeMillis);
         redisUtils.set(username,currentTimeMillis, TokenUtils.REFRESH_EXPIRE_TIME);
@@ -74,7 +73,7 @@ public class TokenServiceImpl implements TokenService {
 
     @Override
     public UserVO setToken(User user,String token) {
-        UserVO userVO = UserVOConverter.INSTANCE.toData(user);
+        UserVO userVO = UserVoConverter.INSTANCE.toData(user);
         userVO.setToken(token);
         return userVO;
     }
@@ -96,11 +95,11 @@ public class TokenServiceImpl implements TokenService {
     }
 
     @Override
-    public void sendSMS(String phone) {
+    public void sendSms(String phone) {
         if (phone == null || !RegularUtils.isMobileExact(phone)){
             throw new CustomException(VerifyContexts.RIGHT_PHONE_NUMBER);
         }
-        Integer code = SMSVerify.sendSMS(phone);
+        Integer code = SmsVerify.sendSms(phone);
         saveCode(code);
     }
 }

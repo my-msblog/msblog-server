@@ -8,17 +8,38 @@ import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.vo.UserVO;
 
 import java.util.List;
+/**
+ * @description:
+ * @author: zhh
+ * @time: 2021/6/11
+ */
 
 public interface UserService extends IService<User> {
-
+    /**
+     *  判断用户名是否存在
+     * @param username
+     */
     void hasUserName(String username);
-
-    User getUserByID(Long id);
-
+    /**
+     *  通过id获取用户
+     * @param id
+     * @return
+     */
+    User getUserById(Long id);
+    /**
+     * 插入用户
+     * @param dto
+     */
     void insertUser(UserTableChangeDTO dto);
-
+    /**
+     * 修改用户
+     * @param dto
+     */
     void updateUser(UserTableChangeDTO dto);
-
+    /**
+     * 查询所有用户
+     * @return
+     */
     List<User> findAll();
 
     /**
@@ -39,9 +60,24 @@ public interface UserService extends IService<User> {
      */
     int deleteById(Long id);
 
+    /**
+     * 根据用户名查找
+     * @param userName
+     * @return
+     */
     User findByUserName(String userName);
 
+    /**
+     * 获取密码
+     * @param username
+     * @return
+     */
     String getPassword(String username);
 
+    /**
+     * 用户分页
+     * @param dto
+     * @return
+     */
     PageInfo<UserVO> getPage(BaseDTO dto);
 }

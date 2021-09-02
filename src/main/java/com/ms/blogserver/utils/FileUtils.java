@@ -17,7 +17,7 @@ import java.util.*;
 @Slf4j
 public class FileUtils {
 
-    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static final String NAME = "FILE_NAME";
     public static final String TIME = "FILE_NAME";
 
@@ -31,9 +31,11 @@ public class FileUtils {
     public static List<FileSimpleVO> files(File directory) throws Exception {
         File[] listFiles = directory.listFiles();
         List<FileSimpleVO> list = new ArrayList<>();
+        assert listFiles != null;
         for (File f : listFiles) {
             if (f.isDirectory()) {
-                files(f); //存在最终的节点
+                //存在最终的节点
+                files(f);
             } else {
                 if (f.getName().endsWith("log")) {
                     FileSimpleVO fileSimpleVO = new FileSimpleVO();
@@ -54,8 +56,10 @@ public class FileUtils {
      * @return
      */
     public static String getTime(long time) {
-        Date d = new Date(time);
-        return format.format(d);
+        synchronized (FORMAT) {
+            Date d = new Date(time);
+            return FORMAT.format(d);
+        }
     }
 
     public static String loadLog(String url){
@@ -64,7 +68,7 @@ public class FileUtils {
             FileInputStream fstream = new FileInputStream(file);
             BufferedReader br = new BufferedReader(new FileReader(file));
             String strLine;
-            StringBuffer stringBuffer = new StringBuffer();
+            StringBuilder stringBuffer = new StringBuilder();
             while ((strLine = br.readLine()) != null)   {
                 stringBuffer.append(strLine);
                 stringBuffer.append("\n");

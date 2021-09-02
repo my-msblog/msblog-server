@@ -15,9 +15,24 @@ import java.util.List;
  */
 public interface CommentService extends IService<Comment> {
 
+    /**
+     * 文章评论
+     * @param articleId
+     * @return
+     */
     List<Comment> getAllCommentByArticleId(Long articleId);
 
+    /**
+     * 评论父级id
+     * @param pid
+     * @return
+     */
     List<CommentVO> getParentId(Long pid);
 
+    /**
+     * 文章评论分页
+     * @param dto
+     * @return
+     */
     PageInfo<CommentVO> getPageByArticle(GetCommentDTO dto);
 }

@@ -2,7 +2,6 @@ package com.ms.blogserver.service.entity.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ms.blogserver.converter.vo.MenuVOConverter;
 import com.ms.blogserver.model.entity.Menu;
 import com.ms.blogserver.model.entity.PermissionMenu;
 import com.ms.blogserver.model.entity.RolePermission;
@@ -15,6 +14,7 @@ import com.ms.blogserver.service.entity.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,7 +47,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
                 .map(PermissionMenu::getMid)
                 .collect(Collectors.toList());
         List<Menu> menus = baseMapper.selectList(new QueryWrapper<Menu>().in("id",midList));
-        handleMenu(menus);
+        // handleMenu(menus);
         return menus;
     }
 
@@ -59,7 +59,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     public List<MenuVO> filterMenuList(Long uid) {
         List<Menu> menus = getMenusByCurrentUser(uid);
-        return MenuVOConverter.INSTANCE.toDataList(menus);
+        handleMenu(menus);
+        List<MenuVO> menuVOList = new ArrayList<>();
+        menus.forEach(menu -> {
+            menuVOList.add(new MenuVO(menu));
+        });
+        return menuVOList;
     }
 
     /**
@@ -73,5 +78,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         });
         list.removeIf(menu -> menu.getParentId() != 0);
     }
+
 
 }

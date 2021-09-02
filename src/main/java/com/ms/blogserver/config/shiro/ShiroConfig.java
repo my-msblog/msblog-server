@@ -1,6 +1,6 @@
 package com.ms.blogserver.config.shiro;
 
-import com.ms.blogserver.config.jwt.JWTFilter;
+import com.ms.blogserver.config.jwt.JwtFilter;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
@@ -78,8 +78,8 @@ public class ShiroConfig {
      *
      * @return
      */
-    public JWTFilter jwtFilterBean() {
-        return new JWTFilter();
+    public JwtFilter jwtFilterBean() {
+        return new JwtFilter();
     }
 
 

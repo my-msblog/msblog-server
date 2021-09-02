@@ -13,5 +13,10 @@ import java.util.List;
  */
 public interface ArticleTagService extends IService<ArticleTag> {
 
-    List<TagVO> getArticleTagBy(Long articleId);
+    /**
+     * 获取对应文章下的文章标签
+     * @param articleId
+     * @return
+     */
+    List<TagVO> getArticleTagById(Long articleId);
 }

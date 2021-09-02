@@ -1,15 +1,12 @@
 package com.ms.blogserver.controller;
 
 import com.ms.blogserver.constant.contexts.LoginContexts;
-import com.ms.blogserver.constant.contexts.VerifyContexts;
-import com.ms.blogserver.converter.vo.UserVOConverter;
+import com.ms.blogserver.converter.vo.UserVoConverter;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
-import com.ms.blogserver.model.dto.UserDTO;
 import com.ms.blogserver.model.dto.UserTableChangeDTO;
-import com.ms.blogserver.model.entity.User;
 import com.ms.blogserver.model.vo.UserVO;
 import com.ms.blogserver.service.api.TokenService;
 import com.ms.blogserver.service.entity.UserService;
@@ -18,7 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
-
+/**
+ * @description:
+ * @author: zhh
+ * @time: 2021/6/11
+ */
 @RestController
 @Slf4j
 @RequestMapping("/user")
@@ -62,7 +63,7 @@ public class UserController extends BaseController {
         try {
             tokenService.getVerifyCode(dto.getCode());
             userService.updateUser(dto);
-            UserVO userVO = UserVOConverter.INSTANCE.toData(userService.getUserByID(dto.getId()));
+            UserVO userVO = UserVoConverter.INSTANCE.toData(userService.getUserById(dto.getId()));
             return ResultFactory.buildSuccessResult(userVO);
         }catch (Exception e){
             throw this.exceptionHandle(e);
@@ -89,7 +90,7 @@ public class UserController extends BaseController {
     public Result phyDelete() throws Exception {
         try {
             userService.deleteById(1392754664565116930L);
-            return ResultFactory.buildSuccessResult(userService.findAll());
+            return ResultFactory.buildSuccessResult();
         } catch (Exception e) {
             throw this.exceptionHandle(e);
         }

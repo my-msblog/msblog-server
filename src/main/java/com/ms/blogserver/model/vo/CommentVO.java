@@ -20,7 +20,7 @@ public class CommentVO {
     private String respondent;
     private Integer likes;
     private Long parentId;
-    private LocalTime create_time;
+    private LocalTime createTime;
 
     private List<CommentVO> children;
 }

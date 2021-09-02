@@ -21,7 +21,7 @@ import java.util.Objects;
 @Service
 public class ArticleTagServiceImpl extends ServiceImpl<ArticleTagMapper, ArticleTag> implements ArticleTagService {
     @Override
-    public List<TagVO> getArticleTagBy(Long articleId) {
+    public List<TagVO> getArticleTagById(Long articleId) {
         if (Objects.nonNull(articleId)){
             throw new CustomException(ErrorContexts.ID_IS_NULL);
         }

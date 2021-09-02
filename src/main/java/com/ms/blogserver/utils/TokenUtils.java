@@ -18,9 +18,18 @@ import java.util.Date;
  */
 @Slf4j
 public class TokenUtils {
-    public static final long EXPIRE_TIME= 60*60*1000*3;//token到期时间，毫秒为单位(60分钟*3)
-    public static final long REFRESH_EXPIRE_TIME=60*60*3;//RefreshToken到期时间，秒为单位(60分钟*3)
-    private static final String TOKEN_SECRET="ljdyaishijin**3nkjnj??";  //密钥盐
+    /**
+     * token到期时间，毫秒为单位(60分钟*3)
+     */
+    public static final long EXPIRE_TIME= 60*60*1000*3;
+    /**
+     * RefreshToken到期时间，秒为单位(60分钟*3)
+     */
+    public static final long REFRESH_EXPIRE_TIME=60*60*3;
+    /**
+     * 密钥盐
+     */
+    private static final String TOKEN_SECRET="ljdyaishijin**3nkjnj??";
 
     /**
      * 生成token
@@ -33,10 +42,12 @@ public class TokenUtils {
         try {
             Date expireAt=new Date(currentTime+EXPIRE_TIME);
             token = JWT.create()
-                    .withIssuer("auth0")//发行人
-                    .withClaim("account",account)//存放数据
+                    .withIssuer("auth0")
+                    //存放数据
+                    .withClaim("account",account)
                     .withClaim("currentTime",currentTime)
-                    .withExpiresAt(expireAt)//过期时间
+                    //过期时间
+                    .withExpiresAt(expireAt)
                     .sign(Algorithm.HMAC256(TOKEN_SECRET));
         } catch (IllegalArgumentException | JWTCreationException | UnsupportedEncodingException je) {
             throw je;
@@ -51,12 +62,12 @@ public class TokenUtils {
      * @return
      */
     public static Boolean verify(String token) throws Exception{
-
-        JWTVerifier jwtVerifier=JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).withIssuer("auth0").build();//创建token验证器
-        DecodedJWT decodedJWT=jwtVerifier.verify(token);
+        //创建token验证器
+        JWTVerifier jwtVerifier=JWT.require(Algorithm.HMAC256(TOKEN_SECRET)).withIssuer("auth0").build();
+        DecodedJWT jwt=jwtVerifier.verify(token);
         System.out.println("认证通过：");
-        System.out.println("account: " + decodedJWT.getClaim("account").asString());
-        System.out.println("过期时间：      " + decodedJWT.getExpiresAt());
+        System.out.println("account: " + jwt.getClaim("account").asString());
+        System.out.println("过期时间：      " + jwt.getExpiresAt());
         return true;
     }
 
@@ -64,8 +75,8 @@ public class TokenUtils {
 
     public static String getAccount(String token){
         try{
-            DecodedJWT decodedJWT=JWT.decode(token);
-            return decodedJWT.getClaim("account").asString();
+            DecodedJWT jwt =JWT.decode(token);
+            return jwt.getClaim("account").asString();
 
         }catch (JWTDecodeException e){
             log.error(e.getMessage());
@@ -74,8 +85,8 @@ public class TokenUtils {
     }
     public static Long getCurrentTime(String token){
         try{
-            DecodedJWT decodedJWT=JWT.decode(token);
-            return decodedJWT.getClaim("currentTime").asLong();
+            DecodedJWT jwt =JWT.decode(token);
+            return jwt.getClaim("currentTime").asLong();
 
         }catch (JWTCreationException e){
             return null;

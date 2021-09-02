@@ -35,9 +35,9 @@ public class VerifyController {
      * @return
      */
     @PostMapping(value = "/sms")
-    public Result sendSMSCode(@RequestBody PhoneDTO dto){
+    public Result sendSmsCode(@RequestBody PhoneDTO dto){
         try {
-            tokenService.sendSMS(dto.getPhone());
+            tokenService.sendSms(dto.getPhone());
             return ResultFactory.buildSuccessResult(VerifyContexts.VERIFY_SUCCESS);
         }catch (Exception e){
             throw new CustomException(e.getMessage());

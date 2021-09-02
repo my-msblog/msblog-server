@@ -15,10 +15,7 @@ import java.io.Serializable;
 @ToString
 @TableName(value = "ms_role_permission")
 public class RolePermission implements Serializable {
-    //主键id
     private Long id;
-    //role id
     private Long rid;
-    //permission id
     private Long pid;
 }

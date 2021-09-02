@@ -29,7 +29,7 @@ public interface DigitalContexts {
     Integer FIVE_MINUTES = 60 * 5;
     Integer TEN_MINUTES = 60 * 10;
     Integer THIRTY_MINUTES = 60 * 30;
-    Integer ONE_hour = 60 * 60;
+    Integer ONE_HOUR = 60 * 60;
 
     Long ZERO_LONG = 0L;
     Long ONE_LONG = 1L;
