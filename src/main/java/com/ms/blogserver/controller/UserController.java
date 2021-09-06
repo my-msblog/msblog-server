@@ -6,6 +6,7 @@ import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
+import com.ms.blogserver.model.dto.IdDTO;
 import com.ms.blogserver.model.dto.UserTableChangeDTO;
 import com.ms.blogserver.model.vo.UserVO;
 import com.ms.blogserver.service.api.TokenService;
@@ -73,16 +74,16 @@ public class UserController extends BaseController {
     /**
      * 删除用户
      *
-     * @param id
+     * @param dto
      * @return
      * @throws CustomException
      */
     @PostMapping(value = "/remove")
-    public Result userDelete(@RequestBody Long id) throws CustomException {
-        if (userService.removeById(id) == 1){
+    public Result userDelete(@RequestBody IdDTO dto) throws CustomException {
+        if (userService.removeById(dto.getId()) == 1){
             return ResultFactory.buildSuccessResult(userService.findAll());
         }
-        throw new CustomException("There is no data with ID "+ id+" in the database");
+        throw new CustomException("There is no data with ID "+ dto.getId()+" in the database");
 
     }
 

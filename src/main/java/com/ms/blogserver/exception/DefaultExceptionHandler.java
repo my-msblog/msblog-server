@@ -6,6 +6,7 @@ import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.constant.result.ResultString;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.ShiroException;
 
 import org.apache.shiro.authz.AuthorizationException;
@@ -69,7 +70,10 @@ public class DefaultExceptionHandler implements ResponseBodyAdvice<Object> {
     @ResponseBody
     public Result handleUnauthorizedException(CustomAuthorizedException customAuthorizedException) {
         log.error(customAuthorizedException.getMessage(), customAuthorizedException);
-        return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.data);
+        if(StringUtils.isEmpty(customAuthorizedException.getMessage())){
+            return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED.data);
+        }
+        return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, customAuthorizedException.getMessage());
     }
     @ExceptionHandler(AuthorizationException.class)
     @ResponseBody

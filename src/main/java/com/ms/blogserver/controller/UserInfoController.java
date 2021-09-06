@@ -9,6 +9,8 @@ import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.model.dto.BaseDTO;
+import com.ms.blogserver.model.vo.MenuVO;
+import com.ms.blogserver.service.api.AccountService;
 import com.ms.blogserver.service.entity.MenuService;
 import com.ms.blogserver.service.entity.UserService;
 import com.ms.blogserver.utils.TokenUtils;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @description:
@@ -37,6 +41,9 @@ public class UserInfoController extends BaseController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AccountService accountService;
+
 
     /**
      * 用户权限菜单
@@ -49,12 +56,8 @@ public class UserInfoController extends BaseController {
     public Result getMenu() throws Exception {
         try {
             String token = getHeaderToken();
-            String username = TokenUtils.getAccount(token);
-            if (StringUtils.isEmpty(username)){
-                return ResultFactory.buildResult(ResultCode.UNAUTHORIZED,LoginContexts.USER_ERROR);
-            }
-            Long uid = userService.findByUserName(username).getId();
-            return ResultFactory.buildSuccessResult(menuService.filterMenuList(uid));
+            List<MenuVO> menu = accountService.getMenu(token);
+            return ResultFactory.buildSuccessResult(menu);
         } catch (Exception e) {
             throw exceptionHandle(e);
         }
@@ -62,7 +65,8 @@ public class UserInfoController extends BaseController {
     @GetMapping("/role")
     public Result getUserRole() throws Exception {
         try {
-            return ResultFactory.buildSuccessResult();
+            String token = getHeaderToken();
+            return ResultFactory.buildSuccessResult(accountService.getRole(token));
         } catch (Exception e){
             throw exceptionHandle(e);
         }
