@@ -1,5 +1,6 @@
 package com.ms.blogserver.service.api;
 
+import com.ms.blogserver.model.dto.UserTableChangeDTO;
 import com.ms.blogserver.model.vo.MenuVO;
 
 import java.util.List;
@@ -23,4 +24,10 @@ public interface AccountService {
      * @return
      */
     String getRole(String token);
+
+    /**
+     * 管理员添加用户
+     * @param dto
+     */
+    void adminUserAdd(UserTableChangeDTO dto);
 }

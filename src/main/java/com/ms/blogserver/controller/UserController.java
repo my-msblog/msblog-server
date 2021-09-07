@@ -9,6 +9,7 @@ import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.model.dto.IdDTO;
 import com.ms.blogserver.model.dto.UserTableChangeDTO;
 import com.ms.blogserver.model.vo.UserVO;
+import com.ms.blogserver.service.api.AccountService;
 import com.ms.blogserver.service.api.TokenService;
 import com.ms.blogserver.service.entity.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,13 +33,16 @@ public class UserController extends BaseController {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
+    private AccountService accountService;
+
     /**
      * 新增用户
      *
      * @param dto 用户信息
      * @return
      */
-    @PostMapping(value = "/add")
+    @PostMapping(value = "/register")
     public Result userAdd(@RequestBody UserTableChangeDTO dto) throws Exception{
         try {
             tokenService.getVerifyCode(dto.getCode());
@@ -49,6 +53,15 @@ public class UserController extends BaseController {
             return ResultFactory.buildSuccessResult(LoginContexts.REGISTER_SUCCESS);
         } catch (Exception e) {
            throw exceptionHandle(e);
+        }
+    }
+    @PostMapping("/admin/add")
+    public Result adminAddUser(@RequestBody UserTableChangeDTO dto) throws Exception{
+        try {
+            accountService.adminUserAdd(dto);
+            return ResultFactory.buildSuccessResult(LoginContexts.REGISTER_SUCCESS);
+        }catch (Exception e) {
+            throw exceptionHandle(e);
         }
     }
 

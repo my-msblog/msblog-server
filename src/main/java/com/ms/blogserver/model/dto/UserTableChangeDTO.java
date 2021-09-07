@@ -18,5 +18,12 @@ public class UserTableChangeDTO {
     private String email;
     private String introduction;
     private Integer sex;
+    /**
+     * 手机验证码
+     */
     private String code;
+    /**
+     * 角色id
+     */
+    private Long roleId;
 }
