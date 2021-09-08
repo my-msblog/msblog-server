@@ -1,7 +1,10 @@
 package com.ms.blogserver.service.api;
 
+import com.github.pagehelper.PageInfo;
+import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.dto.UserTableChangeDTO;
 import com.ms.blogserver.model.vo.MenuVO;
+import com.ms.blogserver.model.vo.UserProfileVO;
 
 import java.util.List;
 
@@ -30,4 +33,11 @@ public interface AccountService {
      * @param dto
      */
     void adminUserAdd(UserTableChangeDTO dto);
+
+    /**
+     * 后台用户管理分页列表
+     * @param dto
+     * @return
+     */
+    PageInfo<UserProfileVO> userProfilePage(BaseDTO dto);
 }

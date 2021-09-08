@@ -36,12 +36,6 @@ import java.util.List;
 public class UserInfoController extends BaseController {
 
     @Autowired
-    private MenuService menuService;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
     private AccountService accountService;
 
 
@@ -71,23 +65,5 @@ public class UserInfoController extends BaseController {
             throw exceptionHandle(e);
         }
     }
-
-    /**
-     * 用户列表分页
-     *
-     * @param dto
-     * @return
-     * @throws Exception
-     */
-    @PostMapping(value = "/user/page")
-    @RequiresPermissions(logical = Logical.AND, value = {PermissionContexts.USERS_MANAGEMENT})
-    public Result getByPage(BaseDTO dto) throws Exception {
-        try {
-            return ResultFactory.buildSuccessResult(userService.getPage(dto));
-        } catch (Exception e) {
-            throw exceptionHandle(e);
-        }
-    }
-
 
 }

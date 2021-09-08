@@ -1,20 +1,26 @@
 package com.ms.blogserver.service.api.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.converter.dto.UserTableChangeDtoConverter;
+import com.ms.blogserver.converter.vo.UserProfileVoConverter;
 import com.ms.blogserver.exception.CustomAuthorizedException;
 import com.ms.blogserver.exception.CustomException;
+import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.dto.UserTableChangeDTO;
 import com.ms.blogserver.model.entity.Role;
 import com.ms.blogserver.model.entity.User;
 import com.ms.blogserver.model.entity.UserRole;
 import com.ms.blogserver.model.vo.MenuVO;
+import com.ms.blogserver.model.vo.UserProfileVO;
 import com.ms.blogserver.service.api.AccountService;
 import com.ms.blogserver.service.entity.MenuService;
 import com.ms.blogserver.service.entity.RoleService;
 import com.ms.blogserver.service.entity.UserRoleService;
 import com.ms.blogserver.service.entity.UserService;
 import com.ms.blogserver.utils.EncryptPassword;
+import com.ms.blogserver.utils.PageInfoUtil;
 import com.ms.blogserver.utils.RegularUtils;
 import com.ms.blogserver.utils.TokenUtils;
 import org.apache.commons.lang.StringUtils;
@@ -81,5 +87,24 @@ public class AccountServiceImpl implements AccountService {
         userService.save(user);
         User newUser = userService.findByUserName(user.getUsername());
         userRoleService.save(new UserRole(newUser.getId(),dto.getRoleId()));
+    }
+
+    @Override
+    public PageInfo<UserProfileVO> userProfilePage(BaseDTO dto) {
+        PageHelper.startPage(dto.getPage(), dto.getSize());
+        List<User> userList = userService.findAll();
+        List<UserProfileVO> resList = UserProfileVoConverter.INSTANCE.toDataList(userList);
+        resList.forEach(userProfileVO -> {
+            Role role = roleService.getById(userProfileVO.getId());
+            if (Objects.isNull(role)){
+                return;
+                //throw new CustomException();
+            }
+            userProfileVO.setRole(role.getName());
+        });
+        PageInfo<UserProfileVO> res = new PageInfo<>();
+        PageInfoUtil.transform(new PageInfo<>(userList),res);
+        res.setList(resList);
+        return res;
     }
 }

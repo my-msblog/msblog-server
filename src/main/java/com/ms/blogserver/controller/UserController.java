@@ -33,8 +33,6 @@ public class UserController extends BaseController {
     @Autowired
     private TokenService tokenService;
 
-    @Autowired
-    private AccountService accountService;
 
     /**
      * 新增用户
@@ -53,15 +51,6 @@ public class UserController extends BaseController {
             return ResultFactory.buildSuccessResult(LoginContexts.REGISTER_SUCCESS);
         } catch (Exception e) {
            throw exceptionHandle(e);
-        }
-    }
-    @PostMapping("/admin/add")
-    public Result adminAddUser(@RequestBody UserTableChangeDTO dto) throws Exception{
-        try {
-            accountService.adminUserAdd(dto);
-            return ResultFactory.buildSuccessResult(LoginContexts.REGISTER_SUCCESS);
-        }catch (Exception e) {
-            throw exceptionHandle(e);
         }
     }
 
