@@ -13,26 +13,39 @@ import java.io.Serializable;
 @ToString
 public class BaseDTO implements Serializable {
 
-    private Integer page = DigitalContexts.ONE;
-    private Integer size = DigitalContexts.FIVE;
+    private Integer page;
+    private Integer size;
 
     public Integer getPage() {
+        if (page <= DigitalContexts.ZERO){
+            page = DigitalContexts.ONE;
+        }
         return page;
     }
 
     public void setPage(Integer page) {
-        if (page > 0) {
-            this.page = page;
-        }
+       this.page = page;
     }
 
     public Integer getSize() {
+        if (size <= DigitalContexts.ZERO){
+            size = DigitalContexts.FIVE;
+        }
         return size;
     }
 
     public void setSize(Integer size) {
-        if (size > 0) {
+        this.size = size;
+    }
+    public BaseDTO(){}
+
+    public BaseDTO(Integer size, Integer page){
+        if (size > 0 && page >0){
             this.size = size;
+            this.page = page;
+        }else {
+            this.size = DigitalContexts.ONE;
+            this.page = DigitalContexts.FIVE;
         }
     }
 }

@@ -50,7 +50,7 @@ public class AccountController extends BaseController {
      */
     @PostMapping(value = "/user/page")
     @RequiresPermissions(logical = Logical.AND, value = {PermissionContexts.USERS_MANAGEMENT})
-    public Result getByPage(BaseDTO dto) throws Exception {
+    public Result getByPage(@RequestBody BaseDTO dto) throws Exception {
         try {
             return ResultFactory.buildSuccessResult(accountService.userProfilePage(dto));
         } catch (Exception e) {
