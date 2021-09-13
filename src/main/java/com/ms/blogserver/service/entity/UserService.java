@@ -74,10 +74,4 @@ public interface UserService extends IService<User> {
      */
     String getPassword(String username);
 
-    /**
-     * 用户分页
-     * @param dto
-     * @return
-     */
-    PageInfo<UserVO> getPage(BaseDTO dto);
 }

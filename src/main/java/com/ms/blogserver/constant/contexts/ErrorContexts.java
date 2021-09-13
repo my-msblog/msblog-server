@@ -18,4 +18,6 @@ public interface ErrorContexts {
     String ID_IS_NULL = "传入id不能为空";
 
     String ADD_NEW_ACCOUNT_ERROR = "添加用户异常";
+
+    String PARAMETER_LIST_IS_EMPTY = "参数列表为空";
 }

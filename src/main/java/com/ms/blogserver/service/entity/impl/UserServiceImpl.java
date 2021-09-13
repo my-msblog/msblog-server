@@ -115,15 +115,4 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new ProgramException(e.getMessage());
         }
     }
-
-    @Override
-    public PageInfo<UserVO> getPage(BaseDTO dto) {
-        PageHelper.startPage(dto.getPage(), dto.getSize());
-        List<User> userList = findAll();
-        List<UserVO> voList = UserVoConverter.INSTANCE.toDataList(userList);
-        PageInfo<UserVO> userVoPageInfo = new PageInfo<>();
-        PageInfoUtil.transform(new PageInfo<>(userList), userVoPageInfo);
-        userVoPageInfo.setList(voList);
-        return userVoPageInfo;
-    }
 }

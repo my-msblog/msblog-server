@@ -11,6 +11,7 @@ import com.ms.blogserver.model.dto.UserTableChangeDTO;
 import com.ms.blogserver.model.vo.UserVO;
 import com.ms.blogserver.service.api.AccountService;
 import com.ms.blogserver.service.api.TokenService;
+import com.ms.blogserver.service.api.UserOperationService;
 import com.ms.blogserver.service.entity.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    private UserOperationService userOperationService;
 
 
     /**
@@ -87,6 +91,15 @@ public class UserController extends BaseController {
         }
         throw new CustomException("There is no data with ID "+ dto.getId()+" in the database");
 
+    }
+    @PostMapping("/remove/list")
+    public Result userDeleteList(@RequestBody IdDTO dto) throws Exception{
+        try {
+            userOperationService.deleteUserListId(dto.getIdList());
+            return ResultFactory.buildSuccessResult();
+        }catch (Exception e){
+            throw exceptionHandle(e);
+        }
     }
 
     @PostMapping(value = "/delete")
