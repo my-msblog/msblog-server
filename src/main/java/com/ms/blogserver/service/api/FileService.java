@@ -2,7 +2,8 @@ package com.ms.blogserver.service.api;
 
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.model.dto.BaseDTO;
-import com.ms.blogserver.model.vo.FileSimpleVO;
+import com.ms.blogserver.model.bo.FileSimpleBO;
+import com.ms.blogserver.model.vo.FileVO;
 import com.ms.blogserver.model.vo.LogVO;
 
 /**
@@ -17,7 +18,7 @@ public interface FileService {
       * @param dto
      * @return
      */
-    PageInfo<FileSimpleVO> findFileName(BaseDTO dto);
+    PageInfo<FileVO> findFileName(BaseDTO dto);
 
     /**
      * 文件名获取日志内容

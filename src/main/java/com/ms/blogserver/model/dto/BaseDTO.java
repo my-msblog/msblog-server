@@ -37,7 +37,10 @@ public class BaseDTO implements Serializable {
     public void setSize(Integer size) {
         this.size = size;
     }
-    public BaseDTO(){}
+    public BaseDTO(){
+        this.size = DigitalContexts.FIVE;
+        this.page = DigitalContexts.ONE;
+    }
 
     public BaseDTO(Integer size, Integer page){
         if (size > 0 && page >0){

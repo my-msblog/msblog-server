@@ -32,7 +32,7 @@ public class LogController extends BaseController {
      * @return
      * @throws Exception
      */
-    @GetMapping(value = "/find/list")
+    @PostMapping(value = "/page")
     public Result getAllLog(BaseDTO dto) throws Exception {
         try {
             return ResultFactory.buildSuccessResult(fileService.findFileName(dto));

@@ -43,6 +43,8 @@ public class ShiroConfig {
         filterRuleMap.put("/swagger-ui.html/**","anon");
         filterRuleMap.put("/webjars/**","anon");
         //放行登录接口和其他不需要权限的接口
+        filterRuleMap.put("/log/**","anon");
+        filterRuleMap.put("/filter/error","anon");
         filterRuleMap.put("/login", "anon");
         filterRuleMap.put("/logout", "anon");
         filterRuleMap.put("/code/**","anon");

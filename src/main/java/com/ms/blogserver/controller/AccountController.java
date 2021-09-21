@@ -8,7 +8,6 @@ import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.dto.UserTableChangeDTO;
 import com.ms.blogserver.service.api.AccountService;
-import com.ms.blogserver.service.entity.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

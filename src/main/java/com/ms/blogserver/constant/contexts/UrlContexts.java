@@ -16,6 +16,7 @@ public interface UrlContexts {
 
     /**
      * 日志存储的相对路径，用于linux正式环境
+     * 同时修改logback-spring.xml中的文件配置
      */
     String LOG_RELATIVE_URL = "spring-log"+ SLASH +"ms-server";
 

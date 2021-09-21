@@ -2,11 +2,13 @@ package com.ms.blogserver.utils;
 
 import com.ms.blogserver.exception.ProgramException;
 import com.ms.blogserver.constant.contexts.ErrorContexts;
-import com.ms.blogserver.model.vo.FileSimpleVO;
+import com.ms.blogserver.model.bo.FileSimpleBO;
 import lombok.extern.slf4j.Slf4j;
+import sun.util.resources.LocaleData;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -28,9 +30,9 @@ public class FileUtils {
      * @return
      * @throws Exception
      */
-    public static List<FileSimpleVO> files(File directory) throws Exception {
+    public static List<FileSimpleBO> files(File directory) throws Exception {
         File[] listFiles = directory.listFiles();
-        List<FileSimpleVO> list = new ArrayList<>();
+        List<FileSimpleBO> list = new ArrayList<>();
         assert listFiles != null;
         for (File f : listFiles) {
             if (f.isDirectory()) {
@@ -38,11 +40,10 @@ public class FileUtils {
                 files(f);
             } else {
                 if (f.getName().endsWith("log")) {
-                    FileSimpleVO fileSimpleVO = new FileSimpleVO();
-                    System.out.println(f.getName() + "; " + getTime(f.lastModified()));
-                    fileSimpleVO.setFileName(f.getName());
-                    fileSimpleVO.setTime(getTime(f.lastModified()));
-                    list.add(fileSimpleVO);
+                    FileSimpleBO fileSimpleBO = new FileSimpleBO();
+                    fileSimpleBO.setFileName(f.getName());
+                    fileSimpleBO.setTime(new Date(f.lastModified()));
+                    list.add(fileSimpleBO);
                 }
             }
         }

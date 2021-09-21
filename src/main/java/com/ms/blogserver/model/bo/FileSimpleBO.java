@@ -1,7 +1,10 @@
-package com.ms.blogserver.model.vo;
+package com.ms.blogserver.model.bo;
 
 import lombok.Data;
 import lombok.ToString;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @description:
@@ -10,7 +13,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class FileSimpleVO {
+public class FileSimpleBO {
     private String fileName;
-    private String time;
+    private Date time;
 }

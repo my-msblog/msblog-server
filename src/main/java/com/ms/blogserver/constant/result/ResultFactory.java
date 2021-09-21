@@ -22,11 +22,20 @@ public class ResultFactory {
     public static Result buildResult(ResultCode resultCode, String message, Object data) {
         return buildResult(resultCode.code, message, data);
     }
+
+    public static Result buildResult(ResultCode resultCode, ResultString resultString, Object data){
+        return buildResult(resultCode.code,resultString.data,data);
+    }
+
+    public static Result buildResult(ResultCode resultCode, ResultString resultString){
+        return  buildResult(resultCode,resultString.data);
+    };
+
     public static Result buildResult(ResultCode resultCode, String message){
         return buildResult(resultCode,message,"");
     }
 
     public static Result buildResult(int resultCode, String message, Object data) {
-        return new Result(resultCode, message, data);
+        return new Result<>(resultCode, message, data);
     }
 }

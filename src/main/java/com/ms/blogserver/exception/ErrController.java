@@ -1,16 +1,10 @@
 package com.ms.blogserver.exception;
 
-import com.ms.blogserver.constant.result.Result;
-import com.ms.blogserver.constant.result.ResultCode;
-import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.constant.result.ResultString;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
-import org.springframework.boot.web.servlet.error.ErrorAttributes;
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
