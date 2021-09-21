@@ -1,11 +1,8 @@
 package com.ms.blogserver.service.entity;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.model.dto.UserTableChangeDTO;
 import com.ms.blogserver.model.entity.User;
-import com.ms.blogserver.model.dto.BaseDTO;
-import com.ms.blogserver.model.vo.UserVO;
 
 import java.util.List;
 /**
@@ -56,9 +53,8 @@ public interface UserService extends IService<User> {
      * 物理删除
      *
      * @param id
-     * @return
      */
-    int deleteById(Long id);
+    void deleteById(Long id);
 
     /**
      * 根据用户名查找
