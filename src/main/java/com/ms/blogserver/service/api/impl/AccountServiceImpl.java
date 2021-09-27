@@ -96,11 +96,9 @@ public class AccountServiceImpl implements AccountService {
         List<UserProfileVO> resList = UserProfileVoConverter.INSTANCE.toDataList(userList);
         resList.forEach(userProfileVO -> {
             Role role = roleService.getById(userProfileVO.getId());
-            if (Objects.isNull(role)){
-                return;
-                //throw new CustomException();
+            if (Objects.nonNull(role)){
+                userProfileVO.setRole(role.getName());
             }
-            userProfileVO.setRole(role.getName());
         });
         PageInfo<UserProfileVO> res = new PageInfo<>();
         PageInfoUtil.transform(new PageInfo<>(userList),res);
