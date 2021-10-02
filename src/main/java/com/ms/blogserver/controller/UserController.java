@@ -89,7 +89,7 @@ public class UserController extends BaseController {
     @PostMapping(value = "/remove")
     public Result userDelete(@RequestBody IdDTO dto) throws CustomException {
         if (userService.removeById(dto.getId()) == 1){
-            return ResultFactory.buildSuccessResult(userService.findAll());
+            return ResultFactory.buildSuccessResult();
         }
         throw new CustomException("There is no data with ID "+ dto.getId()+" in the database");
 
