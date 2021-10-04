@@ -28,7 +28,7 @@ public interface LoginContexts {
 
     String REGISTER_SUCCESS = "注册成功";
 
-    String TOKEN_ERROR = "token验证失败";
+    String TOKEN_ERROR = "token已过期";
 
     String TOKEN_INVALID = "无效token";
 

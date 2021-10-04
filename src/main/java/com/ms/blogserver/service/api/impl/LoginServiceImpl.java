@@ -51,8 +51,11 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public void authentication(String token) {
+        if (StringUtils.isEmpty(token)){
+            throw new CustomException(LoginContexts.TOKEN_INVALID);
+        }
         if (!tokenService.hasLogin(token)) {
-            throw new CustomAuthorizedException();
+            throw new CustomAuthorizedException(LoginContexts.TOKEN_ERROR);
         }
     }
 }

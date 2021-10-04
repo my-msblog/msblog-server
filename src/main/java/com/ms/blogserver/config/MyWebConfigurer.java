@@ -21,6 +21,7 @@ public class MyWebConfigurer implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowCredentials(true)
                 .allowedOrigins("http://localhost:5478")
+                .allowedOrigins("http://127.0.0.1:5477")
                 .allowedOrigins("http://localhost:5477")
                 .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
                 .maxAge(36000L)
