@@ -9,4 +9,11 @@ import com.ms.blogserver.model.entity.Role;
  * @time: 2021/5/21
  */
 public interface RoleService extends IService<Role> {
+
+    /**
+     * 根据用户id获取角色信息
+     * @param userId
+     * @return
+     */
+    String getRoleByUserId(Long userId);
 }

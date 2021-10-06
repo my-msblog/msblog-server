@@ -20,4 +20,8 @@ public interface ErrorContexts {
     String ADD_NEW_ACCOUNT_ERROR = "添加用户异常";
 
     String PARAMETER_LIST_IS_EMPTY = "参数列表为空";
+
+    // database error
+
+    String DATABASE_INNER_TABLE = "系统内部异常：数据库链表关系异常，请联系管理员";
 }

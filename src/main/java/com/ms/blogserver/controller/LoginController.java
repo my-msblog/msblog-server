@@ -63,10 +63,14 @@ public class LoginController extends BaseController {
     @PostMapping(value = "/login")
     public Result userLogin(@RequestBody LoginDTO loginDTO, HttpServletResponse response) throws Exception {
         try {
+            // 验证用户
             User user = loginService.commonLogin(loginDTO.getUsername(), loginDTO.getPassword());
-            //判断验证码
+            // 判断验证码
             captchaService.verifyArithmetic(loginDTO.getKey(), loginDTO.getCode());
-            UserVO userVO = tokenService.setToken(user, tokenService.createToken(user.getUsername(), response));
+            // 生成token
+            String token = tokenService.createToken(user.getUsername(), response);
+            // 返回内容
+            UserVO userVO = tokenService.setToken(user, token);
             return ResultFactory.buildSuccessResult(userVO);
         } catch (Exception e) {
             throw this.exceptionHandle(e);

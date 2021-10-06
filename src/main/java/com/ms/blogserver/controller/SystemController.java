@@ -20,6 +20,6 @@ public class SystemController {
 
     @RequestMapping("/filter/error")
     public Result handleError(){
-        return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, ResultString.NO_AUTHORIZED, LoginContexts.TOKEN_INVALID);
+        return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, LoginContexts.TOKEN_ERROR);
     }
 }
