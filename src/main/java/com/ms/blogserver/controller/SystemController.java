@@ -4,7 +4,6 @@ import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultCode;
 import com.ms.blogserver.constant.result.ResultFactory;
-import com.ms.blogserver.constant.result.ResultString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
