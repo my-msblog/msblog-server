@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 25/08/2021 20:08:45
+ Date: 12/10/2021 16:43:26
 */
 
 SET NAMES utf8mb4;
@@ -116,6 +116,73 @@ CREATE TABLE `ms_favorites`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for ms_logs
+-- ----------------------------
+DROP TABLE IF EXISTS `ms_logs`;
+CREATE TABLE `ms_logs`  (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '文件名称',
+  `time` datetime NULL DEFAULT NULL COMMENT '文件创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1439922427824001026 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of ms_logs
+-- ----------------------------
+INSERT INTO `ms_logs` VALUES (1439922426272108545, 'ms-log-2021-06-06-0.log', '2021-06-06 17:05:20');
+INSERT INTO `ms_logs` VALUES (1439922426326634498, 'ms-log-2021-06-13-0.log', '2021-06-13 18:48:30');
+INSERT INTO `ms_logs` VALUES (1439922426326634499, 'ms-log-2021-06-27-0.log', '2021-06-27 16:43:23');
+INSERT INTO `ms_logs` VALUES (1439922426389549057, 'ms-log-2021-06-28-0.log', '2021-06-28 19:50:01');
+INSERT INTO `ms_logs` VALUES (1439922426389549058, 'ms-log-2021-07-19-0.log', '2021-07-19 16:24:43');
+INSERT INTO `ms_logs` VALUES (1439922426452463617, 'ms-log-2021-07-21-0.log', '2021-07-21 10:18:36');
+INSERT INTO `ms_logs` VALUES (1439922426452463618, 'ms-log-2021-07-23-0.log', '2021-07-23 23:55:09');
+INSERT INTO `ms_logs` VALUES (1439922426515378178, 'ms-log-2021-07-24-0.log', '2021-07-24 23:41:56');
+INSERT INTO `ms_logs` VALUES (1439922426515378179, 'ms-log-2021-07-25-0.log', '2021-07-25 22:55:27');
+INSERT INTO `ms_logs` VALUES (1439922426582487041, 'ms-log-2021-07-26-0.log', '2021-07-26 16:28:03');
+INSERT INTO `ms_logs` VALUES (1439922426582487042, 'ms-log-2021-07-27-0.log', '2021-07-27 11:20:46');
+INSERT INTO `ms_logs` VALUES (1439922426645401602, 'ms-log-2021-07-28-0.log', '2021-07-28 21:31:48');
+INSERT INTO `ms_logs` VALUES (1439922426645401603, 'ms-log-2021-07-29-0.log', '2021-07-29 20:41:47');
+INSERT INTO `ms_logs` VALUES (1439922426645401604, 'ms-log-2021-07-30-0.log', '2021-07-30 19:23:51');
+INSERT INTO `ms_logs` VALUES (1439922426712510466, 'ms-log-2021-07-31-0.log', '2021-07-31 20:12:36');
+INSERT INTO `ms_logs` VALUES (1439922426712510467, 'ms-log-2021-08-01-0.log', '2021-08-01 22:28:36');
+INSERT INTO `ms_logs` VALUES (1439922426779619330, 'ms-log-2021-08-02-0.log', '2021-08-02 19:28:24');
+INSERT INTO `ms_logs` VALUES (1439922426779619331, 'ms-log-2021-08-03-0.log', '2021-08-03 20:15:58');
+INSERT INTO `ms_logs` VALUES (1439922426842533889, 'ms-log-2021-08-04-0.log', '2021-08-04 21:43:57');
+INSERT INTO `ms_logs` VALUES (1439922426842533890, 'ms-log-2021-08-05-0.log', '2021-08-05 15:53:21');
+INSERT INTO `ms_logs` VALUES (1439922426909642754, 'ms-log-2021-08-06-0.log', '2021-08-06 19:36:06');
+INSERT INTO `ms_logs` VALUES (1439922426909642755, 'ms-log-2021-08-07-0.log', '2021-08-07 20:30:15');
+INSERT INTO `ms_logs` VALUES (1439922426976751618, 'ms-log-2021-08-08-0.log', '2021-08-08 18:35:45');
+INSERT INTO `ms_logs` VALUES (1439922426976751619, 'ms-log-2021-08-09-0.log', '2021-08-09 19:15:16');
+INSERT INTO `ms_logs` VALUES (1439922427043860482, 'ms-log-2021-08-11-0.log', '2021-08-11 19:34:54');
+INSERT INTO `ms_logs` VALUES (1439922427043860483, 'ms-log-2021-08-12-0.log', '2021-08-12 21:54:34');
+INSERT INTO `ms_logs` VALUES (1439922427043860484, 'ms-log-2021-08-13-0.log', '2021-08-13 18:42:35');
+INSERT INTO `ms_logs` VALUES (1439922427110969345, 'ms-log-2021-08-14-0.log', '2021-08-14 21:57:16');
+INSERT INTO `ms_logs` VALUES (1439922427110969346, 'ms-log-2021-08-15-0.log', '2021-08-15 23:45:54');
+INSERT INTO `ms_logs` VALUES (1439922427173883906, 'ms-log-2021-08-16-0.log', '2021-08-16 20:10:21');
+INSERT INTO `ms_logs` VALUES (1439922427173883907, 'ms-log-2021-08-17-0.log', '2021-08-17 19:54:43');
+INSERT INTO `ms_logs` VALUES (1439922427236798466, 'ms-log-2021-08-18-0.log', '2021-08-18 16:22:11');
+INSERT INTO `ms_logs` VALUES (1439922427236798467, 'ms-log-2021-08-19-0.log', '2021-08-19 14:50:58');
+INSERT INTO `ms_logs` VALUES (1439922427299713026, 'ms-log-2021-08-21-0.log', '2021-08-21 21:20:34');
+INSERT INTO `ms_logs` VALUES (1439922427299713027, 'ms-log-2021-08-23-0.log', '2021-08-23 20:15:28');
+INSERT INTO `ms_logs` VALUES (1439922427362627586, 'ms-log-2021-08-24-0.log', '2021-08-24 20:04:53');
+INSERT INTO `ms_logs` VALUES (1439922427362627587, 'ms-log-2021-08-25-0.log', '2021-08-25 20:08:57');
+INSERT INTO `ms_logs` VALUES (1439922427429736450, 'ms-log-2021-08-26-0.log', '2021-08-26 21:23:49');
+INSERT INTO `ms_logs` VALUES (1439922427429736451, 'ms-log-2021-08-27-0.log', '2021-08-27 21:45:59');
+INSERT INTO `ms_logs` VALUES (1439922427496845314, 'ms-log-2021-08-28-0.log', '2021-08-28 21:53:45');
+INSERT INTO `ms_logs` VALUES (1439922427496845315, 'ms-log-2021-08-29-0.log', '2021-08-29 19:14:18');
+INSERT INTO `ms_logs` VALUES (1439922427496845316, 'ms-log-2021-08-30-0.log', '2021-08-30 19:57:10');
+INSERT INTO `ms_logs` VALUES (1439922427559759873, 'ms-log-2021-09-02-0.log', '2021-09-02 21:13:55');
+INSERT INTO `ms_logs` VALUES (1439922427559759874, 'ms-log-2021-09-04-0.log', '2021-09-04 19:11:41');
+INSERT INTO `ms_logs` VALUES (1439922427626868738, 'ms-log-2021-09-05-0.log', '2021-09-05 16:15:42');
+INSERT INTO `ms_logs` VALUES (1439922427626868739, 'ms-log-2021-09-06-0.log', '2021-09-06 21:07:36');
+INSERT INTO `ms_logs` VALUES (1439922427626868740, 'ms-log-2021-09-07-0.log', '2021-09-07 17:41:39');
+INSERT INTO `ms_logs` VALUES (1439922427689783297, 'ms-log-2021-09-08-0.log', '2021-09-08 17:16:44');
+INSERT INTO `ms_logs` VALUES (1439922427689783298, 'ms-log-2021-09-12-0.log', '2021-09-12 23:47:11');
+INSERT INTO `ms_logs` VALUES (1439922427756892161, 'ms-log-2021-09-13-0.log', '2021-09-13 23:09:56');
+INSERT INTO `ms_logs` VALUES (1439922427756892162, 'ms-log-2021-09-14-0.log', '2021-09-14 20:39:33');
+INSERT INTO `ms_logs` VALUES (1439922427824001026, 'ms-log.log', '2021-09-20 20:00:33');
+
+-- ----------------------------
 -- Table structure for ms_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_menu`;
@@ -136,17 +203,19 @@ CREATE TABLE `ms_menu`  (
 -- Records of ms_menu
 -- ----------------------------
 INSERT INTO `ms_menu` VALUES (1, '/admin', 'AdminIndex', 'dashboard', '首页', 'el-icon-house', 'layout', 0, 0);
-INSERT INTO `ms_menu` VALUES (2, '/admin', 'Context', 'content_management', '内容管理', 'el-icon-tickets', 'layout', 0, 0);
-INSERT INTO `ms_menu` VALUES (3, '/admin', 'User', 'user_management', '用户管理', 'el-icon-user-solid', 'layout', 0, 0);
-INSERT INTO `ms_menu` VALUES (4, '/admin', 'Info', 'personal_information', '个人信息', 'el-icon-postcard', 'layout', 0, 0);
-INSERT INTO `ms_menu` VALUES (5, '/admin', 'Security', 'security_settings', '安全设置', 'el-icon-lock', 'layout', 0, 0);
+INSERT INTO `ms_menu` VALUES (2, '/admin/context', 'Context', 'content_management', '内容管理', 'el-icon-tickets', 'layout', 0, 0);
+INSERT INTO `ms_menu` VALUES (3, '/admin/user', 'User', 'user_management', '用户管理', 'el-icon-user-solid', 'layout', 0, 0);
+INSERT INTO `ms_menu` VALUES (4, '/admin/personal', 'Info', 'personal_information', '个人信息', 'el-icon-postcard', '/personal', 0, 0);
+INSERT INTO `ms_menu` VALUES (5, '/admin/security', 'Security', 'security_settings', '安全设置', 'el-icon-lock', '/serurity', 0, 0);
 INSERT INTO `ms_menu` VALUES (6, '/admin/user/profile', 'Profile', 'user_information', '用户信息', 'el-icon-menu', '/user-manage/userProfile', 3, 0);
 INSERT INTO `ms_menu` VALUES (7, '/admin/user/role', 'RoleSetting', 'role_configuration', '角色配置', 'el-icon-set-up', '/user-manage/role', 3, 0);
-INSERT INTO `ms_menu` VALUES (9, '/admin/content/banner', 'BannerManagement', 'advertising_management', '广告管理', 'el-icon-mobile', '/bannerManagement', 2, 0);
-INSERT INTO `ms_menu` VALUES (10, '/admin/content/article', 'ArticleManagement', 'article_management', '文章管理', 'el-icon-edit-outline', '/articleManagement', 2, 0);
-INSERT INTO `ms_menu` VALUES (11, '/admin', 'leaveComments', 'message_management', '留言管理', 'el-icon-house', 'layout', 0, 1);
-INSERT INTO `ms_menu` VALUES (12, '/admin/content/log', 'Logout', 'log_output', '日志输出', 'el-icon-files', '/log', 2, 0);
-INSERT INTO `ms_menu` VALUES (13, '/admin', 'System', 'system_management', '系统管理', 'el-icon-s-tools', 'layout', 0, 0);
+INSERT INTO `ms_menu` VALUES (9, '/admin/context/banner', 'BannerManagement', 'advertising_management', '广告管理', 'el-icon-mobile', '/context/banner-management', 2, 1);
+INSERT INTO `ms_menu` VALUES (10, '/admin/context/article', 'ArticleManagement', 'article_management', '文章管理', 'el-icon-edit-outline', '/context/article-management', 2, 0);
+INSERT INTO `ms_menu` VALUES (11, '/admin/leave', 'leaveComments', 'message_management', '留言管理', 'el-icon-house', 'layout', 0, 1);
+INSERT INTO `ms_menu` VALUES (12, '/admin/log', 'Logout', 'log_output', '日志输出', 'el-icon-files', '/log', 0, 0);
+INSERT INTO `ms_menu` VALUES (13, '/admin/system', 'System', 'system_management', '系统管理', 'el-icon-s-tools', '/system', 0, 0);
+INSERT INTO `ms_menu` VALUES (14, '/admin/context/tags', 'Tags', 'tags_management', '标签管理', 'el-icon-s-management\r\nel-icon-s-management\r\nel-icon-s-management\r\nel-icon-s-management\r\nel-icon-s-management\r\nel-icon-s-management\r\nel-icon-s-management\r\nel-icon-s-management\r\nel-icon-s-management', '/context/tags-management', 2, 0);
+INSERT INTO `ms_menu` VALUES (15, '/admin/context/article/categories', 'ArticleCategories', 'article_categories', '文章分类', 'el-icon-s-grid', '/context/article-categories', 2, 0);
 
 -- ----------------------------
 -- Table structure for ms_permission
@@ -178,7 +247,7 @@ CREATE TABLE `ms_permission_menu`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `pid`(`pid`) USING BTREE,
   INDEX `mid`(`mid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 207 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 210 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_permission_menu
@@ -194,6 +263,8 @@ INSERT INTO `ms_permission_menu` VALUES (204, 3, 4);
 INSERT INTO `ms_permission_menu` VALUES (205, 3, 5);
 INSERT INTO `ms_permission_menu` VALUES (206, 3, 11);
 INSERT INTO `ms_permission_menu` VALUES (207, 1, 13);
+INSERT INTO `ms_permission_menu` VALUES (208, 1, 14);
+INSERT INTO `ms_permission_menu` VALUES (209, 1, 12);
 
 -- ----------------------------
 -- Table structure for ms_role
@@ -210,9 +281,9 @@ CREATE TABLE `ms_role`  (
 -- ----------------------------
 -- Records of ms_role
 -- ----------------------------
-INSERT INTO `ms_role` VALUES (1, 'sysAdmin', '系统管理员', 1);
-INSERT INTO `ms_role` VALUES (2, 'contentManager', '内容管理员', 1);
-INSERT INTO `ms_role` VALUES (3, 'visitor', '访客', 1);
+INSERT INTO `ms_role` VALUES (1, 'SYSTEM_ADMIN', '系统管理员', 1);
+INSERT INTO `ms_role` VALUES (2, 'CONTENT_MANAGER', '内容管理员', 1);
+INSERT INTO `ms_role` VALUES (3, 'VISITOR', '访客', 1);
 
 -- ----------------------------
 -- Table structure for ms_role_permission
@@ -273,18 +344,21 @@ CREATE TABLE `ms_user`  (
 -- ----------------------------
 -- Records of ms_user
 -- ----------------------------
-INSERT INTO `ms_user` VALUES (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'this is admin account introdciton,all permission', 1, 'admin@qq.com', '17759309269', '2021-05-20 17:47:14', '2021-08-13 12:47:53', 31, 0);
-INSERT INTO `ms_user` VALUES (4, '4', '4', NULL, 1, NULL, NULL, NULL, NULL, 1, 0);
-INSERT INTO `ms_user` VALUES (5, '5', '5', NULL, 1, NULL, NULL, NULL, NULL, 1, 0);
-INSERT INTO `ms_user` VALUES (6, '6', '6', NULL, 1, NULL, NULL, NULL, NULL, 1, 0);
-INSERT INTO `ms_user` VALUES (7, '7', '7', NULL, 0, NULL, NULL, NULL, NULL, 1, 0);
-INSERT INTO `ms_user` VALUES (12, 'text2', '2222', NULL, 0, NULL, NULL, NULL, NULL, 1, 0);
-INSERT INTO `ms_user` VALUES (22, 'qeqwe', '213', NULL, 0, NULL, NULL, NULL, NULL, 1, 0);
-INSERT INTO `ms_user` VALUES (33, '25', '53', NULL, 0, NULL, NULL, NULL, NULL, 1, 0);
-INSERT INTO `ms_user` VALUES (1392752115447533570, '11131', '131', NULL, 1, '123@qq.com', '0', '2021-05-13 16:02:35', '2021-05-13 17:39:15', 3, 0);
-INSERT INTO `ms_user` VALUES (1393106891279986689, 'text1', '133', NULL, 1, NULL, '1000001', '2021-05-14 15:32:20', '2021-05-14 15:32:20', 0, 0);
-INSERT INTO `ms_user` VALUES (1393111612233474050, '12312', '29852fd8f42d63ef579aa46d8cd15183', NULL, 1, NULL, '312331', '2021-05-14 15:51:06', '2021-05-14 15:51:06', 0, 0);
-INSERT INTO `ms_user` VALUES (1393130419668688898, 'ms', '21232f297a57a5a743894a0e4a801fc3', NULL, 1, NULL, NULL, '2021-05-14 17:05:50', '2021-05-14 17:05:50', 0, 0);
+INSERT INTO `ms_user` VALUES (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'this is admin account introdciton,all permission，test', 1, 'admin@qq.com', '17759309269', '2021-05-20 17:47:14', '2021-10-09 21:20:49', 32, 0);
+INSERT INTO `ms_user` VALUES (44444, '23', '321', 'test', 1, '4text@qq.com', '1234567890', '2021-05-13 16:02:35', '2021-10-12 16:32:06', 6, 0);
+INSERT INTO `ms_user` VALUES (3333333333, '25', '53', 'test', 0, '3text@qq.com', '1234567890', '2021-05-13 16:02:35', NULL, 1, 0);
+INSERT INTO `ms_user` VALUES (4343434343, '233', '321', 'test', 1, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', NULL, 1, 0);
+INSERT INTO `ms_user` VALUES (6666666666, '6', '6', 'test', 1, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', '2021-10-12 16:38:31', 2, 0);
+INSERT INTO `ms_user` VALUES (12121212121, 'text2', '2222', 'test', 0, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', NULL, 1, 0);
+INSERT INTO `ms_user` VALUES (22222222222, 'qeqwe', '213', 'test', 0, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', NULL, 1, 0);
+INSERT INTO `ms_user` VALUES (77777777777, '7', '7', 'test', 0, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', NULL, 1, 0);
+INSERT INTO `ms_user` VALUES (444444444444, '4', '4', 'test', 1, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', NULL, 1, 0);
+INSERT INTO `ms_user` VALUES (555555555555, '5', '5', 'test', 1, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', NULL, 1, 0);
+INSERT INTO `ms_user` VALUES (432312312313123123, '44', '23', '321', 2, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', NULL, 1, 0);
+INSERT INTO `ms_user` VALUES (1392752115447533570, '11131', '131', 'test', 1, '123@qq.com', '1234567890', '2021-05-13 16:02:35', '2021-05-13 17:39:15', 3, 0);
+INSERT INTO `ms_user` VALUES (1393106891279986689, 'text1', '133', 'test', 1, 'text@qq.com', '1000001', '2021-05-14 15:32:20', '2021-05-14 15:32:20', 0, 0);
+INSERT INTO `ms_user` VALUES (1393111612233474050, '12312', '29852fd8f42d63ef579aa46d8cd15183', 'test', 1, 'text@qq.com', '312331', '2021-05-14 15:51:06', '2021-05-14 15:51:06', 0, 0);
+INSERT INTO `ms_user` VALUES (1393130419668688898, 'ms', '21232f297a57a5a743894a0e4a801fc3', 'ms', 1, 'mstext@qq.com', '1234567890', '2021-05-13 16:02:35', '2021-05-14 17:05:50', 0, 0);
 
 -- ----------------------------
 -- Table structure for ms_user_role
@@ -297,12 +371,25 @@ CREATE TABLE `ms_user_role`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `uid`(`uid`) USING BTREE,
   INDEX `rid`(`rid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_user_role
 -- ----------------------------
 INSERT INTO `ms_user_role` VALUES (1, 1, 1);
 INSERT INTO `ms_user_role` VALUES (4, 1393130419668688898, 3);
+INSERT INTO `ms_user_role` VALUES (5, 44444, 3);
+INSERT INTO `ms_user_role` VALUES (6, 3333333333, 3);
+INSERT INTO `ms_user_role` VALUES (7, 4343434343, 3);
+INSERT INTO `ms_user_role` VALUES (8, 6666666666, 3);
+INSERT INTO `ms_user_role` VALUES (9, 12121212121, 3);
+INSERT INTO `ms_user_role` VALUES (10, 22222222222, 3);
+INSERT INTO `ms_user_role` VALUES (11, 77777777777, 3);
+INSERT INTO `ms_user_role` VALUES (12, 444444444444, 3);
+INSERT INTO `ms_user_role` VALUES (13, 555555555555, 3);
+INSERT INTO `ms_user_role` VALUES (14, 432312312313123123, 3);
+INSERT INTO `ms_user_role` VALUES (15, 1392752115447533570, 3);
+INSERT INTO `ms_user_role` VALUES (16, 1393106891279986689, 3);
+INSERT INTO `ms_user_role` VALUES (17, 1393111612233474050, 3);
 
 SET FOREIGN_KEY_CHECKS = 1;
