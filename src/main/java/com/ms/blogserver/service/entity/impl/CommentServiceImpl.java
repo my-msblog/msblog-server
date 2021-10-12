@@ -63,10 +63,10 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     private  List<CommentVO> setString(List<CommentBO> commentBOList) {
         commentBOList.forEach(commentBO -> {
-            commentBO.setCommenter(userService.getUserById(commentBO.getCommenterId()).getUsername());
+            commentBO.setCommenter(userService.getById(commentBO.getCommenterId()).getUsername());
             Long resId = commentBO.getRespondentId();
             if (!resId.equals(DigitalContexts.ZERO_LONG)){
-                commentBO.setRespondent(userService.getUserById(resId).getUsername());
+                commentBO.setRespondent(userService.getById(resId).getUsername());
             }
         });
         return CommentVoConverter.INSTANCE.toDataList(commentBOList);

@@ -10,7 +10,7 @@ public enum ResultString {
     /**
      * 404
      */
-    PAGE_NO_FOUND("页面未找到"),
+    PAGE_NO_FOUND("接口未找到"),
 
     /**
      * 401

@@ -35,6 +35,12 @@ public interface AccountService {
     void adminUserAdd(UserTableChangeDTO dto);
 
     /**
+     * 管理员修改用户
+     * @param dto
+     */
+    void adminChangeUser(UserTableChangeDTO dto);
+
+    /**
      * 后台用户管理分页列表
      * @param dto
      * @return

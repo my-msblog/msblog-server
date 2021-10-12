@@ -12,10 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @description:
@@ -30,6 +27,16 @@ public class AccountController extends BaseController {
 
     @Autowired
     private AccountService accountService;
+
+    @PostMapping("/admin/change/user")
+    public Result adminChangeUser(@RequestBody UserTableChangeDTO dto) throws Exception {
+        try {
+            accountService.adminChangeUser(dto);
+            return ResultFactory.buildSuccessResult();
+        }catch (Exception e) {
+            throw exceptionHandle(e);
+        }
+    }
 
     @PostMapping("/admin/add")
     public Result adminAddUser(@RequestBody UserTableChangeDTO dto) throws Exception{

@@ -72,7 +72,7 @@ public class UserController extends BaseController {
         try {
             tokenService.getVerifyCode(dto.getCode());
             userService.updateUser(dto);
-            UserVO userVO = UserVoConverter.INSTANCE.toData(userService.getUserById(dto.getId()));
+            UserVO userVO = UserVoConverter.INSTANCE.toData(userService.getById(dto.getId()));
             return ResultFactory.buildSuccessResult(userVO);
         }catch (Exception e){
             throw this.exceptionHandle(e);
@@ -88,7 +88,7 @@ public class UserController extends BaseController {
      */
     @PostMapping(value = "/remove")
     public Result userDelete(@RequestBody IdDTO dto) throws CustomException {
-        if (userService.removeById(dto.getId()) == 1){
+        if (userService.removeById(dto.getId())){
             return ResultFactory.buildSuccessResult();
         }
         throw new CustomException("There is no data with ID "+ dto.getId()+" in the database");
@@ -107,7 +107,7 @@ public class UserController extends BaseController {
     @PostMapping(value = "/delete")
     public Result phyDelete() throws Exception {
         try {
-            userService.deleteById(1392754664565116930L);
+            userService.removeById(1392754664565116930L);
             return ResultFactory.buildSuccessResult();
         } catch (Exception e) {
             throw this.exceptionHandle(e);

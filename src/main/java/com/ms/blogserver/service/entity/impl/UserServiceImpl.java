@@ -40,10 +40,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
     }
 
-    @Override
-    public User getUserById(Long id) {
-        return baseMapper.selectById(id);
-    }
 
     @Override
     public void insertUser(UserTableChangeDTO userDTO) {
@@ -67,23 +63,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public void updateUser(UserTableChangeDTO dto) {
-        User user = getUserById(dto.getId());
+        User user = baseMapper.selectById(dto.getId());
         if (Objects.isNull(user)) {
-            throw new CustomException("UserService-updateUser:" + LoginContexts.AUTHENTIC_FAIL);
+            throw new CustomException("UserService-updateUser:" + LoginContexts.USER_IS_NOT_EXIST);
         }
         UserTableChangeDtoConverter.INSTANCE.fromDataNoNull(dto, user);
         baseMapper.updateById(user);
     }
 
-    @Override
-    public List<User> findAll() {
-        return baseMapper.selectList(null);
-    }
-
-    @Override
-    public int removeById(Long id) {
-        return baseMapper.deleteById(id);
-    }
 
     @Override
     public void deleteById(Long id) {

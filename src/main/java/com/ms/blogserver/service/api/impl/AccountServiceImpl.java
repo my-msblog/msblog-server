@@ -90,9 +90,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public void adminChangeUser(UserTableChangeDTO dto) {
+        userService.updateUser(dto);
+    }
+
+    @Override
     public PageInfo<UserProfileVO> userProfilePage(BaseDTO dto) {
         PageHelper.startPage(dto.getPage(), dto.getSize());
-        List<User> userList = userService.findAll();
+        List<User> userList = userService.list();
         List<UserProfileVO> resList = UserProfileVoConverter.INSTANCE.toDataList(userList);
         resList.forEach(userProfileVO -> {
             Long userId = userProfileVO.getId();

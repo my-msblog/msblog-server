@@ -17,12 +17,7 @@ public interface UserService extends IService<User> {
      * @param username
      */
     void hasUserName(String username);
-    /**
-     *  通过id获取用户
-     * @param id
-     * @return
-     */
-    User getUserById(Long id);
+
     /**
      * 插入用户
      * @param dto
@@ -33,21 +28,6 @@ public interface UserService extends IService<User> {
      * @param dto
      */
     void updateUser(UserTableChangeDTO dto);
-    /**
-     * 查询所有用户
-     * @return
-     */
-    List<User> findAll();
-
-    /**
-     * 删除用户
-     * 逻辑删除
-     * deleted默认0，删除时为1
-     *
-     * @param id
-     * @return
-     */
-    int removeById(Long id);
 
     /**
      * 物理删除
