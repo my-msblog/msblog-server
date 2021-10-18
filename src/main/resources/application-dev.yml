@@ -1,0 +1,8 @@
+server: #配置server
+  port: 8080
+
+data:
+  log:
+    url: D:/myself/IdeaProject/spring-log/ms-server
+
+
