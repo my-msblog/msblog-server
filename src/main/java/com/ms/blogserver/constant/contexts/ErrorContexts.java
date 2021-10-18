@@ -21,6 +21,8 @@ public interface ErrorContexts {
 
     String PARAMETER_LIST_IS_EMPTY = "参数列表为空";
 
+    String INSTANCE_EXISTS = "实例已存在，无法初始化！";
+
     // database error
 
     String DATABASE_INNER_TABLE = "系统内部异常：数据库链表关系异常，请联系管理员";

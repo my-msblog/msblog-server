@@ -41,7 +41,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public PageInfo<FileVO> findFileName(BaseDTO dto) {
         try {
-            List<FileSimpleBO> files = FileUtils.files(new File(UrlContexts.LOG_ABSOLUTE_URL));
+            List<FileSimpleBO> files = FileUtils.files(new File(UrlContexts.LOG_URL));
             logsService.filterLogs(files);
             PageHelper.startPage(dto.getPage(),dto.getSize());
             List<Logs> logsList = logsService.list(new LambdaQueryWrapper<Logs>()
@@ -61,7 +61,7 @@ public class FileServiceImpl implements FileService {
         if (StringUtils.isEmpty(fileName)){
             throw new CustomException(ErrorContexts.NO_FILE);
         }
-        String url = UrlContexts.LOG_ABSOLUTE_URL + UrlContexts.SLASH +fileName;
+        String url = UrlContexts.LOG_URL + UrlContexts.SLASH +fileName;
         LogVO logVO = new LogVO();
         logVO.setFileName(fileName);
         logVO.setContext(FileUtils.loadLog(url));
@@ -71,7 +71,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void deleteFile(String fileName) {
-        String url = UrlContexts.LOG_ABSOLUTE_URL + UrlContexts.SLASH +fileName;
+        String url = UrlContexts.LOG_URL + UrlContexts.SLASH +fileName;
         File file = new File(url);
         if (file.exists()) {
             try {
