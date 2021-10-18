@@ -1,4 +1,4 @@
-package com.ms.blogserver.exception;
+package com.ms.blogserver.constant.controller;
 
 import com.ms.blogserver.constant.result.ResultString;
 import lombok.extern.slf4j.Slf4j;

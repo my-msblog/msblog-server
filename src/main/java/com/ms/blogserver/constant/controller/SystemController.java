@@ -1,4 +1,4 @@
-package com.ms.blogserver.controller;
+package com.ms.blogserver.constant.controller;
 
 import com.ms.blogserver.constant.contexts.LoginContexts;
 import com.ms.blogserver.constant.result.Result;
