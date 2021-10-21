@@ -97,7 +97,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public PageInfo<UserProfileVO> userProfilePage(BaseDTO dto) {
         PageHelper.startPage(dto.getPage(), dto.getSize());
-        List<User> userList = userService.list();
+        List<User> userList = userService.getAll();
         List<UserProfileVO> resList = UserProfileVoConverter.INSTANCE.toDataList(userList);
         resList.forEach(userProfileVO -> {
             Long userId = userProfileVO.getId();

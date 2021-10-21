@@ -50,4 +50,10 @@ public interface UserService extends IService<User> {
      */
     String getPassword(String username);
 
+    /**
+     * 获取所有用户（delete=1）
+     * @return
+     */
+    List<User> getAll();
+
 }

@@ -96,4 +96,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             throw new ProgramException(e.getMessage());
         }
     }
+
+    @Override
+    public List<User> getAll() {
+        return baseMapper.selectAll();
+    }
 }
