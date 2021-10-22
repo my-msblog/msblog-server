@@ -7,7 +7,9 @@ import com.ms.blogserver.converter.dto.UserTableChangeDtoConverter;
 import com.ms.blogserver.converter.vo.UserProfileVoConverter;
 import com.ms.blogserver.exception.CustomAuthorizedException;
 import com.ms.blogserver.exception.CustomException;
+import com.ms.blogserver.mapper.UserMapper;
 import com.ms.blogserver.model.dto.BaseDTO;
+import com.ms.blogserver.model.dto.StatusDTO;
 import com.ms.blogserver.model.dto.UserTableChangeDTO;
 import com.ms.blogserver.model.entity.Role;
 import com.ms.blogserver.model.entity.User;
@@ -40,6 +42,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Autowired
     private MenuService menuService;
@@ -107,5 +112,17 @@ public class AccountServiceImpl implements AccountService {
         PageInfoUtil.transform(new PageInfo<>(userList),res);
         res.setList(resList);
         return res;
+    }
+
+    @Override
+    public void userStatusChange(StatusDTO dto) {
+        User user = userMapper.selectUser(dto.getId());
+        if (Objects.isNull(user)){
+            throw new CustomException(LoginContexts.USER_IS_NOT_EXIST);
+        }
+        Integer deleted = user.getDeleted();
+        if (deleted.equals(dto.getStatus())){
+            throw new CustomException(LoginContexts.USER_STATUS_EXCEPTIONS);
+        }
     }
 }

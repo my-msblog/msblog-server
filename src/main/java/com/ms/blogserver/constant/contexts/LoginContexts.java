@@ -38,4 +38,6 @@ public interface LoginContexts {
 
     String EMAIL_ERROR = "邮箱格式错误";
 
+    String USER_STATUS_EXCEPTIONS = "用户状态异常";
+
 }
