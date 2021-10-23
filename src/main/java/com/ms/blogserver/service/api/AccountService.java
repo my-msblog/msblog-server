@@ -2,6 +2,7 @@ package com.ms.blogserver.service.api;
 
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.model.dto.BaseDTO;
+import com.ms.blogserver.model.dto.StatusDTO;
 import com.ms.blogserver.model.dto.UserTableChangeDTO;
 import com.ms.blogserver.model.vo.MenuVO;
 import com.ms.blogserver.model.vo.UserProfileVO;
@@ -46,4 +47,10 @@ public interface AccountService {
      * @return
      */
     PageInfo<UserProfileVO> userProfilePage(BaseDTO dto);
+
+    /**
+     * 修改用户状态
+     * @param dto
+     */
+    void userStatusChange(StatusDTO dto);
 }

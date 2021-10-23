@@ -1,6 +1,7 @@
 package com.ms.blogserver.model.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
@@ -8,6 +9,7 @@ import lombok.ToString;
  * @author: zhh
  * @time: 2021/5/31
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ToString
 public class UserDTO extends BaseDTO{

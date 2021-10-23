@@ -14,7 +14,7 @@ import com.ms.blogserver.mapper.CommentMapper;
 import com.ms.blogserver.service.entity.CommentService;
 import com.ms.blogserver.service.entity.UserService;
 import com.ms.blogserver.utils.PageInfoUtil;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;

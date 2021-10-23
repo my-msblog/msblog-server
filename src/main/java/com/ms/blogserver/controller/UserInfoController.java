@@ -37,7 +37,7 @@ public class UserInfoController extends BaseController {
      */
     @PostMapping(value = "/menu")
     @RequiresRoles(value = {RoleContexts.SYSTEM_ADMIN,RoleContexts.CONTENT_MANAGER},logical = Logical.OR)
-    public Result getMenu() throws Exception {
+    public Result<List<MenuVO>> getMenu() throws Exception {
         try {
             String token = getHeaderToken();
             List<MenuVO> menu = accountService.getMenu(token);
@@ -47,7 +47,7 @@ public class UserInfoController extends BaseController {
         }
     }
     @GetMapping("/role")
-    public Result getUserRole() throws Exception {
+    public Result<String> getUserRole() throws Exception {
         try {
             String token = getHeaderToken();
             return ResultFactory.buildSuccessResult(accountService.getRole(token));

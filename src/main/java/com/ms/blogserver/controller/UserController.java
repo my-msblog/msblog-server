@@ -47,7 +47,7 @@ public class UserController extends BaseController {
      * @return
      */
     @PostMapping(value = "/register")
-    public Result userAdd(@RequestBody UserTableChangeDTO dto) throws Exception{
+    public Result<String> userAdd(@RequestBody UserTableChangeDTO dto) throws Exception{
         try {
             tokenService.getVerifyCode(dto.getCode());
             dto.setUsername( HtmlUtils.htmlEscape(dto.getUsername()));
@@ -68,7 +68,7 @@ public class UserController extends BaseController {
      * @throws Exception
      */
     @PostMapping(value = "/update")
-    public Result userUpdate(@RequestBody UserTableChangeDTO dto) throws Exception {
+    public Result<UserVO> userUpdate(@RequestBody UserTableChangeDTO dto) throws Exception {
         try {
             tokenService.getVerifyCode(dto.getCode());
             userService.updateUser(dto);
@@ -87,7 +87,7 @@ public class UserController extends BaseController {
      * @throws CustomException
      */
     @PostMapping(value = "/remove")
-    public Result userDelete(@RequestBody IdDTO dto) throws CustomException {
+    public Result<String> userDelete(@RequestBody IdDTO dto) throws CustomException {
         if (userService.removeById(dto.getId())){
             return ResultFactory.buildSuccessResult();
         }
@@ -95,7 +95,7 @@ public class UserController extends BaseController {
 
     }
     @PostMapping("/remove/list")
-    public Result userDeleteList(@RequestBody IdDTO dto) throws Exception{
+    public Result<String> userDeleteList(@RequestBody IdDTO dto) throws Exception{
         try {
             userOperationService.deleteUserListId(dto.getIdList());
             return ResultFactory.buildSuccessResult();
@@ -105,7 +105,7 @@ public class UserController extends BaseController {
     }
 
     @PostMapping(value = "/delete")
-    public Result phyDelete() throws Exception {
+    public Result<String> phyDelete() throws Exception {
         try {
             userService.removeById(1392754664565116930L);
             return ResultFactory.buildSuccessResult();

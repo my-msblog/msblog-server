@@ -1,6 +1,7 @@
 package com.ms.blogserver.model.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.time.LocalTime;
@@ -10,6 +11,7 @@ import java.time.LocalTime;
  * @author: zhh
  * @time: 2021/6/4
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ToString
 public class ArticleDTO extends BaseDTO{
