@@ -7,35 +7,35 @@ package com.ms.blogserver.constant.result;
 
 public class ResultFactory {
 
-    public static Result buildSuccessResult(){
+    public static Result<String> buildSuccessResult(){
         return buildSuccessResult("");
     }
 
-    public static Result buildSuccessResult(Object data) {
+    public static<T> Result<T> buildSuccessResult(T data) {
         return buildResult(ResultCode.SUCCESS, "success", data);
     }
 
-    public static Result buildFailResult(String message) {
+    public static Result<String> buildFailResult(String message) {
         return buildResult(ResultCode.FAIL, message, "");
     }
 
-    public static Result buildResult(ResultCode resultCode, String message, Object data) {
+    public static<T> Result<T> buildResult(ResultCode resultCode, String message, T data) {
         return buildResult(resultCode.code, message, data);
     }
 
-    public static Result buildResult(ResultCode resultCode, ResultString resultString, Object data){
+    public static<T> Result<T> buildResult(ResultCode resultCode, ResultString resultString, T data){
         return buildResult(resultCode.code,resultString.data,data);
     }
 
-    public static Result buildResult(ResultCode resultCode, ResultString resultString){
+    public static Result<String> buildResult(ResultCode resultCode, ResultString resultString){
         return  buildResult(resultCode,resultString.data);
-    };
+    }
 
-    public static Result buildResult(ResultCode resultCode, String message){
+    public static Result<String> buildResult(ResultCode resultCode, String message){
         return buildResult(resultCode,message,"");
     }
 
-    public static Result buildResult(int resultCode, String message, Object data) {
+    public static<T> Result<T> buildResult(int resultCode, String message, T data) {
         return new Result<>(resultCode, message, data);
     }
 }

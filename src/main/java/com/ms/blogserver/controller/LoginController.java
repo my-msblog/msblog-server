@@ -43,7 +43,7 @@ public class LoginController extends BaseController {
      * @return
      */
     @PostMapping(value = "api/authentication")
-    public Result authentication() throws Exception {
+    public Result<String> authentication() throws Exception {
         try {
             loginService.authentication(getHeaderToken());
             return ResultFactory.buildSuccessResult();
@@ -61,7 +61,7 @@ public class LoginController extends BaseController {
      * @throws Exception
      */
     @PostMapping(value = "/login")
-    public Result userLogin(@RequestBody LoginDTO loginDTO, HttpServletResponse response) throws Exception {
+    public Result<UserVO> userLogin(@RequestBody LoginDTO loginDTO, HttpServletResponse response) throws Exception {
         try {
             // 验证用户
             User user = loginService.commonLogin(loginDTO.getUsername(), loginDTO.getPassword());
@@ -83,7 +83,7 @@ public class LoginController extends BaseController {
      * @return
      */
     @GetMapping(value = "/logout")
-    public Result logout() throws Exception {
+    public Result<String> logout() throws Exception {
         try {
             loginService.userLogout(getHeaderToken());
             return ResultFactory.buildSuccessResult(LoginContexts.LOGOUT_SUCCESS);

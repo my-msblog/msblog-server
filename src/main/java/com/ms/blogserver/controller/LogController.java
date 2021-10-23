@@ -1,9 +1,12 @@
 package com.ms.blogserver.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.model.dto.BaseDTO;
+import com.ms.blogserver.model.vo.FileVO;
+import com.ms.blogserver.model.vo.LogVO;
 import com.ms.blogserver.service.api.FileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +36,7 @@ public class LogController extends BaseController {
      * @throws Exception
      */
     @PostMapping(value = "/page")
-    public Result getAllLog(BaseDTO dto) throws Exception {
+    public Result<PageInfo<FileVO>> getAllLog(BaseDTO dto) throws Exception {
         try {
             return ResultFactory.buildSuccessResult(fileService.findFileName(dto));
         } catch (Exception e) {
@@ -49,7 +52,7 @@ public class LogController extends BaseController {
      * @throws Exception
      */
     @PostMapping(value = "/get/context")
-    public Result getLog(String fileName) throws Exception {
+    public Result<LogVO> getLog(String fileName) throws Exception {
         try {
             return ResultFactory.buildSuccessResult(fileService.getLog(fileName));
         } catch (Exception e) {
@@ -65,7 +68,7 @@ public class LogController extends BaseController {
      * @throws Exception
      */
     @PostMapping(value = "/delete")
-    public Result deleteLog(String fileName) throws Exception {
+    public Result<String> deleteLog(String fileName) throws Exception {
         try {
             fileService.deleteFile(fileName);
             return ResultFactory.buildSuccessResult("");

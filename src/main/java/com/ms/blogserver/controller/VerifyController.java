@@ -35,7 +35,7 @@ public class VerifyController {
      * @return
      */
     @PostMapping(value = "/sms")
-    public Result sendSmsCode(@RequestBody PhoneDTO dto){
+    public Result<String> sendSmsCode(@RequestBody PhoneDTO dto){
         try {
             tokenService.sendSms(dto.getPhone());
             return ResultFactory.buildSuccessResult(VerifyContexts.VERIFY_SUCCESS);
@@ -51,7 +51,7 @@ public class VerifyController {
      * @return
      */
     @GetMapping(value = "/captcha/arithmetic")
-    public Result arithmetic(){
+    public Result<CaptchaVO> arithmetic(){
         try {
             CaptchaVO captchaVO = captchaService.createArithmetic();
             return ResultFactory.buildSuccessResult(captchaVO);
@@ -66,7 +66,7 @@ public class VerifyController {
      * @return
      */
     @GetMapping(value = "/captcha/spec")
-    public Result spec(){
+    public Result<CaptchaVO> spec(){
         try {
             CaptchaVO captchaVO = captchaService.createSpec();
             return ResultFactory.buildSuccessResult(captchaVO);

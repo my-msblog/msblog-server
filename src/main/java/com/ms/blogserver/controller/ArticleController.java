@@ -1,10 +1,13 @@
 package com.ms.blogserver.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.model.dto.GetCommentDTO;
+import com.ms.blogserver.model.vo.ArticleVO;
+import com.ms.blogserver.model.vo.CommentVO;
 import com.ms.blogserver.service.entity.ArticleService;
 import com.ms.blogserver.service.entity.CommentService;
 import lombok.extern.slf4j.Slf4j;
@@ -35,9 +38,10 @@ public class ArticleController extends BaseController {
      * @throws Exception
      */
     @PostMapping(value = "/get")
-    public Result getArticle(Long id) throws Exception {
+    public Result<ArticleVO> getArticle(Long id) throws Exception {
         try {
-            return ResultFactory.buildSuccessResult(articleService.getArticleById(id));
+            ArticleVO res = articleService.getArticleById(id);
+            return ResultFactory.buildSuccessResult(res);
         }catch (Exception e){
             throw this.exceptionHandle(e);
         }
@@ -51,9 +55,10 @@ public class ArticleController extends BaseController {
      * @throws Exception
      */
     @PostMapping(value = "/comment")
-    public Result getComment(@RequestBody GetCommentDTO dto) throws Exception {
+    public Result<PageInfo<CommentVO>> getComment(@RequestBody GetCommentDTO dto) throws Exception {
         try {
-            return ResultFactory.buildSuccessResult(commentService.getPageByArticle(dto));
+            PageInfo<CommentVO> data = commentService.getPageByArticle(dto);
+            return ResultFactory.buildSuccessResult(data);
         }catch (Exception e){
             throw this.exceptionHandle(e);
         }
@@ -65,7 +70,7 @@ public class ArticleController extends BaseController {
      * @return
      */
     @GetMapping("/user/count")
-    public Result getUserArticle() {
+    public Result<String> getUserArticle() {
         try {
             return ResultFactory.buildSuccessResult();
         }catch (Exception e) {
