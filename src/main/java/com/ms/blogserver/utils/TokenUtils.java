@@ -49,7 +49,7 @@ public class TokenUtils {
                     //过期时间
                     .withExpiresAt(expireAt)
                     .sign(Algorithm.HMAC256(TOKEN_SECRET));
-        } catch (IllegalArgumentException | JWTCreationException | UnsupportedEncodingException je) {
+        } catch (IllegalArgumentException | JWTCreationException je) {
             throw je;
         }
         return token;

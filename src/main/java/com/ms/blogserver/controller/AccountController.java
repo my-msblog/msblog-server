@@ -85,6 +85,7 @@ public class AccountController extends BaseController {
     @PostMapping("/admin/status/change")
     public Result<String> changeStatus(@RequestBody StatusDTO dto) throws Exception{
         try{
+            accountService.userStatusChange(dto);
             return ResultFactory.buildSuccessResult();
         } catch (Exception e){
             throw exceptionHandle(e);

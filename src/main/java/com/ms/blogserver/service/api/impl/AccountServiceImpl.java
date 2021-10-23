@@ -124,5 +124,6 @@ public class AccountServiceImpl implements AccountService {
         if (deleted.equals(dto.getStatus())){
             throw new CustomException(LoginContexts.USER_STATUS_EXCEPTIONS);
         }
+        userMapper.updateUserStatus(user.getId(), dto.getStatus());
     }
 }

@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.5</version>
+        <version>2.5.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
@@ -16,35 +16,46 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
-        <commons.codec.version>1.12</commons.codec.version>
+        <spring.boot.web.version>2.5.5</spring.boot.web.version>
+       <!-- <tomcat.version>2.4.5</tomcat.version>-->
+        <lombok.version>1.18.22</lombok.version>
+        <mybatis-plus.version>3.4.3.4</mybatis-plus.version>
+        <fastjson.version>1.2.78</fastjson.version>
+        <springfox.swagger-ui.version>3.0.0</springfox.swagger-ui.version>
+        <captcha.version>1.6.2</captcha.version>
+        <shiro.version>1.7.1</shiro.version>
+        <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <commons.codec.version>20041127.091804</commons.codec.version>
         <commons.logging.version>1.2</commons.logging.version>
-        <commons.io.version>2.5</commons.io.version>
-        <commons.pool.version>1.6</commons.pool.version>
+        <commons.io.version>20030203.000550</commons.io.version>
+        <commons.pool.version>20030825.183949</commons.pool.version>
         <commons.lang.version>2.6</commons.lang.version>
-        <commons.lang3.version>3.5</commons.lang3.version>
-        <commons.collections.version>3.2.2</commons.collections.version>
-        <commons.collections4.version>4.3</commons.collections4.version>
+        <commons.lang3.version>3.12.0</commons.lang3.version>
+        <commons.collections.version>20040616</commons.collections.version>
+        <commons.collections4.version>4.4</commons.collections4.version>
         <commons.math3.version>3.6.1</commons.math3.version>
-        <commons.compress.version>1.18</commons.compress.version>
+        <commons.compress.version>1.21</commons.compress.version>
     </properties>
     <dependencies>
         <!--spring web，打包war移除内置tomcat，jar不需要-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
+            <version>${spring.boot.web.version}</version>
+            <!--<exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
         </dependency>
         <!-- 外置tomcat-->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
+            <version>${tomcat.version}</version>
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
         <!-- 支持 @ConfigurationProperties 注解 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -53,20 +64,22 @@
         </dependency>
 
         <!--aop-->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
+        </dependency>-->
         <!--mysql-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.25</version>
             <scope>runtime</scope>
         </dependency>
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -78,31 +91,31 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.4.1</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
         <!-- swagger-ui -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
+            <version>${springfox.swagger-ui.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
+            <version>${springfox.swagger-ui.version}</version>
         </dependency>
         <!-- Spring 整合Shiro需要的依赖 -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
-            <version>1.3.2</version>
+            <version>${shiro.version}</version>
         </dependency>
         <!-- 实体类转换工具 mapstruct -->
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.4.2.Final</version>
+            <version>${mapstruct.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <dependency>
@@ -114,46 +127,39 @@
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
-            <version>3.2.0</version>
+            <version>3.18.2</version>
         </dependency>
         <!--集成redis-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-redis</artifactId>
-            <version>1.4.1.RELEASE</version>
+            <version>1.4.7.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.3</version>
+            <version>${fastjson.version}</version>
         </dependency>
         <!--http (sms verify)-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
-            <version>4.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
         </dependency>
         <!--验证码图片生成-->
         <dependency>
             <groupId>com.github.whvcse</groupId>
             <artifactId>easy-captcha</artifactId>
-            <version>1.6.2</version>
+            <version>${captcha.version}</version>
         </dependency>
         <!-- pageHelper -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.3.0</version>
+            <version>1.4.0</version>
         </dependency>
 
        <!-- &lt;!&ndash;数据源&ndash;&gt;
@@ -179,7 +185,7 @@
         <dependency>
             <groupId>commons-pool</groupId>
             <artifactId>commons-pool</artifactId>
-            <version>${commons.pool.version}</version>
+            <version>20030825.183949</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>

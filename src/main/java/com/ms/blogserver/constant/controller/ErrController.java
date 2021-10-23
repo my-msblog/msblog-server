@@ -34,7 +34,7 @@ public class ErrController extends BasicErrorController {
     public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
         getErrorProperties().setIncludeException(true);
         getErrorProperties().setIncludeMessage(ErrorProperties.IncludeAttribute.ALWAYS);
-        getErrorProperties().setIncludeStacktrace(ErrorProperties.IncludeStacktrace.ALWAYS);
+        getErrorProperties().setIncludeStacktrace(ErrorProperties.IncludeAttribute.ALWAYS);
         Map<String, Object> body = getErrorAttributes(request, getErrorAttributeOptions(request, MediaType.ALL));
         HttpStatus status = getStatus(request);
         Map<String, Object> map = new HashMap<String, Object>(12);
