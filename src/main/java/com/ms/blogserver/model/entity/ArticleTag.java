@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-@TableName(value = "ms_")
+@TableName(value = "ms_article_tag")
 public class ArticleTag implements Serializable {
     private Long id;
     private Long articleId;
