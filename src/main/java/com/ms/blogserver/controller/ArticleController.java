@@ -5,6 +5,7 @@ import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.exception.CustomException;
+import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.dto.GetCommentDTO;
 import com.ms.blogserver.model.vo.ArticleVO;
 import com.ms.blogserver.model.vo.CommentVO;
@@ -13,6 +14,8 @@ import com.ms.blogserver.service.entity.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @description:
