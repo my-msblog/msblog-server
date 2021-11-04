@@ -16,6 +16,7 @@ import java.time.LocalTime;
 @ToString
 @TableName(value = "ms_article")
 public class Article implements Serializable {
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
     private String title;
     private String content;
