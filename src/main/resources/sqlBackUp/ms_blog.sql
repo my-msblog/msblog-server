@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 12/10/2021 16:43:26
+ Date: 04/11/2021 22:13:58
 */
 
 SET NAMES utf8mb4;
@@ -22,31 +22,31 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_article`;
 CREATE TABLE `ms_article`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
-  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-  `content_md` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL,
-  `type` int NULL DEFAULT NULL,
-  `writer_id` bigint NOT NULL,
-  `create_time` datetime NULL DEFAULT NULL,
-  `update_time` datetime NULL DEFAULT NULL,
-  `cover` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '内容简介',
+  `id` bigint NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '标题',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '内容简介',
+  `content_md` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL COMMENT '文章内容',
+  `type` int NULL DEFAULT NULL COMMENT '类型',
+  `writer_id` bigint NOT NULL COMMENT '作者id',
+  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  `cover` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '图片资源',
   `likes` int NULL DEFAULT NULL COMMENT '点赞',
-  `version` int NULL DEFAULT NULL,
+  `version` int NULL DEFAULT NULL COMMENT '乐观锁',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_article
 -- ----------------------------
-INSERT INTO `ms_article` VALUES (1, '11', '11', '11', 2, 1393130419668688898, NULL, NULL, '11', 0, 0);
+INSERT INTO `ms_article` VALUES (1, 'ms-vue', 'ms-vue md ', '# msblog-ts\r\n\r\n\r\n- Get the project code\r\n\r\n```bash\r\ngit clone https://github.com.cnpmjs.org/my-msblog/msblog-ts.git\r\n```\r\n## Project setup\r\n```\r\nyarn install\r\n```\r\n\r\n### Compiles and hot-reloads for development\r\n```\r\nyarn serve\r\n```\r\n\r\n### Compiles and minifies for production\r\n```\r\nyarn build\r\n```\r\n\r\n### Lints and fixes files\r\n```\r\nyarn lint\r\n```\r\n\r\n### core\r\n\r\n|  说明 | 技术 |\r\n|  :----:  | :----: |\r\n| 框架 | vue3 |\r\n|  脚手架 | vue/cli@5.0.0-beta.4 |\r\n|  语言 | TypeScript@4.1.5 |\r\n| ui框架 | element-plus@1.1.0-beta.19|\r\n\r\n## Git 贡献提交规范\r\n- 参考  [vue](https://github.com/vuejs/vue/blob/dev/.github/COMMIT_CONVENTION.md) 规范  ([Angular](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular))\r\n    - `feat` 增加新功能\r\n    - `fix` 修复问题/BUG\r\n    - `style` 代码风格相关无影响运行结果的\r\n    - `perf` 优化/性能提升\r\n    - `refactor` 重构\r\n    - `revert` 撤销修改\r\n    - `test` 测试相关\r\n    - `docs` 文档/注释\r\n    - `chore` 依赖更新/脚手架配置修改等\r\n    - `workflow` 工作流改进\r\n    - `ci` 持续集成\r\n    - `types` 类型定义文件更改\r\n    - `wip` 开发中\r\n\r\n\r\n\r\n### Customize configuration\r\nSee [Configuration Reference](https://cli.vuejs.org/config/).\r\n', 3, 1393130419668688898, '2021-11-04 16:13:09', '2021-11-04 16:13:14', 'https://i.loli.net/2021/11/04/XMsbfOEHCGBcSaw.jpg', 0, 0);
 
 -- ----------------------------
 -- Table structure for ms_article_tag
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_article_tag`;
 CREATE TABLE `ms_article_tag`  (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `tag_id` bigint NULL DEFAULT NULL,
   `article_id` bigint NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
@@ -55,6 +55,7 @@ CREATE TABLE `ms_article_tag`  (
 -- ----------------------------
 -- Records of ms_article_tag
 -- ----------------------------
+INSERT INTO `ms_article_tag` VALUES (1, 1, 1);
 
 -- ----------------------------
 -- Table structure for ms_category
@@ -70,10 +71,10 @@ CREATE TABLE `ms_category`  (
 -- ----------------------------
 -- Records of ms_category
 -- ----------------------------
-INSERT INTO `ms_category` VALUES (1, 1, 'vue');
-INSERT INTO `ms_category` VALUES (2, 2, 'spring');
-INSERT INTO `ms_category` VALUES (3, 3, 'mysql');
-INSERT INTO `ms_category` VALUES (4, 4, NULL);
+INSERT INTO `ms_category` VALUES (1, 1, '生活笔记');
+INSERT INTO `ms_category` VALUES (2, 2, '经验分享');
+INSERT INTO `ms_category` VALUES (3, 3, '技术总结');
+INSERT INTO `ms_category` VALUES (4, 4, '其它');
 
 -- ----------------------------
 -- Table structure for ms_comment
@@ -89,7 +90,7 @@ CREATE TABLE `ms_comment`  (
   `likes` int NULL DEFAULT 0,
   `create_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_comment
@@ -114,6 +115,23 @@ CREATE TABLE `ms_favorites`  (
 -- ----------------------------
 -- Records of ms_favorites
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for ms_flow
+-- ----------------------------
+DROP TABLE IF EXISTS `ms_flow`;
+CREATE TABLE `ms_flow`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `time` datetime NOT NULL COMMENT '单日时间',
+  `flow` int NULL DEFAULT NULL COMMENT '流量',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of ms_flow
+-- ----------------------------
+INSERT INTO `ms_flow` VALUES (1, '2021-10-29 00:00:00', 20);
+INSERT INTO `ms_flow` VALUES (2, '2021-10-14 00:00:00', 18);
 
 -- ----------------------------
 -- Table structure for ms_logs
@@ -227,7 +245,7 @@ CREATE TABLE `ms_permission`  (
   `described` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_permission
@@ -311,7 +329,7 @@ INSERT INTO `ms_role_permission` VALUES (4, 2, 3);
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_tag`;
 CREATE TABLE `ms_tag`  (
-  `id` bigint NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `name_zh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `create_time` datetime NULL DEFAULT NULL,
@@ -321,6 +339,8 @@ CREATE TABLE `ms_tag`  (
 -- ----------------------------
 -- Records of ms_tag
 -- ----------------------------
+INSERT INTO `ms_tag` VALUES (1, 'vue', 'vue', '2021-11-04 20:59:22');
+INSERT INTO `ms_tag` VALUES (2, 'spring boot', 'spring boot', '2021-11-04 21:00:36');
 
 -- ----------------------------
 -- Table structure for ms_user
@@ -344,11 +364,11 @@ CREATE TABLE `ms_user`  (
 -- ----------------------------
 -- Records of ms_user
 -- ----------------------------
-INSERT INTO `ms_user` VALUES (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'this is admin account introdciton,all permission，test', 1, 'admin@qq.com', '17759309269', '2021-05-20 17:47:14', '2021-10-09 21:20:49', 32, 0);
+INSERT INTO `ms_user` VALUES (1, 'admin', 'f0dbe38dbeab67349e6c737c1d49a097', 'this is admin account introdciton,all permission，test', 1, 'admin@qq.com', '17759309269', '2021-05-20 17:47:14', '2021-10-09 21:20:49', 32, 0);
 INSERT INTO `ms_user` VALUES (44444, '23', '321', 'test', 1, '4text@qq.com', '1234567890', '2021-05-13 16:02:35', '2021-10-12 16:32:06', 6, 0);
-INSERT INTO `ms_user` VALUES (3333333333, '25', '53', 'test', 0, '3text@qq.com', '1234567890', '2021-05-13 16:02:35', NULL, 1, 0);
-INSERT INTO `ms_user` VALUES (4343434343, '233', '321', 'test', 1, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', NULL, 1, 0);
-INSERT INTO `ms_user` VALUES (6666666666, '6', '6', 'test', 1, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', '2021-10-12 16:38:31', 2, 0);
+INSERT INTO `ms_user` VALUES (3333333333, '25', '53', 'test', 0, '3text@qq.com', '1234567890', '2021-05-13 16:02:35', '2021-10-12 17:11:11', 3, 0);
+INSERT INTO `ms_user` VALUES (4343434343, '213123', '321', 'test', 0, 'test@qq.com', '1234567890', '2021-05-13 16:02:35', '2021-10-14 22:59:15', 9, 0);
+INSERT INTO `ms_user` VALUES (6666666666, '6', '6', 'test', 1, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', '2021-10-12 17:05:47', 3, 0);
 INSERT INTO `ms_user` VALUES (12121212121, 'text2', '2222', 'test', 0, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', NULL, 1, 0);
 INSERT INTO `ms_user` VALUES (22222222222, 'qeqwe', '213', 'test', 0, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', NULL, 1, 0);
 INSERT INTO `ms_user` VALUES (77777777777, '7', '7', 'test', 0, 'text@qq.com', '1234567890', '2021-05-13 16:02:35', NULL, 1, 0);
@@ -359,6 +379,8 @@ INSERT INTO `ms_user` VALUES (1392752115447533570, '11131', '131', 'test', 1, '1
 INSERT INTO `ms_user` VALUES (1393106891279986689, 'text1', '133', 'test', 1, 'text@qq.com', '1000001', '2021-05-14 15:32:20', '2021-05-14 15:32:20', 0, 0);
 INSERT INTO `ms_user` VALUES (1393111612233474050, '12312', '29852fd8f42d63ef579aa46d8cd15183', 'test', 1, 'text@qq.com', '312331', '2021-05-14 15:51:06', '2021-05-14 15:51:06', 0, 0);
 INSERT INTO `ms_user` VALUES (1393130419668688898, 'ms', '21232f297a57a5a743894a0e4a801fc3', 'ms', 1, 'mstext@qq.com', '1234567890', '2021-05-13 16:02:35', '2021-05-14 17:05:50', 0, 0);
+INSERT INTO `ms_user` VALUES (1450800489004367873, 'test-add', '3a796012c73aed1fe6f390bb191d40ab', NULL, 0, 'add@123.com', '1234321', '2021-10-20 20:26:06', '2021-10-20 20:26:06', 0, 0);
+INSERT INTO `ms_user` VALUES (1452921905195642882, 'tableadd', '3e9a00f12acde32bb0bb71b79698db0d', NULL, 1, '', '', '2021-10-26 16:55:51', '2021-10-26 16:55:51', 0, 0);
 
 -- ----------------------------
 -- Table structure for ms_user_role
@@ -371,7 +393,7 @@ CREATE TABLE `ms_user_role`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `uid`(`uid`) USING BTREE,
   INDEX `rid`(`rid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1452921905719930883 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_user_role
@@ -391,5 +413,7 @@ INSERT INTO `ms_user_role` VALUES (14, 432312312313123123, 3);
 INSERT INTO `ms_user_role` VALUES (15, 1392752115447533570, 3);
 INSERT INTO `ms_user_role` VALUES (16, 1393106891279986689, 3);
 INSERT INTO `ms_user_role` VALUES (17, 1393111612233474050, 3);
+INSERT INTO `ms_user_role` VALUES (1450800489763536897, 1450800489004367873, 3);
+INSERT INTO `ms_user_role` VALUES (1452921905719930882, 1452921905195642882, 3);
 
 SET FOREIGN_KEY_CHECKS = 1;
