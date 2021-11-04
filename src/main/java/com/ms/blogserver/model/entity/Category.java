@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * @description:
  * @author: zhh
@@ -12,7 +14,7 @@ import lombok.ToString;
 @Data
 @ToString
 @TableName(value = "ms_category")
-public class Category {
+public class Category implements Serializable {
     private Integer id;
     private Integer categoryId;
     private String category;

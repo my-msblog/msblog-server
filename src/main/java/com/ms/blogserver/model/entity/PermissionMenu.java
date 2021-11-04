@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * @description:
  * @author: zhh
@@ -12,7 +14,7 @@ import lombok.ToString;
 @Data
 @ToString
 @TableName(value = "ms_permission_menu")
-public class PermissionMenu {
+public class PermissionMenu implements Serializable {
     private Long id;
     private Long pid;
     private int mid;

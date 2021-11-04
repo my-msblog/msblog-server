@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @Data
 @ToString
 @TableName("ms_favorites")
-public class Favorites {
+public class Favorites implements Serializable {
     private Long id;
     private Long articleId;
     private Long userId;

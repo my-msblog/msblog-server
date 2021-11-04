@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * @description:
  * @author: zhh
@@ -13,7 +15,7 @@ import lombok.ToString;
 @Data
 @ToString
 @TableName(value = "ms_permission")
-public class Permission {
+public class Permission implements Serializable {
     private Long id;
     @TableField(value = "name_en")
     private String name;

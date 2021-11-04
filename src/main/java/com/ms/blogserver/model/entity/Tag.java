@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
 /**
@@ -16,7 +17,7 @@ import java.time.LocalTime;
 @Data
 @ToString
 @TableName(value = "ms_tag")
-public class Tag {
+public class Tag implements Serializable {
     private Long id;
     private String name;
     private String nameZh;
