@@ -6,9 +6,11 @@ import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.vo.ArticleCardVO;
+import com.ms.blogserver.model.vo.HomeCardVO;
 import com.ms.blogserver.service.api.HomeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,9 +30,19 @@ public class HomeController {
 
     @PostMapping("/article/page")
     public Result<PageInfo<ArticleCardVO>> getPages(BaseDTO dto) {
-            try {
+        try {
             PageInfo<ArticleCardVO> page = homeService.getPage(dto);
             return ResultFactory.buildSuccessResult(page);
+        } catch (Exception e) {
+            throw new CustomException(e.getMessage());
+        }
+    }
+
+    @GetMapping("/info")
+    public Result<HomeCardVO> getMainInfo() {
+        try {
+            HomeCardVO result = homeService.getHomeCard();
+            return ResultFactory.buildSuccessResult(result);
         } catch (Exception e) {
             throw new CustomException(e.getMessage());
         }

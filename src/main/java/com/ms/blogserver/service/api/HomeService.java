@@ -3,6 +3,7 @@ package com.ms.blogserver.service.api;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.vo.ArticleCardVO;
+import com.ms.blogserver.model.vo.HomeCardVO;
 
 /**
  * @description:
@@ -17,4 +18,10 @@ public interface HomeService {
      * @return
      */
     PageInfo<ArticleCardVO> getPage(BaseDTO dto);
+
+    /**
+     * 获取主页信息
+     * @return
+     */
+    HomeCardVO getHomeCard();
 }

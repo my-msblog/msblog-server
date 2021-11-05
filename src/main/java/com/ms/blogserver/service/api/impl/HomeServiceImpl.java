@@ -12,6 +12,7 @@ import com.ms.blogserver.model.entity.Article;
 import com.ms.blogserver.model.entity.ArticleTag;
 import com.ms.blogserver.model.entity.Tag;
 import com.ms.blogserver.model.vo.ArticleCardVO;
+import com.ms.blogserver.model.vo.HomeCardVO;
 import com.ms.blogserver.model.vo.TagVO;
 import com.ms.blogserver.service.api.HomeService;
 import com.ms.blogserver.service.entity.ArticleService;
@@ -68,6 +69,15 @@ public class HomeServiceImpl implements HomeService {
         PageInfo<ArticleCardVO> res = new PageInfo<>();
         PageInfoUtil.transform(new PageInfo<>(articleList), res);
         res.setList(resList);
+        return res;
+    }
+
+    @Override
+    public HomeCardVO getHomeCard() {
+        HomeCardVO res = new HomeCardVO();
+        res.setArticle(articleService.list().size());
+        res.setTag(tagService.list().size());
+        res.setCategory(categoryService.list().size());
         return res;
     }
 }
