@@ -31,7 +31,7 @@ public class BoardController extends BaseController {
             StatisticsVO res = boardService.getValue();
             return ResultFactory.buildSuccessResult(res);
         } catch (Exception e) {
-            throw new CustomException(e.getMessage());
+            throw new CustomException(e.getMessage(),e);
         }
     }
 }

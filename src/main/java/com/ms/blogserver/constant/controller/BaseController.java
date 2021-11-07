@@ -75,9 +75,9 @@ public class BaseController {
      */
     public Exception exceptionHandle(Exception e) {
         if (e instanceof CustomException) {
-            return new CustomException(e.getMessage());
+            return new CustomException(e.getMessage(),e);
         } else if (e instanceof ProgramException) {
-            return new ProgramException(e.getMessage());
+            return new ProgramException(e.getMessage(),e);
         }
         return e;
     }

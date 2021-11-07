@@ -40,7 +40,7 @@ public class VerifyController {
             tokenService.sendSms(dto.getPhone());
             return ResultFactory.buildSuccessResult(VerifyContexts.VERIFY_SUCCESS);
         }catch (Exception e){
-            throw new CustomException(e.getMessage());
+            throw new CustomException(e.getMessage(),e);
         }
 
     }
@@ -56,7 +56,7 @@ public class VerifyController {
             CaptchaVO captchaVO = captchaService.createArithmetic();
             return ResultFactory.buildSuccessResult(captchaVO);
         } catch (Exception e) {
-            throw new CustomException(e.getMessage());
+            throw new CustomException(e.getMessage(),e);
         }
     }
 
@@ -71,7 +71,7 @@ public class VerifyController {
             CaptchaVO captchaVO = captchaService.createSpec();
             return ResultFactory.buildSuccessResult(captchaVO);
         } catch (Exception e) {
-            throw new CustomException(e.getMessage());
+            throw new CustomException(e.getMessage(),e);
         }
     }
 }

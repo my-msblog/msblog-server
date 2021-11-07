@@ -14,7 +14,9 @@ public class ProgramException extends RuntimeException{
     public ProgramException(String msg) {
         super(msg);
     }
-
+    public ProgramException(String msg, Throwable cause){
+        super(msg,cause);
+    }
     public ProgramException(Exception e){
         super(e);
     }
