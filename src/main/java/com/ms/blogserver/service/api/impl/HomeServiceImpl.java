@@ -20,6 +20,7 @@ import com.ms.blogserver.service.entity.ArticleTagService;
 import com.ms.blogserver.service.entity.CategoryService;
 import com.ms.blogserver.service.entity.TagService;
 import com.ms.blogserver.utils.PageInfoUtil;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,8 +62,11 @@ public class HomeServiceImpl implements HomeService {
                     .stream()
                     .map(ArticleTag::getTagId)
                     .collect(Collectors.toList());
-            List<Tag> tagList = tagService.list(new LambdaQueryWrapper<Tag>().in(Tag::getId, tagIds));
-            List<TagVO> tagVOList = TagVoConverter.INSTANCE.toDataList(tagList);
+            List<TagVO> tagVOList = new ArrayList<>();
+            if (CollectionUtils.isNotEmpty(tagIds)){
+                List<Tag> tagList = tagService.list(new LambdaQueryWrapper<Tag>().in(Tag::getId, tagIds));
+                tagVOList = TagVoConverter.INSTANCE.toDataList(tagList);
+            }
             articleCardBO.setTagVOList(tagVOList);
         });
         List<ArticleCardVO> resList = ArticleCardVoConverter.INSTANCE.toDataList(articleCardBOList);

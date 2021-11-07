@@ -1,6 +1,7 @@
 package com.ms.blogserver.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.exception.CustomException;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequestMapping("/client")
-public class HomeController {
+public class HomeController extends BaseController {
 
     @Autowired
     private HomeService homeService;
@@ -34,7 +35,7 @@ public class HomeController {
             PageInfo<ArticleCardVO> page = homeService.getPage(dto);
             return ResultFactory.buildSuccessResult(page);
         } catch (Exception e) {
-            throw new CustomException(e.getMessage());
+            throw new CustomException(e.getMessage(),e);
         }
     }
 
