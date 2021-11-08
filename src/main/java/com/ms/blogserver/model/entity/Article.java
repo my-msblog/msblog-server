@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -26,9 +27,9 @@ public class Article implements Serializable {
     private Integer likes;
     private Integer type;
     @TableField(value = "create_time",fill = FieldFill.INSERT)
-    private LocalTime createTime;
+    private LocalDateTime createTime;
     @TableField(value = "update_time",fill = FieldFill.UPDATE)
-    private LocalTime updateTime;
+    private LocalDateTime updateTime;
     @Version
     @TableField(fill = FieldFill.INSERT)
     private Integer version;

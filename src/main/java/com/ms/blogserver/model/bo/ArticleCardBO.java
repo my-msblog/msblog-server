@@ -1,10 +1,12 @@
 package com.ms.blogserver.model.bo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ms.blogserver.model.vo.TagVO;
 import lombok.Data;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -20,6 +22,8 @@ public class ArticleCardBO implements Serializable {
     private String content;
     private String cover;
     private Integer type;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
     private String typeName;
     private List<TagVO> tagVOList;
 }
