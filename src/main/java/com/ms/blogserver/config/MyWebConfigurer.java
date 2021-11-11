@@ -11,6 +11,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class MyWebConfigurer implements WebMvcConfigurer {
+
+    /**
+     * 允许跨越的url
+     */
+    private final String[] origin = {
+            "http://127.0.0.1:5478",
+            "http://localhost:5478",
+            "http://127.0.0.1:5477",
+            "http://localhost:5477",
+            "http://192.168.0.129:5477"
+    };
     /**
      * 跨域请求
      *
@@ -20,9 +31,7 @@ public class MyWebConfigurer implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowCredentials(true)
-                .allowedOrigins("http://localhost:5478")
-                .allowedOrigins("http://127.0.0.1:5477")
-                .allowedOrigins("http://localhost:5477")
+                .allowedOrigins(origin)
                 .allowedMethods("POST", "GET", "PUT", "OPTIONS", "DELETE")
                 .maxAge(36000L)
                 .allowedHeaders("*");
