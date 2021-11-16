@@ -2,6 +2,7 @@ package com.ms.blogserver.service.api;
 
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.model.dto.BaseDTO;
+import com.ms.blogserver.model.vo.AnnouncementVO;
 import com.ms.blogserver.model.vo.ArticleCardVO;
 import com.ms.blogserver.model.vo.HomeCardVO;
 
@@ -24,4 +25,10 @@ public interface HomeService {
      * @return
      */
     HomeCardVO getHomeCard();
+
+    /**
+     * 获取最新公告
+     * @return
+     */
+    AnnouncementVO getAnnouncement();
 }

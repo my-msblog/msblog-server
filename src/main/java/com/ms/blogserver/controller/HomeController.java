@@ -6,6 +6,7 @@ import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.model.dto.BaseDTO;
+import com.ms.blogserver.model.vo.AnnouncementVO;
 import com.ms.blogserver.model.vo.ArticleCardVO;
 import com.ms.blogserver.model.vo.HomeCardVO;
 import com.ms.blogserver.service.api.HomeService;
@@ -45,7 +46,17 @@ public class HomeController extends BaseController {
             HomeCardVO result = homeService.getHomeCard();
             return ResultFactory.buildSuccessResult(result);
         } catch (Exception e) {
-            throw new CustomException(e.getMessage());
+            throw new CustomException(e);
+        }
+    }
+
+    @GetMapping("/get/announcement")
+    public Result<AnnouncementVO> getAnnouncement(){
+        try {
+            AnnouncementVO result = homeService.getAnnouncement();
+            return ResultFactory.buildSuccessResult(result);
+        } catch (Exception e) {
+            throw new CustomException(e.getMessage(),e);
         }
     }
 
