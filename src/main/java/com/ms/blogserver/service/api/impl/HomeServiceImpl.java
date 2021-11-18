@@ -16,12 +16,14 @@ import com.ms.blogserver.model.vo.HomeCardVO;
 import com.ms.blogserver.model.vo.TagVO;
 import com.ms.blogserver.service.api.HomeService;
 import com.ms.blogserver.service.entity.*;
+import com.ms.blogserver.utils.DateUtils;
 import com.ms.blogserver.utils.PageInfoUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -93,7 +95,10 @@ public class HomeServiceImpl implements HomeService {
     public AnnouncementVO getAnnouncement() {
         AnnouncementVO res = new AnnouncementVO();
         Announcement announcement = announcementService.getOne(
-                new LambdaQueryWrapper<Announcement>().orderByDesc(Announcement::getUpdateTime).last("limit 1"));
+                new LambdaQueryWrapper<Announcement>()
+                        .ge(Announcement::getUpdateTime, DateUtils.getBeforeWeek(new Date()))
+                        .orderByDesc(Announcement::getUpdateTime)
+                        .last("limit 1"));
         if (Objects.nonNull(announcement)) {
             User createUser = userService.getById(announcement.getCreateUser());
             if (Objects.isNull(createUser)){

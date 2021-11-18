@@ -31,32 +31,32 @@ public class HomeController extends BaseController {
     private HomeService homeService;
 
     @PostMapping("/article/page")
-    public Result<PageInfo<ArticleCardVO>> getPages(BaseDTO dto) {
+    public Result<PageInfo<ArticleCardVO>> getPages(BaseDTO dto) throws Exception {
         try {
             PageInfo<ArticleCardVO> page = homeService.getPage(dto);
             return ResultFactory.buildSuccessResult(page);
         } catch (Exception e) {
-            throw new CustomException(e.getMessage(),e);
+            throw exceptionHandle(e);
         }
     }
 
     @GetMapping("/info")
-    public Result<HomeCardVO> getMainInfo() {
+    public Result<HomeCardVO> getMainInfo() throws Exception {
         try {
             HomeCardVO result = homeService.getHomeCard();
             return ResultFactory.buildSuccessResult(result);
         } catch (Exception e) {
-            throw new CustomException(e);
+            throw exceptionHandle(e);
         }
     }
 
     @GetMapping("/get/announcement")
-    public Result<AnnouncementVO> getAnnouncement(){
+    public Result<AnnouncementVO> getAnnouncement() throws Exception {
         try {
             AnnouncementVO result = homeService.getAnnouncement();
             return ResultFactory.buildSuccessResult(result);
         } catch (Exception e) {
-            throw new CustomException(e.getMessage(),e);
+            throw exceptionHandle(e);
         }
     }
 
