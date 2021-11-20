@@ -78,7 +78,7 @@ public class FileServiceImpl implements FileService {
                 boolean delete = file.delete();
                 if (!delete){
                     throw new CustomException(ErrorContexts.FILE_NO_DELETE);
-                };
+                }
             } catch (Exception e) {
                 throw new CustomException(e.getMessage());
             }
