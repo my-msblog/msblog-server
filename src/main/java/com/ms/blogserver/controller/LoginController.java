@@ -10,6 +10,7 @@ import com.ms.blogserver.model.vo.UserVO;
 import com.ms.blogserver.service.api.CaptchaService;
 import com.ms.blogserver.service.api.LoginService;
 import com.ms.blogserver.service.api.TokenService;
+import com.ms.blogserver.utils.SecretUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,6 +64,8 @@ public class LoginController extends BaseController {
     @PostMapping(value = "/login")
     public Result<UserVO> userLogin(@RequestBody LoginDTO loginDTO, HttpServletResponse response) throws Exception {
         try {
+            // 密码解密
+            loginDTO.setPassword(SecretUtils.desEncrypt(loginDTO.getPassword()));
             // 验证用户
             User user = loginService.commonLogin(loginDTO.getUsername(), loginDTO.getPassword());
             // 判断验证码
