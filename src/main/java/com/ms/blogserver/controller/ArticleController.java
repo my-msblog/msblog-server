@@ -41,7 +41,7 @@ public class ArticleController extends BaseController {
      * @throws Exception
      */
     @PostMapping(value = "/get")
-    public Result<ArticleVO> getArticle(Long id) throws Exception {
+    public Result<ArticleVO> getArticle(@RequestBody Long id) throws Exception {
         try {
             ArticleVO res = articleService.getArticleById(id);
             return ResultFactory.buildSuccessResult(res);

@@ -10,10 +10,7 @@ import com.ms.blogserver.model.vo.LogVO;
 import com.ms.blogserver.service.api.FileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @description:
@@ -36,7 +33,7 @@ public class LogController extends BaseController {
      * @throws Exception
      */
     @PostMapping(value = "/page")
-    public Result<PageInfo<FileVO>> getAllLog(BaseDTO dto) throws Exception {
+    public Result<PageInfo<FileVO>> getAllLog(@RequestBody BaseDTO dto) throws Exception {
         try {
             return ResultFactory.buildSuccessResult(fileService.findFileName(dto));
         } catch (Exception e) {
@@ -52,7 +49,7 @@ public class LogController extends BaseController {
      * @throws Exception
      */
     @PostMapping(value = "/get/context")
-    public Result<LogVO> getLog(String fileName) throws Exception {
+    public Result<LogVO> getLog(@RequestBody String fileName) throws Exception {
         try {
             return ResultFactory.buildSuccessResult(fileService.getLog(fileName));
         } catch (Exception e) {
@@ -68,7 +65,7 @@ public class LogController extends BaseController {
      * @throws Exception
      */
     @PostMapping(value = "/delete")
-    public Result<String> deleteLog(String fileName) throws Exception {
+    public Result<String> deleteLog(@RequestBody String fileName) throws Exception {
         try {
             fileService.deleteFile(fileName);
             return ResultFactory.buildSuccessResult("");
