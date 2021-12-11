@@ -7,6 +7,7 @@ import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.dto.GetCommentDTO;
+import com.ms.blogserver.model.vo.ArchiveVO;
 import com.ms.blogserver.model.vo.ArticleVO;
 import com.ms.blogserver.model.vo.CommentVO;
 import com.ms.blogserver.service.entity.ArticleService;
@@ -97,10 +98,11 @@ public class ArticleController extends BaseController {
      * @return
      * @throws Exception
      */
-    @PostMapping(value = "/date")
-    public Result getByDate() throws Exception {
+    @PostMapping(value = "/date/page")
+    public Result<PageInfo<ArchiveVO>> getByDate(BaseDTO dto) throws Exception {
         try {
-            return null;
+            PageInfo<ArchiveVO> pageInfo = articleService.getPageByTimesLine(dto);
+            return ResultFactory.buildSuccessResult(pageInfo);
         }catch (Exception e){
             throw this.exceptionHandle(e);
         }

@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ms.blogserver.converter.vo.ArchiveVoConverter;
 import com.ms.blogserver.converter.vo.ArticleVoConverter;
 import com.ms.blogserver.exception.CustomException;
-import com.ms.blogserver.model.dto.ArticleDTO;
+import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.dto.GetCommentDTO;
 import com.ms.blogserver.model.entity.Article;
+import com.ms.blogserver.model.vo.ArchiveVO;
 import com.ms.blogserver.service.entity.CategoryService;
 import com.ms.blogserver.service.entity.CommentService;
 import com.ms.blogserver.utils.PageInfoUtil;
@@ -54,22 +56,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
-    public PageInfo<ArticleVO> getPage(ArticleDTO dto) {
+    public PageInfo<ArchiveVO> getPageByTimesLine(BaseDTO dto) {
         PageHelper.startPage(dto.getPage(),dto.getSize());
-        List<Article> articleList = baseMapper.selectList(new LambdaQueryWrapper<Article>()
-                .eq(Objects.nonNull(dto.getWriterId()),Article::getWriterId,dto.getWriterId())
-                .eq(Objects.nonNull(dto.getType()),Article::getType,dto.getType())
-                .eq(Objects.nonNull(dto.getTime()),Article::getCreateTime,dto.getTime()));
-        // entity转vo
-        List<ArticleVO> list = ArticleVoConverter.INSTANCE.toDataList(articleList);
-        // 添加分类
-        list.forEach(articleVO -> {
-            articleVO.setTypeName(categoryService.getCategoryByCid(articleVO.getType()));
-        });
-        PageInfo<ArticleVO> res = new PageInfo<>();
-        // PageInfo转换
-        PageInfoUtil.transform(new PageInfo<>(articleList),res);
-        res.setList(list);
-        return res;
+        List<Article> articles = baseMapper.selectList(
+                new LambdaQueryWrapper<Article>().orderByDesc(Article::getCreateTime));
+        List<ArchiveVO> archiveVOList = ArchiveVoConverter.INSTANCE.toDataList(articles);
+        PageInfo<ArchiveVO> result = new PageInfo<ArchiveVO>();
+        PageInfoUtil.transform(new PageInfo<Article>(articles), result);
+        result.setList(archiveVOList);
+        return result;
     }
 }
