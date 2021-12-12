@@ -64,12 +64,12 @@ public class LoginController extends BaseController {
     @PostMapping(value = "/login")
     public Result<UserVO> userLogin(@RequestBody LoginDTO loginDTO, HttpServletResponse response) throws Exception {
         try {
+            // 判断验证码
+            captchaService.verifyArithmetic(loginDTO.getKey(), loginDTO.getCode());
             // 密码解密
             loginDTO.setPassword(SecretUtils.desEncrypt(loginDTO.getPassword()));
             // 验证用户
             User user = loginService.commonLogin(loginDTO.getUsername(), loginDTO.getPassword());
-            // 判断验证码
-            captchaService.verifyArithmetic(loginDTO.getKey(), loginDTO.getCode());
             // 生成token
             String token = tokenService.createToken(user.getUsername(), response);
             // 返回内容

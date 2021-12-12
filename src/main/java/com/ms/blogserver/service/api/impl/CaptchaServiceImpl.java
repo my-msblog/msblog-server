@@ -57,6 +57,9 @@ public class CaptchaServiceImpl implements CaptchaService {
     @Override
     public void verifyArithmetic(String key, String code) {
         String redisCode = (String) redisUtils.get(key);
+        if(code.isEmpty()){
+            throw new CustomException(VerifyContexts.VERIFY_NO_NULL);
+        }
         if (redisCode == null){
             throw new CustomException(VerifyContexts.INVALID_CAPTCHA);
         }
