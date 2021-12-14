@@ -63,16 +63,11 @@
             <optional>true</optional>
         </dependency>
 
-        <!--aop-->
-       <!-- <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>-->
         <!--加密-->
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.60</version>
+            <version>1.69</version>
         </dependency>
         <!--mysql-->
         <dependency>
