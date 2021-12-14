@@ -79,12 +79,6 @@ public class DefaultExceptionHandler implements ResponseBodyAdvice<Object> {
         }
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, customAuthorizedException.getMessage());
     }
-//    @ExceptionHandler(AuthorizationException.class)
-//    @ResponseBody
-//    public Result handleAuthorizationException(AuthorizationException e){
-//        log.error("handleAuthorizationException:"+LoginContexts.INSUFFICIENT_USER_PERMISSIONS,e);
-//        return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, LoginContexts.INSUFFICIENT_USER_PERMISSIONS);
-//    }
 
     /**
      * 其他异常

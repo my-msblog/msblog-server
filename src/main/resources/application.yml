@@ -12,10 +12,7 @@ spring:
   profiles:
     active: dev
   mvc:
-    throw-exception-if-no-handler-found: true
-  #main:
-   # web-application-type: none
-
+    throw-exception-if-no-handler-found: false
   servlet:
     multipart:
       max-file-size: 10MB #文件最大上传大小
@@ -47,6 +44,9 @@ spring:
   #设置全局，Null值不返回到前端
   jackson:
     default-property-inclusion: non_null
+  web:
+    resources:
+      add-mappings: true
 
 
 # 正式环境取消logging配置，默认加载resources文件下logback-spring.xml
