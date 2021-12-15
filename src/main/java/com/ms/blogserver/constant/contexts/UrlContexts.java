@@ -1,6 +1,6 @@
 package com.ms.blogserver.constant.contexts;
 
-import com.ms.blogserver.api.config.ApiLogConfig;
+import com.ms.blogserver.api.config.LogConfig;
 
 import java.io.File;
 
@@ -26,7 +26,7 @@ public interface UrlContexts {
      */
     String LOG_ABSOLUTE_URL = "D:"+ SLASH +"myself"+ SLASH +"IdeaProject"+ SLASH +"spring-log"+ SLASH +"ms-server";
 
-    String LOG_URL = ApiLogConfig.INSTANCE.getUrl();
+    String LOG_URL = LogConfig.INSTANCE.getUrl();
 
     String HTTPS = "https://";
 

@@ -1,6 +1,5 @@
 package com.ms.blogserver.api.config;
 
-import com.ms.blogserver.constant.contexts.ErrorContexts;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -13,10 +12,10 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @ConfigurationProperties(prefix = "data.log")
-public class ApiLogConfig {
+public class LogConfig {
 
     private String url;
 
-    public static ApiLogConfig INSTANCE = new ApiLogConfig();
+    public static LogConfig INSTANCE = new LogConfig();
 
 }

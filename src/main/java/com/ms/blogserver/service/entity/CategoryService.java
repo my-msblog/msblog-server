@@ -2,6 +2,7 @@ package com.ms.blogserver.service.entity;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ms.blogserver.model.entity.Category;
+import com.ms.blogserver.model.vo.CategoryVO;
 
 import java.util.List;
 
@@ -23,5 +24,5 @@ public interface CategoryService extends IService<Category> {
      * 获取分类列表
      * @return
      */
-    List<Category> getList();
+    List<CategoryVO> getList();
 }

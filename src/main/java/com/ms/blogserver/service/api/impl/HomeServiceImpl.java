@@ -57,7 +57,8 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public PageInfo<ArticleCardVO> getPage(BaseDTO dto) {
         PageHelper.startPage(dto.getPage(), dto.getSize());
-        List<Article> articleList = articleService.list(new LambdaQueryWrapper<Article>().orderByDesc(Article::getCreateTime));
+        List<Article> articleList = articleService.list(new LambdaQueryWrapper<Article>()
+                .orderByDesc(Article::getCreateTime));
         List<ArticleCardBO> articleCardBOList = ArticleCardBoConverter.INSTANCE.toDataList(articleList);
         articleCardBOList.forEach(articleCardBO -> {
             String type = categoryService.getCategoryByCid(articleCardBO.getType());

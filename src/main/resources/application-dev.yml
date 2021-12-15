@@ -5,4 +5,5 @@ data:
   log:
     url: D:/myself/IdeaProject/spring-log/ms-server
 
-
+test:
+  name: dev

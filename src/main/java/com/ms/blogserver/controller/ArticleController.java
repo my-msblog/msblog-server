@@ -1,6 +1,7 @@
 package com.ms.blogserver.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.ms.blogserver.api.config.ServerConfig;
 import com.ms.blogserver.constant.controller.BaseController;
 import com.ms.blogserver.constant.result.Result;
 import com.ms.blogserver.constant.result.ResultFactory;
@@ -9,8 +10,10 @@ import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.dto.GetCommentDTO;
 import com.ms.blogserver.model.vo.ArchiveVO;
 import com.ms.blogserver.model.vo.ArticleVO;
+import com.ms.blogserver.model.vo.CategoryVO;
 import com.ms.blogserver.model.vo.CommentVO;
 import com.ms.blogserver.service.entity.ArticleService;
+import com.ms.blogserver.service.entity.CategoryService;
 import com.ms.blogserver.service.entity.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,9 @@ public class ArticleController extends BaseController {
     @Autowired
     private ArticleService articleService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     /**
      * 获取指定id文章
      *
@@ -46,7 +52,7 @@ public class ArticleController extends BaseController {
         try {
             ArticleVO res = articleService.getArticleById(id);
             return ResultFactory.buildSuccessResult(res);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw this.exceptionHandle(e);
         }
     }
@@ -63,7 +69,7 @@ public class ArticleController extends BaseController {
         try {
             PageInfo<CommentVO> data = commentService.getPageByArticle(dto);
             return ResultFactory.buildSuccessResult(data);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw this.exceptionHandle(e);
         }
     }
@@ -77,7 +83,7 @@ public class ArticleController extends BaseController {
     public Result<String> getUserArticle() {
         try {
             return ResultFactory.buildSuccessResult();
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new CustomException(e.getMessage());
         }
     }
@@ -88,22 +94,32 @@ public class ArticleController extends BaseController {
      * @return
      */
     @PostMapping(value = "/user/comment")
-    public Result getUserComment(){
+    public Result getUserComment() {
         return null;
     }
 
     /**
-     * 根据日期获取标题
+     * 日期分页
      *
      * @return
      * @throws Exception
      */
     @PostMapping(value = "/date/page")
-    public Result<PageInfo<ArchiveVO>> getByDate(BaseDTO dto) throws Exception {
+    public Result<PageInfo<ArchiveVO>> getByDate(@RequestBody BaseDTO dto) throws Exception {
         try {
             PageInfo<ArchiveVO> pageInfo = articleService.getPageByTimesLine(dto);
             return ResultFactory.buildSuccessResult(pageInfo);
-        }catch (Exception e){
+        } catch (Exception e) {
+            throw this.exceptionHandle(e);
+        }
+    }
+
+    @GetMapping(value = "/list/category")
+    public Result<List<CategoryVO>> getCategory() throws Exception {
+        try {
+            List<CategoryVO> list = categoryService.getList();
+            return ResultFactory.buildSuccessResult(list);
+        } catch (Exception e) {
             throw this.exceptionHandle(e);
         }
     }
