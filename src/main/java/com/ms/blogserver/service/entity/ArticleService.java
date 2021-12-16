@@ -6,7 +6,10 @@ import com.ms.blogserver.model.dto.ArticleDTO;
 import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.entity.Article;
 import com.ms.blogserver.model.vo.ArchiveVO;
+import com.ms.blogserver.model.vo.ArticleCategoryVO;
 import com.ms.blogserver.model.vo.ArticleVO;
+
+import java.util.List;
 
 /**
  * @description:
@@ -28,5 +31,12 @@ public interface ArticleService extends IService<Article> {
      * @return
      */
     PageInfo<ArchiveVO> getPageByTimesLine(BaseDTO dto);
+
+    /**
+     * 获取分类文章列表
+     * @param category
+     * @return
+     */
+    List<ArticleCategoryVO> getArticleListByCategory(Integer category);
 
 }

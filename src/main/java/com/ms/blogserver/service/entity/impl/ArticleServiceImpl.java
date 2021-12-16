@@ -4,26 +4,30 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.ms.blogserver.converter.bo.ArticleBoConverter;
 import com.ms.blogserver.converter.vo.ArchiveVoConverter;
+import com.ms.blogserver.converter.vo.ArticleCategoryVoConverter;
 import com.ms.blogserver.converter.vo.ArticleVoConverter;
+import com.ms.blogserver.converter.vo.TagVoConverter;
 import com.ms.blogserver.exception.CustomException;
+import com.ms.blogserver.model.bo.ArticleBO;
 import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.dto.GetCommentDTO;
 import com.ms.blogserver.model.entity.Article;
-import com.ms.blogserver.model.vo.ArchiveVO;
-import com.ms.blogserver.service.entity.CategoryService;
-import com.ms.blogserver.service.entity.CommentService;
+import com.ms.blogserver.model.entity.ArticleTag;
+import com.ms.blogserver.model.entity.Tag;
+import com.ms.blogserver.model.vo.*;
+import com.ms.blogserver.service.entity.*;
 import com.ms.blogserver.utils.PageInfoUtil;
-import com.ms.blogserver.model.vo.ArticleVO;
 import com.ms.blogserver.mapper.ArticleMapper;
-import com.ms.blogserver.service.entity.ArticleService;
-import com.ms.blogserver.model.vo.CommentVO;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @description:
@@ -38,6 +42,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private TagService tagService;
+
+    @Autowired
+    private ArticleTagService articleTagService;
 
     @Override
     public ArticleVO getArticleById(Long id) {
@@ -66,5 +76,30 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         PageInfoUtil.transform(new PageInfo<Article>(articles), result);
         result.setList(archiveVOList);
         return result;
+    }
+
+    @Override
+    public List<ArticleCategoryVO> getArticleListByCategory(Integer category) {
+        List<Article> articleListByType = baseMapper.selectList(new LambdaQueryWrapper<Article>()
+                .eq(Article::getType, category)
+                .orderByDesc(Article::getCreateTime));
+        List<ArticleBO> articleBOList = ArticleBoConverter.INSTANCE.toDataList(articleListByType);
+        articleBOList.forEach(item ->{
+            String type = categoryService.getCategoryByCid(item.getType());
+            item.setTypeName(type);
+            List<Long> tagIds = articleTagService
+                    .list(new LambdaQueryWrapper<ArticleTag>()
+                            .eq(ArticleTag::getArticleId, item.getId()))
+                    .stream()
+                    .map(ArticleTag::getTagId)
+                    .collect(Collectors.toList());
+            List<TagVO> tagVOList = new ArrayList<>();
+            if (CollectionUtils.isNotEmpty(tagIds)){
+                List<Tag> tagList = tagService.list(new LambdaQueryWrapper<Tag>().in(Tag::getId, tagIds));
+                tagVOList = TagVoConverter.INSTANCE.toDataList(tagList);
+            }
+            item.setTagVOList(tagVOList);
+        });
+        return ArticleCategoryVoConverter.INSTANCE.toDataList(articleBOList);
     }
 }

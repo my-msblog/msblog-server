@@ -8,10 +8,7 @@ import com.ms.blogserver.constant.result.ResultFactory;
 import com.ms.blogserver.exception.CustomException;
 import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.dto.GetCommentDTO;
-import com.ms.blogserver.model.vo.ArchiveVO;
-import com.ms.blogserver.model.vo.ArticleVO;
-import com.ms.blogserver.model.vo.CategoryVO;
-import com.ms.blogserver.model.vo.CommentVO;
+import com.ms.blogserver.model.vo.*;
 import com.ms.blogserver.service.entity.ArticleService;
 import com.ms.blogserver.service.entity.CategoryService;
 import com.ms.blogserver.service.entity.CommentService;
@@ -75,20 +72,6 @@ public class ArticleController extends BaseController {
     }
 
     /**
-     * 当前用户文章总数
-     *
-     * @return
-     */
-    @GetMapping("/user/count")
-    public Result<String> getUserArticle() {
-        try {
-            return ResultFactory.buildSuccessResult();
-        } catch (Exception e) {
-            throw new CustomException(e.getMessage());
-        }
-    }
-
-    /**
      * 用户评论
      *
      * @return
@@ -120,6 +103,22 @@ public class ArticleController extends BaseController {
             List<CategoryVO> list = categoryService.getList();
             return ResultFactory.buildSuccessResult(list);
         } catch (Exception e) {
+            throw this.exceptionHandle(e);
+        }
+    }
+
+    /**
+     * 获取同一类别的文章
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @GetMapping(value = "/category/{id}")
+    public Result<List<ArticleCategoryVO>> getCategoryIdList(@PathVariable Integer id) throws Exception {
+        try{
+            List<ArticleCategoryVO> list = articleService.getArticleListByCategory(id);
+            return ResultFactory.buildSuccessResult(list);
+        }catch (Exception e){
             throw this.exceptionHandle(e);
         }
     }

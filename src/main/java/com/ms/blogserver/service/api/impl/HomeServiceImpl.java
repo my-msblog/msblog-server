@@ -3,11 +3,11 @@ package com.ms.blogserver.service.api.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ms.blogserver.converter.bo.ArticleCardBoConverter;
+import com.ms.blogserver.converter.bo.ArticleBoConverter;
 import com.ms.blogserver.converter.vo.ArticleCardVoConverter;
 import com.ms.blogserver.converter.vo.TagVoConverter;
 import com.ms.blogserver.exception.ProgramException;
-import com.ms.blogserver.model.bo.ArticleCardBO;
+import com.ms.blogserver.model.bo.ArticleBO;
 import com.ms.blogserver.model.dto.BaseDTO;
 import com.ms.blogserver.model.entity.*;
 import com.ms.blogserver.model.vo.AnnouncementVO;
@@ -59,13 +59,13 @@ public class HomeServiceImpl implements HomeService {
         PageHelper.startPage(dto.getPage(), dto.getSize());
         List<Article> articleList = articleService.list(new LambdaQueryWrapper<Article>()
                 .orderByDesc(Article::getCreateTime));
-        List<ArticleCardBO> articleCardBOList = ArticleCardBoConverter.INSTANCE.toDataList(articleList);
-        articleCardBOList.forEach(articleCardBO -> {
-            String type = categoryService.getCategoryByCid(articleCardBO.getType());
-            articleCardBO.setTypeName(type);
+        List<ArticleBO> articleBOList = ArticleBoConverter.INSTANCE.toDataList(articleList);
+        articleBOList.forEach(articleBO -> {
+            String type = categoryService.getCategoryByCid(articleBO.getType());
+            articleBO.setTypeName(type);
             List<Long> tagIds = articleTagService
                     .list(new LambdaQueryWrapper<ArticleTag>()
-                            .eq(ArticleTag::getArticleId, articleCardBO.getId()))
+                            .eq(ArticleTag::getArticleId, articleBO.getId()))
                     .stream()
                     .map(ArticleTag::getTagId)
                     .collect(Collectors.toList());
@@ -74,9 +74,9 @@ public class HomeServiceImpl implements HomeService {
                 List<Tag> tagList = tagService.list(new LambdaQueryWrapper<Tag>().in(Tag::getId, tagIds));
                 tagVOList = TagVoConverter.INSTANCE.toDataList(tagList);
             }
-            articleCardBO.setTagVOList(tagVOList);
+            articleBO.setTagVOList(tagVOList);
         });
-        List<ArticleCardVO> resList = ArticleCardVoConverter.INSTANCE.toDataList(articleCardBOList);
+        List<ArticleCardVO> resList = ArticleCardVoConverter.INSTANCE.toDataList(articleBOList);
         PageInfo<ArticleCardVO> res = new PageInfo<>();
         PageInfoUtil.transform(new PageInfo<>(articleList), res);
         res.setList(resList);

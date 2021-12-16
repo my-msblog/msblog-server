@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Data
 @ToString
-public class ArticleCardBO implements Serializable {
+public class ArticleBO implements Serializable {
     private Long id;
     private String title;
     private String content;
