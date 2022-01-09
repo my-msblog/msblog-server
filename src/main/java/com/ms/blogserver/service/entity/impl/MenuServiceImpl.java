@@ -46,9 +46,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
                 .stream()
                 .map(PermissionMenu::getMid)
                 .collect(Collectors.toList());
-        List<Menu> menus = baseMapper.selectList(new QueryWrapper<Menu>().in("id",midList));
         // handleMenu(menus);
-        return menus;
+        return baseMapper.selectList(new QueryWrapper<Menu>().in("id",midList));
     }
 
     @Override
@@ -61,15 +60,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         List<Menu> menus = getMenusByCurrentUser(uid);
         handleMenu(menus);
         List<MenuVO> menuVOList = new ArrayList<>();
-        menus.forEach(menu -> {
-            menuVOList.add(new MenuVO(menu));
-        });
+        menus.forEach(menu -> menuVOList.add(new MenuVO(menu)));
         return menuVOList;
     }
 
     /**
      * 组装菜单
-     * @return
      */
     private void handleMenu(List<Menu> list){
         list.forEach(menu -> {
