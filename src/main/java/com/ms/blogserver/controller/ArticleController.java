@@ -12,6 +12,7 @@ import com.ms.blogserver.model.vo.*;
 import com.ms.blogserver.service.entity.ArticleService;
 import com.ms.blogserver.service.entity.CategoryService;
 import com.ms.blogserver.service.entity.CommentService;
+import com.ms.blogserver.service.entity.TagService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,9 @@ public class ArticleController extends BaseController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private TagService tagService;
 
     /**
      * 获取指定id文章
@@ -122,4 +126,15 @@ public class ArticleController extends BaseController {
             throw this.exceptionHandle(e);
         }
     }
+
+    @GetMapping(value = "/list/tag")
+    public Result<List<TagVO>> getTagList() throws Exception{
+        try{
+            List<TagVO> list = tagService.getTagList();
+            return ResultFactory.buildSuccessResult(list);
+        } catch (Exception e){
+           throw this.exceptionHandle(e);
+        }
+    }
+
 }

@@ -2,6 +2,7 @@ package com.ms.blogserver.service.entity;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ms.blogserver.model.entity.Tag;
+import com.ms.blogserver.model.vo.TagVO;
 
 import java.util.List;
 
@@ -11,18 +12,11 @@ import java.util.List;
  * @time: 2021/6/11
  */
 public interface TagService extends IService<Tag> {
-    /**
-     * 获取所有文章标签
-     *
-     * @return
-     */
-    List<Tag> getAllTag();
 
     /**
-     * 根据标签id获取tag
+     * 获取标签列表
      *
-     * @param id
      * @return
      */
-    Tag getTagById(Long id);
+    List<TagVO> getTagList();
 }
