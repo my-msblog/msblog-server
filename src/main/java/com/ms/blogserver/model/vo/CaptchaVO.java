@@ -1,5 +1,6 @@
 package com.ms.blogserver.model.vo;
 
+import com.ms.blogserver.core.base.BaseVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
@@ -12,7 +13,7 @@ import lombok.ToString;
 @Data
 @ToString
 @AllArgsConstructor
-public class CaptchaVO {
+public class CaptchaVO implements BaseVO {
     private String key;
     private String img;
 

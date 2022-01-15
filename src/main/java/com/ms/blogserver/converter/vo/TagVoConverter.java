@@ -1,9 +1,8 @@
 package com.ms.blogserver.converter.vo;
 
-import com.ms.blogserver.converter.Converter;
+import com.ms.blogserver.core.base.Converter;
 import com.ms.blogserver.model.entity.Tag;
 import com.ms.blogserver.model.vo.TagVO;
-import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 /**

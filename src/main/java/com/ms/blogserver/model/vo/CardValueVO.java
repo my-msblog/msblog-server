@@ -1,6 +1,7 @@
 package com.ms.blogserver.model.vo;
 
-import com.ms.blogserver.constant.contexts.DigitalContexts;
+import com.ms.blogserver.core.base.BaseVO;
+import com.ms.blogserver.core.constant.contexts.DigitalContexts;
 import lombok.Data;
 import lombok.ToString;
 
@@ -13,7 +14,7 @@ import java.util.Objects;
  */
 @Data
 @ToString
-public class CardValueVO {
+public class CardValueVO implements BaseVO {
     private Integer visit;
     private Integer user;
     private Integer articles;

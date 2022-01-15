@@ -1,4 +1,4 @@
-package com.ms.blogserver.constant.result;
+package com.ms.blogserver.core.constant.result;
 
 import lombok.Data;
 import lombok.ToString;
@@ -20,5 +20,9 @@ public class Result<T> {
         this.code = code;
         this.msg = msg;
         this.data = data;
+    }
+
+    public Result(){
+
     }
 }

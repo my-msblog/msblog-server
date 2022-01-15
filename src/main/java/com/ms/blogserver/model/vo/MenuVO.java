@@ -1,6 +1,7 @@
 package com.ms.blogserver.model.vo;
 
 import com.ms.blogserver.converter.vo.MenuVoConverter;
+import com.ms.blogserver.core.base.BaseVO;
 import com.ms.blogserver.model.entity.Menu;
 import lombok.Data;
 import lombok.ToString;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 @Data
 @ToString
-public class MenuVO {
+public class MenuVO implements BaseVO {
     private String path;
     private String nameZh;
     private String component;

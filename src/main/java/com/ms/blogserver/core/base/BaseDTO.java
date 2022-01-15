@@ -1,6 +1,6 @@
-package com.ms.blogserver.model.dto;
+package com.ms.blogserver.core.base;
 
-import com.ms.blogserver.constant.contexts.DigitalContexts;
+import com.ms.blogserver.core.constant.contexts.DigitalContexts;
 import lombok.ToString;
 
 import java.io.Serializable;

@@ -1,6 +1,6 @@
-package com.ms.blogserver.constant.controller;
+package com.ms.blogserver.core.controller;
 
-import com.ms.blogserver.constant.result.ResultString;
+import com.ms.blogserver.core.constant.result.ResultString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;

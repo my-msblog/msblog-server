@@ -1,7 +1,7 @@
 package com.ms.blogserver.service.entity;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ms.blogserver.exception.CustomException;
+import com.ms.blogserver.core.exception.CustomException;
 import com.ms.blogserver.model.entity.UserRole;
 
 /**

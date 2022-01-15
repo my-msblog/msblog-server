@@ -1,4 +1,4 @@
-package com.ms.blogserver.converter;
+package com.ms.blogserver.core.base;
 
 import org.mapstruct.BeanMapping;
 import org.mapstruct.MappingTarget;

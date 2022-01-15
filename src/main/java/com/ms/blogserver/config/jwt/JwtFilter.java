@@ -1,12 +1,7 @@
 package com.ms.blogserver.config.jwt;
 
-import com.alibaba.fastjson.JSONObject;
 import com.auth0.jwt.exceptions.TokenExpiredException;
-import com.ms.blogserver.constant.contexts.LoginContexts;
-import com.ms.blogserver.constant.contexts.UrlContexts;
-import com.ms.blogserver.constant.result.ResultCode;
-import com.ms.blogserver.constant.result.ResultFactory;
-import com.ms.blogserver.constant.result.ResultString;
+import com.ms.blogserver.core.constant.contexts.UrlContexts;
 import com.ms.blogserver.utils.RedisUtils;
 import com.ms.blogserver.utils.TokenUtils;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -22,8 +17,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 /**

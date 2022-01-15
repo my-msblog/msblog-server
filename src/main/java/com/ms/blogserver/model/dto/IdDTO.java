@@ -2,6 +2,7 @@ package com.ms.blogserver.model.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  * @time: 2021/6/11
  */
 @Data
-public class IdDTO {
+public class IdDTO implements Serializable {
     private Long id;
     private List<Long> idList;
 }

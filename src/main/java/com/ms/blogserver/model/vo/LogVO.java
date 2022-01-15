@@ -1,5 +1,6 @@
 package com.ms.blogserver.model.vo;
 
+import com.ms.blogserver.core.base.BaseVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,7 +11,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class LogVO {
+public class LogVO implements BaseVO {
     private String fileName;
     private String time;
     private String context;

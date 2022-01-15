@@ -1,4 +1,4 @@
-package com.ms.blogserver.constant.result;
+package com.ms.blogserver.core.constant.result;
 
 /**
  * @description:

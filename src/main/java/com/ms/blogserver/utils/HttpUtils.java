@@ -4,7 +4,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import com.ms.blogserver.constant.contexts.UrlContexts;
+import com.ms.blogserver.core.constant.contexts.UrlContexts;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;

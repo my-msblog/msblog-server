@@ -1,8 +1,8 @@
 package com.ms.blogserver.service.api.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.ms.blogserver.constant.contexts.ErrorContexts;
-import com.ms.blogserver.exception.CustomException;
+import com.ms.blogserver.core.constant.contexts.ErrorContexts;
+import com.ms.blogserver.core.exception.CustomException;
 import com.ms.blogserver.model.entity.User;
 import com.ms.blogserver.service.api.UserOperationService;
 import com.ms.blogserver.service.entity.UserService;

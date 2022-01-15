@@ -1,7 +1,7 @@
 package com.ms.blogserver.utils;
 
-import com.ms.blogserver.exception.ProgramException;
-import com.ms.blogserver.constant.contexts.ErrorContexts;
+import com.ms.blogserver.core.exception.ProgramException;
+import com.ms.blogserver.core.constant.contexts.ErrorContexts;
 import com.ms.blogserver.model.bo.FileSimpleBO;
 import lombok.extern.slf4j.Slf4j;
 

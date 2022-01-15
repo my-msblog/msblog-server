@@ -1,5 +1,6 @@
 package com.ms.blogserver.model.dto;
 
+import com.ms.blogserver.core.base.BaseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -12,7 +13,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ToString
-public class UserDTO extends BaseDTO{
+public class UserDTO extends BaseDTO {
     private Long id;
     private String username;
     private String pwd;

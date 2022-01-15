@@ -1,6 +1,7 @@
 package com.ms.blogserver.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ms.blogserver.core.base.BaseVO;
 import lombok.Data;
 import lombok.ToString;
 
@@ -13,7 +14,7 @@ import java.util.Date;
  */
 @Data
 @ToString
-public class AnnouncementVO {
+public class AnnouncementVO implements BaseVO {
     private String announcement;
     private String user;
     @JsonFormat(pattern = "yyyy-MM-dd")

@@ -1,8 +1,8 @@
 package com.ms.blogserver.service.api.impl;
 
-import com.ms.blogserver.constant.contexts.DigitalContexts;
-import com.ms.blogserver.constant.contexts.VerifyContexts;
-import com.ms.blogserver.exception.CustomException;
+import com.ms.blogserver.core.constant.contexts.DigitalContexts;
+import com.ms.blogserver.core.constant.contexts.VerifyContexts;
+import com.ms.blogserver.core.exception.CustomException;
 import com.ms.blogserver.model.vo.CaptchaVO;
 import com.ms.blogserver.service.api.CaptchaService;
 import com.ms.blogserver.utils.RedisUtils;

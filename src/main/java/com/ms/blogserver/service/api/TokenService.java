@@ -1,6 +1,6 @@
 package com.ms.blogserver.service.api;
 
-import com.ms.blogserver.exception.CustomException;
+import com.ms.blogserver.core.exception.CustomException;
 import com.ms.blogserver.model.entity.User;
 import com.ms.blogserver.model.vo.UserVO;
 

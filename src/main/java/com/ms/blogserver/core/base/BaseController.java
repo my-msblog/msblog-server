@@ -1,8 +1,8 @@
-package com.ms.blogserver.constant.controller;
+package com.ms.blogserver.core.base;
 
-import com.ms.blogserver.constant.contexts.WebContexts;
-import com.ms.blogserver.exception.CustomException;
-import com.ms.blogserver.exception.ProgramException;
+import com.ms.blogserver.core.constant.contexts.WebContexts;
+import com.ms.blogserver.core.exception.CustomException;
+import com.ms.blogserver.core.exception.ProgramException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

@@ -1,6 +1,7 @@
 package com.ms.blogserver.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ms.blogserver.core.base.BaseVO;
 import lombok.Data;
 import lombok.ToString;
 
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @ToString
-public class UserVO {
+public class UserVO implements BaseVO {
     private Long id ;
     private String username;
     private String phone;

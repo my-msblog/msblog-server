@@ -1,9 +1,9 @@
 package com.ms.blogserver.controller;
 
-import com.ms.blogserver.constant.contexts.RoleContexts;
-import com.ms.blogserver.constant.controller.BaseController;
-import com.ms.blogserver.constant.result.Result;
-import com.ms.blogserver.constant.result.ResultFactory;
+import com.ms.blogserver.core.constant.contexts.RoleContexts;
+import com.ms.blogserver.core.base.BaseController;
+import com.ms.blogserver.core.constant.result.Result;
+import com.ms.blogserver.core.constant.result.ResultFactory;
 import com.ms.blogserver.model.vo.MenuVO;
 import com.ms.blogserver.service.api.AccountService;
 import org.apache.shiro.authz.annotation.Logical;

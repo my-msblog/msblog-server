@@ -1,4 +1,4 @@
-package com.ms.blogserver.constant.contexts;
+package com.ms.blogserver.core.constant.contexts;
 
 /**
  * @description: WEB 常量参数

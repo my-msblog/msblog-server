@@ -1,5 +1,6 @@
 package com.ms.blogserver.model.vo;
 
+import com.ms.blogserver.core.base.BaseVO;
 import lombok.Data;
 import lombok.ToString;
 
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @Data
 @ToString
-public class CommentVO {
+public class CommentVO implements BaseVO {
     private Long id;
     private String content;
     private String commenter;

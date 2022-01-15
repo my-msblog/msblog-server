@@ -1,8 +1,8 @@
 package com.ms.blogserver.service.entity.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ms.blogserver.constant.contexts.ErrorContexts;
-import com.ms.blogserver.exception.ProgramException;
+import com.ms.blogserver.core.constant.contexts.ErrorContexts;
+import com.ms.blogserver.core.exception.ProgramException;
 import com.ms.blogserver.model.entity.Role;
 import com.ms.blogserver.mapper.RoleMapper;
 import com.ms.blogserver.service.entity.RoleService;

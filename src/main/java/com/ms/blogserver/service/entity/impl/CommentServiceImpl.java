@@ -3,7 +3,7 @@ package com.ms.blogserver.service.entity.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageInfo;
-import com.ms.blogserver.constant.contexts.DigitalContexts;
+import com.ms.blogserver.core.constant.contexts.DigitalContexts;
 import com.ms.blogserver.converter.bo.CommentBoConverter;
 import com.ms.blogserver.converter.vo.CommentVoConverter;
 import com.ms.blogserver.model.entity.Comment;

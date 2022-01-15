@@ -3,6 +3,8 @@ package com.ms.blogserver.model.dto;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * @description:
  * @author: zhh
@@ -10,7 +12,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class UserTableChangeDTO {
+public class UserTableChangeDTO implements Serializable {
     private Long id;
     private String username;
     private String pwd;

@@ -1,9 +1,9 @@
 package com.ms.blogserver.controller;
 
-import com.ms.blogserver.constant.contexts.LoginContexts;
-import com.ms.blogserver.constant.controller.BaseController;
-import com.ms.blogserver.constant.result.Result;
-import com.ms.blogserver.constant.result.ResultFactory;
+import com.ms.blogserver.core.constant.contexts.LoginContexts;
+import com.ms.blogserver.core.base.BaseController;
+import com.ms.blogserver.core.constant.result.Result;
+import com.ms.blogserver.core.constant.result.ResultFactory;
 import com.ms.blogserver.model.dto.LoginDTO;
 import com.ms.blogserver.model.entity.User;
 import com.ms.blogserver.model.vo.UserVO;

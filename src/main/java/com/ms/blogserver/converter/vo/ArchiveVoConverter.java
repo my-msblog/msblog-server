@@ -1,6 +1,6 @@
 package com.ms.blogserver.converter.vo;
 
-import com.ms.blogserver.converter.Converter;
+import com.ms.blogserver.core.base.Converter;
 import com.ms.blogserver.model.entity.Article;
 import com.ms.blogserver.model.vo.ArchiveVO;
 import org.mapstruct.Mapping;

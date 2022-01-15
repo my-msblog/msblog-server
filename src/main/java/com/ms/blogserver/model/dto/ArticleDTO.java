@@ -1,5 +1,6 @@
 package com.ms.blogserver.model.dto;
 
+import com.ms.blogserver.core.base.BaseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -14,7 +15,7 @@ import java.time.LocalTime;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ToString
-public class ArticleDTO extends BaseDTO{
+public class ArticleDTO extends BaseDTO {
     private Long id;
     private Integer type;
     private LocalTime time;

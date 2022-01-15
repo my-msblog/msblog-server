@@ -1,5 +1,6 @@
 package com.ms.blogserver.model.vo;
 
+import com.ms.blogserver.core.base.BaseVO;
 import lombok.Data;
 import lombok.ToString;
 
@@ -10,7 +11,7 @@ import lombok.ToString;
  */
 @ToString
 @Data
-public class UserProfileVO {
+public class UserProfileVO implements BaseVO {
     private Long id;
     private String username;
     private Integer sex;

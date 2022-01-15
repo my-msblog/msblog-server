@@ -1,7 +1,7 @@
 package com.ms.blogserver.utils;
 
 
-import com.ms.blogserver.exception.ProgramException;
+import com.ms.blogserver.core.exception.ProgramException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;

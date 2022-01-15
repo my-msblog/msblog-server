@@ -1,5 +1,6 @@
 package com.ms.blogserver.model.vo;
 
+import com.ms.blogserver.core.base.BaseVO;
 import lombok.Data;
 import lombok.ToString;
 
@@ -10,7 +11,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class CategoryVO {
+public class CategoryVO implements BaseVO {
     private Integer categoryId;
     private String category;
     private Integer count;
