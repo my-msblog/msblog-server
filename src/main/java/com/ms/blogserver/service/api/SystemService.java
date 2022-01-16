@@ -17,7 +17,7 @@ public interface SystemService {
      * @param requestMappingHandlerMapping
      * @return
      */
-    List<RequestItemVO> getAllUri(RequestMappingHandlerMapping requestMappingHandlerMapping) throws Exception;
+    List<RequestItemVO> getAllUrl(RequestMappingHandlerMapping requestMappingHandlerMapping) throws Exception;
 
     /**
      * vo类装json

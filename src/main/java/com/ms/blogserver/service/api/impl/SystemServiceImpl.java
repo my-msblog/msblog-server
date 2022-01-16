@@ -5,6 +5,7 @@ import com.ms.blogserver.core.base.BaseVO;
 import com.ms.blogserver.core.exception.ProgramException;
 import com.ms.blogserver.model.vo.RequestItemVO;
 import com.ms.blogserver.service.api.SystemService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.core.ResolvableType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.method.HandlerMethod;
@@ -28,7 +29,7 @@ public class SystemServiceImpl implements SystemService {
     private static final String LANG = "lang";
 
     @Override
-    public List<RequestItemVO> getAllUri(RequestMappingHandlerMapping requestMappingHandlerMapping) throws Exception {
+    public List<RequestItemVO> getAllUrl(RequestMappingHandlerMapping requestMappingHandlerMapping) throws Exception {
         List<RequestItemVO> requestItemVOList = new ArrayList<>();
         Map<RequestMappingInfo, HandlerMethod> handlerMethods = requestMappingHandlerMapping.getHandlerMethods();
         for (Map.Entry<RequestMappingInfo, HandlerMethod> requestMappingInfoHandlerMethodEntry
@@ -43,22 +44,25 @@ public class SystemServiceImpl implements SystemService {
             String controllerName = mappingInfoValue.getBeanType().toString();
             // 过滤api接口
             if ("class org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController"
-                    .equals(controllerName)) {
-                continue;
-            }
-            if (controllerName.contains("swagger") || controllerName.contains("core")) {
+                    .equals(controllerName) || controllerName.contains("swagger")
+                    || controllerName.contains("core")) {
                 continue;
             }
             String requestMethodName = mappingInfoValue.getMethod().getName();
             Class<?>[] methodParamTypes = mappingInfoValue.getMethod().getParameterTypes();
             Method method = mappingInfoValue.getMethod();
+            ApiOperation apiOperation = method.getAnnotation(ApiOperation.class);
+            String annotationValue = Objects.isNull(apiOperation) ? "" : apiOperation.value();
             ResolvableType resolvableType = ResolvableType.forMethodReturnType(method);
             Type type = resolvableType.getType();
             String returnName = type.getTypeName();
             Map<String, Object> returnValueMap = new HashMap<>(12);
             genericClass(type, returnValueMap);
-            RequestItemVO item = new RequestItemVO(requestUrl, requestType, controllerName,
-                    requestMethodName, methodParamTypes, returnValueMap, returnName);
+            RequestItemVO item = RequestItemVO.builder().controllerName(controllerName)
+                    .methodName(requestMethodName).requestUrl(requestUrl).requestType(requestType)
+                    .annotationValue(annotationValue).methodParmaTypes(methodParamTypes).returnName(returnName)
+                    .returnValueMap(returnValueMap)
+                    .build();
             requestItemVOList.add(item);
         }
         return requestItemVOList;
@@ -76,7 +80,7 @@ public class SystemServiceImpl implements SystemService {
             } else if (type.equals(List.class)) {
                 genericVoTypes(result, field, listKey);
             } else if (type.equals(PageInfo.class)) {
-                Map<String, Object> pageInfoMap = new HashMap<String, Object>(12);
+                Map<String, Object> pageInfoMap = new HashMap<>(12);
                 genericVoTypes(pageInfoMap,field,listKey);
                 result.put(type.getTypeName(), pageInfoMap);
             } else {
