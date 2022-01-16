@@ -79,7 +79,7 @@ public class ArticleController extends BaseController {
      * @return
      */
     @PostMapping(value = "/user/comment")
-    public Result getUserComment() {
+    public Result<Object> getUserComment() {
         return null;
     }
 

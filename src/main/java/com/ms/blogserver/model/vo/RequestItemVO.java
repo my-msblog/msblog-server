@@ -36,18 +36,24 @@ public class RequestItemVO implements BaseVO {
      */
     public Class<?>[] methodParmaTypes;
     /**
+     *  result name
+     */
+    public String returnName;
+    /**
      * vo参数
      */
     public Map<String, Object> returnValueMap;
 
     public RequestItemVO(String requestUrl, String requestType,
                          String controllerName, String requestMethodName,
-                         Class<?>[] methodParmaTypes, Map<String, Object> returnValueMap){
+                         Class<?>[] methodParmaTypes, Map<String, Object> returnValueMap,
+                         String returnName){
         this.requestUrl = requestUrl;
         this.requestType = requestType;
         this.controllerName = controllerName;
         this.methodName = requestMethodName;
         this.methodParmaTypes = methodParmaTypes;
         this.returnValueMap = returnValueMap;
+        this.returnName = returnName;
     }
 }

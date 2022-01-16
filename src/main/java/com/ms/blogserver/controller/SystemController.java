@@ -58,7 +58,7 @@ public class SystemController {
     }
 
     @GetMapping("/sys/test")
-    public Result test()  {
+    public Result<Object> test()  {
         Map<String, Object> json1 = systemService.classToJson(CommentVO.class, true );
 
         Map<String, Object> json0 = systemService.classToJson(MenuVO.class, true);

@@ -1,7 +1,9 @@
 package com.ms.blogserver;
 
 
+import com.ms.blogserver.api.config.ServerConfig;
 import com.ms.blogserver.config.LogInterceptorAdapter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.DispatcherServlet;
  * @time: 2021/6/11
  */
 @SpringBootApplication
+@Slf4j
 public class MsblogServerApplication extends SpringBootServletInitializer {
 
     @Override
@@ -27,6 +30,7 @@ public class MsblogServerApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
         try{
             SpringApplication.run(MsblogServerApplication.class, args);
+            log.info("http://localhost:{}/swagger-ui/index.html",ServerConfig.Api.getPort());
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -26,7 +26,7 @@ public class BoardController extends BaseController {
     private BoardService boardService;
 
     @GetMapping("/card/value")
-    public Result getValue(){
+    public Result<StatisticsVO> getValue(){
         try {
             StatisticsVO res = boardService.getValue();
             return ResultFactory.buildSuccessResult(res);
