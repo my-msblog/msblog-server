@@ -33,7 +33,8 @@ public class AccountController extends BaseController {
     private AccountService accountService;
 
     /**
-     *  管理员修改用户接口
+     * 管理员修改用户接口
+     *
      * @param dto
      * @return
      * @throws Exception
@@ -44,26 +45,29 @@ public class AccountController extends BaseController {
         try {
             accountService.adminChangeUser(dto);
             return ResultFactory.buildSuccessResult();
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw exceptionHandle(e);
         }
     }
 
     /**
      * 管理员添加用户接口
+     *
      * @param dto
      * @return
      * @throws Exception
      */
+    @ApiOperation("管理员添加用户接口")
     @PostMapping("/admin/add")
-    public Result<String> adminAddUser(@RequestBody UserTableChangeDTO dto) throws Exception{
+    public Result<String> adminAddUser(@RequestBody UserTableChangeDTO dto) throws Exception {
         try {
             accountService.adminUserAdd(dto);
             return ResultFactory.buildSuccessResult(LoginContexts.REGISTER_SUCCESS);
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw exceptionHandle(e);
         }
     }
+
     /**
      * 用户列表分页
      *
@@ -71,6 +75,7 @@ public class AccountController extends BaseController {
      * @return
      * @throws Exception
      */
+    @ApiOperation(value = "用户列表分页")
     @PostMapping(value = "/user/page")
     @RequiresPermissions(logical = Logical.AND, value = {PermissionContexts.USERS_MANAGEMENT})
     public Result<PageInfo<UserProfileVO>> getByPage(@RequestBody BaseDTO dto) throws Exception {
@@ -81,12 +86,14 @@ public class AccountController extends BaseController {
             throw exceptionHandle(e);
         }
     }
+
+    @ApiOperation(value = "修改用户状态")
     @PostMapping("/admin/status/change")
-    public Result<String> changeStatus(@RequestBody StatusDTO dto) throws Exception{
-        try{
+    public Result<String> changeStatus(@RequestBody StatusDTO dto) throws Exception {
+        try {
             accountService.userStatusChange(dto);
             return ResultFactory.buildSuccessResult();
-        } catch (Exception e){
+        } catch (Exception e) {
             throw exceptionHandle(e);
         }
     }

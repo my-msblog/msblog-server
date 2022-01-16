@@ -13,8 +13,9 @@ import java.util.Map;
  * @time: 2022/1/15
  */
 @Data
-@ToString
 @Builder
+
+@ToString
 public class RequestItemVO implements BaseVO {
 
     /**
@@ -52,16 +53,16 @@ public class RequestItemVO implements BaseVO {
 
     public RequestItemVO(){}
 
-    public RequestItemVO(String requestUrl, String requestType, String controllerName,
-                         String requestMethodName, String annotationValue, Class<?>[] methodParmaTypes,
-                         Map<String, Object> returnValueMap, String returnName){
-        this.requestUrl = requestUrl;
-        this.requestType = requestType;
+    public RequestItemVO(String controllerName, String methodName, String requestType,
+                         String requestUrl, String annotationValue, Class<?>[] methodParmaTypes,
+                         String returnName, Map<String, Object> returnValueMap) {
         this.controllerName = controllerName;
-        this.methodName = requestMethodName;
-        this.methodParmaTypes = methodParmaTypes;
-        this.returnValueMap = returnValueMap;
-        this.returnName = returnName;
+        this.methodName = methodName;
+        this.requestType = requestType;
+        this.requestUrl = requestUrl;
         this.annotationValue = annotationValue;
+        this.methodParmaTypes = methodParmaTypes;
+        this.returnName = returnName;
+        this.returnValueMap = returnValueMap;
     }
 }

@@ -8,6 +8,7 @@ import com.ms.blogserver.model.dto.PhoneDTO;
 import com.ms.blogserver.model.vo.CaptchaVO;
 import com.ms.blogserver.service.api.CaptchaService;
 import com.ms.blogserver.service.api.TokenService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class VerifyController {
      * @param dto
      * @return
      */
+    @ApiOperation(value = "发送手机验证码")
     @PostMapping(value = "/sms")
     public Result<String> sendSmsCode(@RequestBody PhoneDTO dto){
         try {
@@ -50,6 +52,7 @@ public class VerifyController {
      *
      * @return
      */
+    @ApiOperation(value = "获取算式验证码")
     @GetMapping(value = "/captcha/arithmetic")
     public Result<CaptchaVO> arithmetic(){
         try {
@@ -65,6 +68,7 @@ public class VerifyController {
      *
      * @return
      */
+    @ApiOperation(value = "获取验证码（字母+数字）")
     @GetMapping(value = "/captcha/spec")
     public Result<CaptchaVO> spec(){
         try {

@@ -6,6 +6,7 @@ package com.ms.blogserver.core.constant.contexts;
  * @time: 2021/8/30
  */
 public interface WebContexts {
+
     String X_FORWARDED_FOR = "x-forwarded-for";
 
 }

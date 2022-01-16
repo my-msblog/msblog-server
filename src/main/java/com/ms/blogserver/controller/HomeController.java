@@ -9,6 +9,7 @@ import com.ms.blogserver.model.vo.AnnouncementVO;
 import com.ms.blogserver.model.vo.ArticleCardVO;
 import com.ms.blogserver.model.vo.HomeCardVO;
 import com.ms.blogserver.service.api.HomeService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,7 @@ public class HomeController extends BaseController {
     @Autowired
     private HomeService homeService;
 
+    @ApiOperation(value="文章分页")
     @PostMapping("/article/page")
     public Result<PageInfo<ArticleCardVO>> getPages(@RequestBody BaseDTO dto) throws Exception {
         try {
@@ -35,7 +37,7 @@ public class HomeController extends BaseController {
             throw exceptionHandle(e);
         }
     }
-
+    @ApiOperation(value = "主页个人卡片信息统计")
     @GetMapping("/info")
     public Result<HomeCardVO> getMainInfo() throws Exception {
         try {
@@ -46,6 +48,7 @@ public class HomeController extends BaseController {
         }
     }
 
+    @ApiOperation(value = "七天内最新公告接口")
     @GetMapping("/get/announcement")
     public Result<AnnouncementVO> getAnnouncement() throws Exception {
         try {

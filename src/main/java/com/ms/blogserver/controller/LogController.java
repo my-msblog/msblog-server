@@ -8,6 +8,7 @@ import com.ms.blogserver.core.base.BaseDTO;
 import com.ms.blogserver.model.vo.FileVO;
 import com.ms.blogserver.model.vo.LogVO;
 import com.ms.blogserver.service.api.FileService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ public class LogController extends BaseController {
      * @return
      * @throws Exception
      */
+    @ApiOperation("所有日志文件列表")
     @PostMapping(value = "/page")
     public Result<PageInfo<FileVO>> getAllLog(@RequestBody BaseDTO dto) throws Exception {
         try {
@@ -48,6 +50,7 @@ public class LogController extends BaseController {
      * @return
      * @throws Exception
      */
+    @ApiOperation("获取日志文件内容")
     @PostMapping(value = "/get/context")
     public Result<LogVO> getLog(@RequestBody String fileName) throws Exception {
         try {
@@ -64,6 +67,7 @@ public class LogController extends BaseController {
      * @return
      * @throws Exception
      */
+    @ApiOperation("删除文件指定文件")
     @PostMapping(value = "/delete")
     public Result<String> deleteLog(@RequestBody String fileName) throws Exception {
         try {

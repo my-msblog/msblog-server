@@ -12,6 +12,7 @@ import com.ms.blogserver.model.vo.UserVO;
 import com.ms.blogserver.service.api.TokenService;
 import com.ms.blogserver.service.api.UserOperationService;
 import com.ms.blogserver.service.entity.UserService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,6 +47,7 @@ public class UserController extends BaseController {
      * @param dto 用户信息
      * @return
      */
+    @ApiOperation(value = "新增用户")
     @PostMapping(value = "/register")
     public Result<String> userAdd(@RequestBody UserTableChangeDTO dto) throws Exception{
         try {
@@ -67,6 +69,7 @@ public class UserController extends BaseController {
      * @return
      * @throws Exception
      */
+    @ApiOperation(value = "修改用户信息")
     @PostMapping(value = "/update")
     public Result<UserVO> userUpdate(@RequestBody UserTableChangeDTO dto) throws Exception {
         try {
@@ -86,6 +89,7 @@ public class UserController extends BaseController {
      * @return
      * @throws CustomException
      */
+    @ApiOperation(value = "删除用户")
     @PostMapping(value = "/remove")
     public Result<String> userDelete(@RequestBody IdDTO dto) throws CustomException {
         if (userService.removeById(dto.getId())){
@@ -94,6 +98,7 @@ public class UserController extends BaseController {
         throw new CustomException("There is no data with ID "+ dto.getId()+" in the database");
 
     }
+    @ApiOperation(value = "批量删除用户")
     @PostMapping("/remove/list")
     public Result<String> userDeleteList(@RequestBody IdDTO dto) throws Exception{
         try {
@@ -103,7 +108,8 @@ public class UserController extends BaseController {
             throw exceptionHandle(e);
         }
     }
-
+    @ApiOperation(value = "接口遗弃")
+    @Deprecated
     @PostMapping(value = "/delete")
     public Result<String> phyDelete() throws Exception {
         try {

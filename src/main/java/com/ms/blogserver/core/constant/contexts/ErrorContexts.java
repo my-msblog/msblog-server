@@ -23,6 +23,8 @@ public interface ErrorContexts {
 
     String INSTANCE_EXISTS = "实例已存在，无法初始化！";
 
+    String INTERFACE_WIP = "接口开发中";
+
     // database error
 
     String DATABASE_INNER_TABLE = "系统内部异常：数据库链表关系异常，请联系管理员";

@@ -6,6 +6,7 @@ import com.ms.blogserver.core.constant.result.Result;
 import com.ms.blogserver.core.constant.result.ResultFactory;
 import com.ms.blogserver.model.vo.MenuVO;
 import com.ms.blogserver.service.api.AccountService;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class UserInfoController extends BaseController {
      * @return
      * @throws Exception
      */
+    @ApiOperation(value = "用户权限菜单")
     @PostMapping(value = "/menu")
     @RequiresRoles(value = {RoleContexts.SYSTEM_ADMIN,RoleContexts.CONTENT_MANAGER},logical = Logical.OR)
     public Result<List<MenuVO>> getMenu() throws Exception {
@@ -46,6 +48,7 @@ public class UserInfoController extends BaseController {
             throw exceptionHandle(e);
         }
     }
+    @ApiOperation(value = "用户角色")
     @GetMapping("/role")
     public Result<String> getUserRole() throws Exception {
         try {

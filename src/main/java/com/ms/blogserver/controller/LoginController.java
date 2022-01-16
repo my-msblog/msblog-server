@@ -11,6 +11,7 @@ import com.ms.blogserver.service.api.CaptchaService;
 import com.ms.blogserver.service.api.LoginService;
 import com.ms.blogserver.service.api.TokenService;
 import com.ms.blogserver.utils.SecretUtils;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,7 @@ public class LoginController extends BaseController {
      *
      * @return
      */
+    @ApiOperation("验证是否登录")
     @PostMapping(value = "api/authentication")
     public Result<String> authentication() throws Exception {
         try {
@@ -61,6 +63,7 @@ public class LoginController extends BaseController {
      * @return
      * @throws Exception
      */
+    @ApiOperation(value = "账号密码登录")
     @PostMapping(value = "/login")
     public Result<UserVO> userLogin(@RequestBody LoginDTO loginDTO, HttpServletResponse response) throws Exception {
         try {
@@ -85,6 +88,7 @@ public class LoginController extends BaseController {
      *
      * @return
      */
+    @ApiOperation(value = "登出")
     @GetMapping(value = "/logout")
     public Result<String> logout() throws Exception {
         try {

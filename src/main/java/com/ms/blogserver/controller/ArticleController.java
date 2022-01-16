@@ -2,6 +2,7 @@ package com.ms.blogserver.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.core.base.BaseController;
+import com.ms.blogserver.core.constant.contexts.ErrorContexts;
 import com.ms.blogserver.core.constant.result.Result;
 import com.ms.blogserver.core.constant.result.ResultFactory;
 import com.ms.blogserver.core.base.BaseDTO;
@@ -11,6 +12,7 @@ import com.ms.blogserver.service.entity.ArticleService;
 import com.ms.blogserver.service.entity.CategoryService;
 import com.ms.blogserver.service.entity.CommentService;
 import com.ms.blogserver.service.entity.TagService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +48,7 @@ public class ArticleController extends BaseController {
      * @return
      * @throws Exception
      */
+    @ApiOperation(value="获取指定id文章")
     @PostMapping(value = "/get")
     public Result<ArticleVO> getArticle(@RequestBody Long id) throws Exception {
         try {
@@ -63,6 +66,7 @@ public class ArticleController extends BaseController {
      * @return
      * @throws Exception
      */
+    @ApiOperation(value = "获取文章评论")
     @PostMapping(value = "/comment")
     public Result<PageInfo<CommentVO>> getComment(@RequestBody GetCommentDTO dto) throws Exception {
         try {
@@ -78,6 +82,7 @@ public class ArticleController extends BaseController {
      *
      * @return
      */
+    @ApiOperation(value = ErrorContexts.INTERFACE_WIP)
     @PostMapping(value = "/user/comment")
     public Result<Object> getUserComment() {
         return null;
@@ -89,6 +94,7 @@ public class ArticleController extends BaseController {
      * @return
      * @throws Exception
      */
+    @ApiOperation("日期分页")
     @PostMapping(value = "/date/page")
     public Result<PageInfo<ArchiveVO>> getByDate(@RequestBody BaseDTO dto) throws Exception {
         try {
@@ -99,6 +105,7 @@ public class ArticleController extends BaseController {
         }
     }
 
+    @ApiOperation(value="文章分类列表")
     @GetMapping(value = "/list/category")
     public Result<List<CategoryVO>> getCategory() throws Exception {
         try {
@@ -115,6 +122,7 @@ public class ArticleController extends BaseController {
      * @return
      * @throws Exception
      */
+    @ApiOperation("获取同一类别的文章")
     @GetMapping(value = "/category/{id}")
     public Result<List<ArticleCategoryVO>> getCategoryIdList(@PathVariable Integer id) throws Exception {
         try{
@@ -130,6 +138,7 @@ public class ArticleController extends BaseController {
      * @return
      * @throws Exception
      */
+    @ApiOperation("标签列表")
     @GetMapping(value = "/list/tag")
     public Result<List<TagVO>> getTagList() throws Exception{
         try{

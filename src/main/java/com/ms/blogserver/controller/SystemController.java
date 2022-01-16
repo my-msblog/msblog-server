@@ -7,6 +7,7 @@ import com.ms.blogserver.core.constant.result.ResultFactory;
 import com.ms.blogserver.core.exception.ProgramException;
 import com.ms.blogserver.model.vo.*;
 import com.ms.blogserver.service.api.SystemService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,11 +34,13 @@ public class SystemController {
     @Autowired
     private SystemService systemService;
 
+    @ApiOperation(value="捕获错误")
     @RequestMapping("/filter/error")
     public Result<String> handleError(){
         return ResultFactory.buildResult(ResultCode.UNAUTHORIZED, LoginContexts.TOKEN_ERROR);
     }
 
+    @ApiOperation(value="Api接口文档")
     @GetMapping("/sys/all/interface")
     public Result<List<RequestItemVO>> getAllInterface(){
         try {

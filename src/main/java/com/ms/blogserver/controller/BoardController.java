@@ -6,6 +6,7 @@ import com.ms.blogserver.core.constant.result.ResultFactory;
 import com.ms.blogserver.core.exception.CustomException;
 import com.ms.blogserver.model.vo.StatisticsVO;
 import com.ms.blogserver.service.api.BoardService;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ public class BoardController extends BaseController {
     @Autowired
     private BoardService boardService;
 
+    @ApiOperation(value="后台主页中顶部卡片值的接口")
     @GetMapping("/card/value")
     public Result<StatisticsVO> getValue(){
         try {
