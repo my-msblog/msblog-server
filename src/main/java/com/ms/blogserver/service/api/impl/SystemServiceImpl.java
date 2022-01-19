@@ -5,6 +5,7 @@ import com.ms.blogserver.core.base.BaseVO;
 import com.ms.blogserver.core.exception.ProgramException;
 import com.ms.blogserver.model.vo.RequestItemVO;
 import com.ms.blogserver.service.api.SystemService;
+import com.ms.blogserver.utils.StrComparatorUtils;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.core.ResolvableType;
 import org.springframework.stereotype.Service;
@@ -59,14 +60,18 @@ public class SystemServiceImpl implements SystemService {
             Map<String, Object> returnValueMap = new HashMap<>(12);
             genericClass(type, returnValueMap);
             RequestItemVO item = RequestItemVO.builder().controllerName(controllerName)
-                    .methodName(requestMethodName).requestUrl(requestUrl).requestType(requestType)
-                    .annotationValue(annotationValue).methodParmaTypes(methodParamTypes).returnName(returnName)
+                    .methodName(requestMethodName).requestUrl(requestUrl)
+                    .requestType(requestType.replace("[", "").replace("]", ""))
+                    .annotationValue(annotationValue).methodParmaTypes(methodParamTypes)
+                    .returnName(filterString(returnName))
                     .returnValueMap(returnValueMap)
                     .build();
             requestItemVOList.add(item);
         }
+        requestItemVOList.sort(new StrComparatorUtils<>("requestUrl", false));
         return requestItemVOList;
     }
+
     @Override
     public Map<String, Object> classToJson(Class<?> clazz, Boolean listKey) {
         Field[] fields = clazz.getDeclaredFields();
@@ -76,15 +81,15 @@ public class SystemServiceImpl implements SystemService {
             String fieldName = field.getName();
             Class<?> type = field.getType();
             if (BaseVO.class.isAssignableFrom(type)) {
-                result.put(fieldName, classToJson(type, listKey));
+                result.put(filterString(fieldName), classToJson(type, listKey));
             } else if (type.equals(List.class)) {
                 genericVoTypes(result, field, listKey);
             } else if (type.equals(PageInfo.class)) {
                 Map<String, Object> pageInfoMap = new HashMap<>(12);
-                genericVoTypes(pageInfoMap,field,listKey);
-                result.put(type.getTypeName(), pageInfoMap);
+                genericVoTypes(pageInfoMap, field, listKey);
+                result.put(filterString(type.getTypeName()), pageInfoMap);
             } else {
-                result.put(fieldName, type.getTypeName());
+                result.put(filterString(fieldName), filterString(type.getTypeName()));
             }
         });
         return result;
@@ -99,35 +104,45 @@ public class SystemServiceImpl implements SystemService {
             Type typeArgument = types[0];
             if (typeArgument instanceof ParameterizedType) {
                 genericClass = genericClass(typeArgument, childrenMap);
-                returnValueMap.put(typeArgument.getTypeName(), childrenMap);
+                returnValueMap.put(filterString(typeArgument.getTypeName()), childrenMap);
             } else {
                 genericClass = (Class<?>) types[0];
                 String typeName = genericClass.getTypeName();
-                if(typeName.contains(LANG)) {
-                    returnValueMap.put(typeName, typeName);
-                }else {
-                    returnValueMap.put(typeName, this.classToJson(genericClass, true));
+                if (typeName.contains(LANG)) {
+                    returnValueMap.put(filterString(typeName), filterString(typeName));
+                } else {
+                    returnValueMap.put(filterString(typeName), this.classToJson(genericClass, true));
                 }
             }
         } else {
-           throw new ProgramException("class cast error: not cast to class");
+            throw new ProgramException("class cast error: not cast to class");
         }
         return genericClass;
     }
-    private void genericVoTypes(Map<String, Object> map, Field field, Boolean listKey){
+
+    private void genericVoTypes(Map<String, Object> map, Field field, Boolean listKey) {
         Type genericClass = field.getGenericType();
         String fieldName = field.getName();
         ParameterizedType pt = (ParameterizedType) genericClass;
         Class<?> actualTypeArgument = (Class<?>) pt.getActualTypeArguments()[0];
         if (BaseVO.class.isAssignableFrom(actualTypeArgument)) {
             if (listKey) {
-                map.put(fieldName,
+                map.put(filterString(fieldName),
                         new ArrayList<>(Collections.singletonList(classToJson(actualTypeArgument, false))));
             } else {
-                map.put(fieldName, "This object itself");
+                map.put(filterString(fieldName), "This object itself");
             }
         } else {
-            map.put(fieldName, actualTypeArgument.getTypeName());
+            map.put(filterString(fieldName), filterString(actualTypeArgument.getTypeName()));
         }
+    }
+
+    private String filterString(String classString) {
+        return classString.replaceAll("com.ms.blogserver.core.constant.result.", "")
+                .replaceAll("com.ms.blogserver.model.vo.", "")
+                .replaceAll("com.github.pagehelper.", "")
+                .replaceAll("java.lang.", "")
+                .replaceAll("java.util.", "")
+                .replaceAll("java.time.", "");
     }
 }
