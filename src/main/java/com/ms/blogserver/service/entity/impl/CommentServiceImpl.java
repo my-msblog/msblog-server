@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.core.constant.contexts.DigitalContexts;
 import com.ms.blogserver.converter.bo.CommentBoConverter;
 import com.ms.blogserver.converter.vo.CommentVoConverter;
+import com.ms.blogserver.model.dto.CommentSubmitDTO;
 import com.ms.blogserver.model.entity.Comment;
 import com.ms.blogserver.model.bo.CommentBO;
 import com.ms.blogserver.model.dto.GetCommentDTO;
@@ -39,7 +40,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     }
 
     @Override
-    public List<CommentVO> getParentId(Long pid) {
+    public List<CommentVO> getByParentId(Long pid) {
         List<Comment> list = baseMapper.selectList(new QueryWrapper<Comment>().eq("parent_id", pid));
         List<CommentBO> commentBOList = CommentBoConverter.INSTANCE.toDataList(list);
         return setString(commentBOList);
@@ -61,6 +62,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return commentVoPageInfo;
     }
 
+    @Override
+    public PageInfo<CommentVO> commentSubmit(CommentSubmitDTO dto) {
+        return null;
+    }
+
     private  List<CommentVO> setString(List<CommentBO> commentBOList) {
         commentBOList.forEach(commentBO -> {
             commentBO.setCommenter(userService.getById(commentBO.getCommenterId()).getUsername());
@@ -74,7 +80,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     private void handle(List<CommentVO> list){
         list.forEach(commentVO -> {
-            List<CommentVO> children =getParentId(commentVO.getId());
+            List<CommentVO> children = getByParentId(commentVO.getId());
             commentVO.setChildren(children);
         });
         list.removeIf(commentVO -> !commentVO.getParentId().equals(DigitalContexts.ZERO_LONG));

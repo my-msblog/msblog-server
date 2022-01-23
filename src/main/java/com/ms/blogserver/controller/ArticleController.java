@@ -3,9 +3,12 @@ package com.ms.blogserver.controller;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.core.base.BaseController;
 import com.ms.blogserver.core.constant.contexts.ErrorContexts;
+import com.ms.blogserver.core.constant.contexts.PermissionContexts;
 import com.ms.blogserver.core.constant.result.Result;
 import com.ms.blogserver.core.constant.result.ResultFactory;
 import com.ms.blogserver.core.base.BaseDTO;
+import com.ms.blogserver.core.exception.CustomException;
+import com.ms.blogserver.model.dto.CommentSubmitDTO;
 import com.ms.blogserver.model.dto.GetCommentDTO;
 import com.ms.blogserver.model.vo.*;
 import com.ms.blogserver.service.entity.ArticleService;
@@ -14,6 +17,9 @@ import com.ms.blogserver.service.entity.CommentService;
 import com.ms.blogserver.service.entity.TagService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,6 +92,22 @@ public class ArticleController extends BaseController {
     @PostMapping(value = "/user/comment")
     public Result<Object> getUserComment() {
         return null;
+    }
+
+    @ApiOperation(value = "评论提交接口")
+    @PostMapping(value = "/comment/submit")
+    @RequiresPermissions(logical = Logical.OR, value = {
+            PermissionContexts.USERS_MANAGEMENT,
+            PermissionContexts.CONTENT_MANAGEMENT,
+            PermissionContexts.ROLES_MANAGEMENT,
+    })
+    public Result submitComment(CommentSubmitDTO dto) throws Exception{
+        try {
+
+            return ResultFactory.buildSuccessResult();
+        } catch (Exception e) {
+            throw this.exceptionHandle(e);
+        }
     }
 
     /**

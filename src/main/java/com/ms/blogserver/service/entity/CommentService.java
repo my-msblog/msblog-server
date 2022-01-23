@@ -2,6 +2,7 @@ package com.ms.blogserver.service.entity;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
+import com.ms.blogserver.model.dto.CommentSubmitDTO;
 import com.ms.blogserver.model.entity.Comment;
 import com.ms.blogserver.model.dto.GetCommentDTO;
 import com.ms.blogserver.model.vo.CommentVO;
@@ -27,7 +28,7 @@ public interface CommentService extends IService<Comment> {
      * @param pid
      * @return
      */
-    List<CommentVO> getParentId(Long pid);
+    List<CommentVO> getByParentId(Long pid);
 
     /**
      * 文章评论分页
@@ -35,4 +36,11 @@ public interface CommentService extends IService<Comment> {
      * @return
      */
     PageInfo<CommentVO> getPageByArticle(GetCommentDTO dto);
+
+    /**
+     * 评论提交
+     * @param dto 提交信息
+     * @return commentVO 分页
+     */
+    PageInfo<CommentVO> commentSubmit(CommentSubmitDTO dto);
 }
