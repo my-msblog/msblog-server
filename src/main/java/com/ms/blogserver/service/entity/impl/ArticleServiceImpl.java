@@ -12,7 +12,6 @@ import com.ms.blogserver.converter.vo.TagVoConverter;
 import com.ms.blogserver.core.exception.CustomException;
 import com.ms.blogserver.model.bo.ArticleBO;
 import com.ms.blogserver.core.base.BaseDTO;
-import com.ms.blogserver.model.dto.GetCommentDTO;
 import com.ms.blogserver.model.entity.Article;
 import com.ms.blogserver.model.entity.ArticleTag;
 import com.ms.blogserver.model.entity.Tag;
@@ -41,9 +40,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     private CategoryService categoryService;
 
     @Autowired
-    private CommentService commentService;
-
-    @Autowired
     private TagService tagService;
 
     @Autowired
@@ -58,8 +54,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             }
             ArticleVO articleVO = ArticleVoConverter.INSTANCE.toData(article);
             articleVO.setTypeName(categoryService.getCategoryByCid(article.getType()));
-            PageInfo<CommentVO> commentVoPageInfo = commentService.getPageByArticle(new GetCommentDTO(id));
-            articleVO.setCommentVoS(commentVoPageInfo);
             return articleVO;
         } catch (Exception e) {
            throw new CustomException(e.getMessage());
@@ -73,7 +67,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 new LambdaQueryWrapper<Article>().orderByDesc(Article::getCreateTime));
         List<ArchiveVO> archiveVOList = ArchiveVoConverter.INSTANCE.toDataList(articles);
         PageInfo<ArchiveVO> result = new PageInfo<ArchiveVO>();
-        PageInfoUtil.transform(new PageInfo<Article>(articles), result);
+        PageInfoUtil.transform(new PageInfo<>(articles), result);
         result.setList(archiveVOList);
         return result;
     }

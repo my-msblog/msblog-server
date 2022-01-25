@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 /**
  * @description:
@@ -22,5 +22,5 @@ public class Tag implements Serializable {
     private String name;
     private String nameZh;
     @TableField(value = "create_time",fill = FieldFill.INSERT)
-    private LocalTime createTime;
+    private LocalDateTime createTime;
 }

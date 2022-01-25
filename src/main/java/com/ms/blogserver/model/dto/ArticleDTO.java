@@ -5,7 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
+
 
 /**
  * @description:
@@ -18,6 +19,6 @@ import java.time.LocalTime;
 public class ArticleDTO extends BaseDTO {
     private Long id;
     private Integer type;
-    private LocalTime time;
+    private LocalDateTime time;
     private Long writerId;
 }

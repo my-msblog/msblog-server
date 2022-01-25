@@ -3,7 +3,7 @@ package com.ms.blogserver.model.bo;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 /**
  * @description:
@@ -14,11 +14,13 @@ import java.time.LocalTime;
 public class CommentBO implements Serializable {
     private Long id;
     private String content;
+    private Long articleId;
     private String commenter;
     private String respondent;
     private Long commenterId;
     private Long respondentId;
     private Long parentId;
+    private Boolean isLike;
     private Integer likes;
-    private LocalTime createTime;
+    private LocalDateTime createTime;
 }

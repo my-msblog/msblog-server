@@ -38,7 +38,7 @@ public class TokenUtils {
      */
     public static String sign(String account,Long currentTime) throws UnsupportedEncodingException {
 
-        String token=null;
+        String token;
         try {
             Date expireAt=new Date(currentTime+EXPIRE_TIME);
             token = JWT.create()

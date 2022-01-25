@@ -7,9 +7,8 @@ import com.ms.blogserver.core.constant.contexts.PermissionContexts;
 import com.ms.blogserver.core.constant.result.Result;
 import com.ms.blogserver.core.constant.result.ResultFactory;
 import com.ms.blogserver.core.base.BaseDTO;
-import com.ms.blogserver.core.exception.CustomException;
 import com.ms.blogserver.model.dto.CommentSubmitDTO;
-import com.ms.blogserver.model.dto.GetCommentDTO;
+import com.ms.blogserver.model.dto.IdDTO;
 import com.ms.blogserver.model.vo.*;
 import com.ms.blogserver.service.entity.ArticleService;
 import com.ms.blogserver.service.entity.CategoryService;
@@ -17,7 +16,6 @@ import com.ms.blogserver.service.entity.CommentService;
 import com.ms.blogserver.service.entity.TagService;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,9 +72,10 @@ public class ArticleController extends BaseController {
      */
     @ApiOperation(value = "获取文章评论")
     @PostMapping(value = "/comment")
-    public Result<PageInfo<CommentVO>> getComment(@RequestBody GetCommentDTO dto) throws Exception {
+    public Result<PageInfo<CommentItemVO>> getComment(@RequestBody IdDTO dto) throws Exception {
         try {
-            PageInfo<CommentVO> data = commentService.getPageByArticle(dto);
+            String token = this.getHeaderToken();
+            PageInfo<CommentItemVO> data = commentService.getPageByArticle(dto, token);
             return ResultFactory.buildSuccessResult(data);
         } catch (Exception e) {
             throw this.exceptionHandle(e);
@@ -94,16 +93,20 @@ public class ArticleController extends BaseController {
         return null;
     }
 
+    /**
+     * 评论提交
+     * @param dto
+     * @return
+     * @throws Exception
+     */
     @ApiOperation(value = "评论提交接口")
     @PostMapping(value = "/comment/submit")
-    @RequiresPermissions(logical = Logical.OR, value = {
-            PermissionContexts.USERS_MANAGEMENT,
-            PermissionContexts.CONTENT_MANAGEMENT,
-            PermissionContexts.ROLES_MANAGEMENT,
-    })
-    public Result submitComment(CommentSubmitDTO dto) throws Exception{
+    @RequiresPermissions(logical = Logical.OR, value = {PermissionContexts.USERS_MANAGEMENT,
+            PermissionContexts.CONTENT_MANAGEMENT, PermissionContexts.ROLES_MANAGEMENT,})
+    public Result<String> submitComment(CommentSubmitDTO dto) throws Exception{
         try {
-
+            String token = this.getHeaderToken();
+            commentService.commentSubmit(dto, token);
             return ResultFactory.buildSuccessResult();
         } catch (Exception e) {
             throw this.exceptionHandle(e);

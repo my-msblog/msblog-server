@@ -24,11 +24,6 @@ public class ArticleVO implements BaseVO {
     private Integer likes;
     private Integer type;
     private String typeName;
-
-    /**
-     * 文章评论
-     */
-    private PageInfo<CommentVO> commentVoS;
     /**
      * 文章标签
      */

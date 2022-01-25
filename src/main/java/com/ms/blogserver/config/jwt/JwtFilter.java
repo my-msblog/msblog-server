@@ -110,7 +110,6 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) {
-        logger.debug("onLoginSuccess：");
         String jwttoken= (String) token.getPrincipal();
         if (jwttoken!=null){
             try{

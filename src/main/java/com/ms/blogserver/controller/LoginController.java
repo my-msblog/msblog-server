@@ -74,7 +74,7 @@ public class LoginController extends BaseController {
             // 验证用户
             User user = loginService.commonLogin(loginDTO.getUsername(), loginDTO.getPassword());
             // 生成token
-            String token = tokenService.createToken(user.getUsername(), response);
+            String token = tokenService.createToken(user.getId().toString(), response);
             // 返回内容
             UserVO userVO = tokenService.setToken(user, token);
             return ResultFactory.buildSuccessResult(userVO);

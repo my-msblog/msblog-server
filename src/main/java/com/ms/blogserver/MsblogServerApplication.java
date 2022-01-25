@@ -10,7 +10,9 @@ import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoC
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.DispatcherServlet;
 
 /**
@@ -20,6 +22,8 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 @SpringBootApplication
 @Slf4j
+@EnableCaching
+@EnableScheduling
 public class MsblogServerApplication extends SpringBootServletInitializer {
 
     @Override
