@@ -57,24 +57,26 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public List<MenuVO> getMenu(String token) {
-        String username = TokenUtils.getAccount(token);
-        if (StringUtils.isEmpty(username)){
+        String account = TokenUtils.getAccount(token);
+        if (StringUtils.isEmpty(account)){
             throw new CustomAuthorizedException(LoginContexts.USER_ERROR);
         }
-        Long uid = userService.findByUserName(username).getId();
-        if (Objects.isNull(uid)){
+        Long userId = Long.parseLong(account);
+        User user = userService.getById(userId);
+        if (Objects.isNull(user)){
             throw new CustomException(LoginContexts.USER_IS_NOT_EXIST);
         }
-        return menuService.filterMenuList(uid);
+        return menuService.filterMenuList(user.getId());
     }
 
     @Override
     public String getRole(String token) {
-        String username = TokenUtils.getAccount(token);
-        if (StringUtils.isEmpty(username)){
+        String account = TokenUtils.getAccount(token);
+        if (StringUtils.isEmpty(account)){
             throw new CustomAuthorizedException(LoginContexts.USER_ERROR);
         }
-        User user = userService.findByUserName(username);
+        Long userId = Long.parseLong(account);
+        User user = userService.getById(userId);
         if (Objects.isNull(user)){
             throw new CustomException(LoginContexts.USER_IS_NOT_EXIST);
         }

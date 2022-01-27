@@ -65,9 +65,10 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         log.info("身份认证");
         String token = (String) authenticationToken.getCredentials();
-        String username = TokenUtils.getAccount(token);
+        String account = TokenUtils.getAccount(token);
+        Long useId = Long.parseLong(account);
         //这里要去数据库查找是否存在该用户，这里直接放行
-        User user = userService.findByUserName(username);
+        User user = userService.getById(useId);
         if (user == null) {
             throw new AuthenticationException("认证失败,用户不存在");
         }
@@ -80,11 +81,11 @@ public class CustomRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        String username = TokenUtils.getAccount(principals.toString());
+        Long userId = Long.getLong(TokenUtils.getAccount(principals.toString()));
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         Set<String> roleSet = new HashSet<>();
         Set<String> permissionSet = new HashSet<>();
-        User user = userService.findByUserName(username);
+        User user = userService.getById(userId);
         //获得该用户角色
         Role role = roleService.getById(userRoleService.getRidByUid(user.getId()));
         List<Long> pid = rolePermissionService.getAllPermissionByRoleId(role.getId())

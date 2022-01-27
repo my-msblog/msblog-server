@@ -92,9 +92,8 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        logger.debug("onAccessDenied");
         this.sendChallenge(request,response);
-        responseError(response,"token verify fail");
+        responseError(response);
         return false;
         //throw new CustomAuthorizedException("sfrzyc");
     }
@@ -110,13 +109,13 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) {
-        String jwttoken= (String) token.getPrincipal();
-        if (jwttoken!=null){
+        String jwtToken= (String) token.getPrincipal();
+        if (jwtToken!=null){
             try{
-                if(TokenUtils.verify(jwttoken)){
+                if(TokenUtils.verify(jwtToken)){
                     //判断Redis是否存在所对应的RefreshToken
-                    String account = TokenUtils.getAccount(jwttoken);
-                    Long currentTime= TokenUtils.getCurrentTime(jwttoken);
+                    String account = TokenUtils.getAccount(jwtToken);
+                    Long currentTime= TokenUtils.getCurrentTime(jwtToken);
                     if (redisUtils.hasKey(account)) {
                         Long currentTimeMillisRedis;
                         Object o = redisUtils.get(account);
@@ -197,13 +196,13 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     /**
      * 将非法请求跳转到 /unauthorized/**
      */
-    private void responseError(ServletResponse response, String message) {
+    private void responseError(ServletResponse response) {
         try {
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
             httpServletResponse.setCharacterEncoding("UTF-8");
             httpServletResponse.setContentType("application/json; charset=utf-8");
             httpServletResponse.sendRedirect("/filter/error");
-            logger.error("responseError:"+message);
+            logger.error("responseError:"+ "token verify fail");
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
