@@ -21,6 +21,12 @@ public class SmsVerify {
     private static final String APPCODE = "6416008baa3d495a94bb4944fb788259";
     private static final Integer CODE_LENGTH = 6;
 
+    /**
+     * 发送短信
+     *
+     * @param phone 电话
+     * @return {@link Integer}
+     */
     public static Integer sendSms(String phone){
         Integer code = RandomUtils.getRandomInt(CODE_LENGTH);
         Map<String, String> headers = new HashMap<String, String>(12);

@@ -33,8 +33,12 @@ public class TokenUtils {
 
     /**
      * 生成token
+     *
+     * @param account     账户
+     * @param currentTime 当前时间
+     * @return {@link String}
+     * @throws UnsupportedEncodingException 不支持编码异常
      * @param: [user]
-     * @return
      */
     public static String sign(String account,Long currentTime) throws UnsupportedEncodingException {
 
@@ -58,8 +62,11 @@ public class TokenUtils {
 
     /**
      * token验证
+     *
+     * @param token 令牌
+     * @return {@link Boolean}
+     * @throws Exception 异常
      * @param: [token]
-     * @return
      */
     public static Boolean verify(String token) throws Exception{
         //创建token验证器
@@ -72,7 +79,12 @@ public class TokenUtils {
     }
 
 
-
+    /**
+     * 获得账户
+     *
+     * @param token 令牌
+     * @return {@link String}
+     */
     public static String getAccount(String token){
         try{
             DecodedJWT jwt =JWT.decode(token);
@@ -83,6 +95,13 @@ public class TokenUtils {
             return null;
         }
     }
+
+    /**
+     * 获取当前时间
+     *
+     * @param token 令牌
+     * @return {@link Long}
+     */
     public static Long getCurrentTime(String token){
         try{
             DecodedJWT jwt =JWT.decode(token);

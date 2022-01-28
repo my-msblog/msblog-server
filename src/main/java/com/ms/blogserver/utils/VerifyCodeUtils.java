@@ -15,17 +15,19 @@ import java.io.IOException;
 public class VerifyCodeUtils {
 
     /**
+     * 数字验证码
      * png图片
      * 字符类型
-     *  TYPE_DEFAULT         数字和字母混合
-     *  TYPE_ONLY_NUMBER     纯数字
-     *  TYPE_ONLY_CHAR       纯字母
-     *  TYPE_ONLY_UPPER      纯大写字母
-     *  TYPE_ONLY_LOWER      纯小写字母
-     *  TYPE_NUM_AND_UPPER   数字和大写字母
+     * TYPE_DEFAULT         数字和字母混合
+     * TYPE_ONLY_NUMBER     纯数字
+     * TYPE_ONLY_CHAR       纯字母
+     * TYPE_ONLY_UPPER      纯大写字母
+     * TYPE_ONLY_LOWER      纯小写字母
+     * TYPE_NUM_AND_UPPER   数字和大写字母
      *
-     * @return
-     * @throws IOException,FontFormatException
+     * @return {@link SpecCaptcha}
+     * @throws IOException         io异常
+     * @throws FontFormatException 字体格式异常
      */
     public static SpecCaptcha digitalCaptcha() throws IOException, FontFormatException {
         SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 5);
@@ -38,7 +40,7 @@ public class VerifyCodeUtils {
     /**
      * 算术表达式
      *
-     * @return
+     * @return {@link ArithmeticCaptcha}
      */
     public static ArithmeticCaptcha arithmeticCaptcha(){
         ArithmeticCaptcha captcha = new ArithmeticCaptcha(130, 48);

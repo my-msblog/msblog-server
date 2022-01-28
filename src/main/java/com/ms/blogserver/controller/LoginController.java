@@ -56,12 +56,13 @@ public class LoginController extends BaseController {
     }
 
     /**
+     * 用户登录
      * 账号密码登录
      *
-     * @param loginDTO
-     * @param response
-     * @return
-     * @throws Exception
+     * @param loginDTO 登录dto
+     * @param response 响应
+     * @return {@link Result}<{@link UserVO}>
+     * @throws Exception 异常
      */
     @ApiOperation(value = "账号密码登录")
     @PostMapping(value = "/login")
@@ -84,9 +85,11 @@ public class LoginController extends BaseController {
     }
 
     /**
+     * 注销
      * 登出
      *
-     * @return
+     * @return {@link Result}<{@link String}>
+     * @throws Exception 异常
      */
     @ApiOperation(value = "登出")
     @GetMapping(value = "/logout")

@@ -12,7 +12,7 @@ public class RandomUtils {
      * 生成随机字符
      *
      * @param length 生成随机字符的长度
-     * @return
+     * @return {@link String}
      */
     public static String getRandomString(int length) {
         String base = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -26,10 +26,10 @@ public class RandomUtils {
     }
 
     /**
+     * 得到随机整数
      *
-     *
-     * @param length
-     * @return
+     * @param length 长度
+     * @return {@link Integer}
      */
     public static Integer getRandomInt(int length){
         String num = "1234567890";
@@ -43,8 +43,9 @@ public class RandomUtils {
     }
 
     /**
+     * 得到四个随机整数
      *
-     * @return
+     * @return {@link Integer}
      */
     public static Integer getFourInt(){
         return getRandomInt(4);

@@ -12,6 +12,12 @@ public class EncryptPassword {
     private static final Object DEFAULT_SALT = null;
     private static final int DEFAULT_HASH_ITERATIONS = 1;
 
+    /**
+     * 加密
+     *
+     * @param password 密码
+     * @return {@link String}
+     */
     public static String encrypt(String password) {
         return new SimpleHash(DEFAULT_ALGORITHM_NAME, password, DEFAULT_SALT, DEFAULT_HASH_ITERATIONS).toString();
     }

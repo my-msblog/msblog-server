@@ -10,9 +10,13 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
+ * 文件跑龙套
+ *
+ * @author maoshen5478
  * @description: 文件工具类
  * @author: zhh
  * @time: 2021/6/9
+ * @date 2022/01/28
  */
 @Slf4j
 public class FileUtils {
@@ -22,11 +26,12 @@ public class FileUtils {
     public static final String TIME = "FILE_NAME";
 
     /**
+     * 文件
      * 获取当前目录下所有.log文件的文件名和修改时间
      *
      * @param directory 文件目录
-     * @return
-     * @throws Exception
+     * @return {@link List}<{@link FileSimpleBO}>
+     * @throws Exception 异常
      */
     public static List<FileSimpleBO> files(File directory) throws Exception {
         File[] listFiles = directory.listFiles();
@@ -52,7 +57,7 @@ public class FileUtils {
      * 文件时间格式转换
      *
      * @param time 文件修改时间
-     * @return
+     * @return {@link String}
      */
     public static String getTime(long time) {
         synchronized (FORMAT) {
@@ -61,6 +66,12 @@ public class FileUtils {
         }
     }
 
+    /**
+     * 加载日志
+     *
+     * @param url url
+     * @return {@link String}
+     */
     public static String loadLog(String url){
         try{
             File file = new File(url+".log");

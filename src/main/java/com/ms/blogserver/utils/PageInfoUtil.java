@@ -13,10 +13,8 @@ public class PageInfoUtil {
     /**
      * 转化PageInfo
      *
-     * @param from
-     * @param to
-     * @param <T>
-     * @param <E>
+     * @param from 源PageInfo
+     * @param to   需要转成的对象
      */
     public static <T extends Serializable, E> void transform(PageInfo<T> from, PageInfo<E> to) {
         to.setPageNum(from.getPageNum());

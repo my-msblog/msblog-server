@@ -70,10 +70,11 @@ public class AccountController extends BaseController {
 
     /**
      * 用户列表分页
+     * 用户列表分页
      *
-     * @param dto
-     * @return
-     * @throws Exception
+     * @param dto dto
+     * @return {@link Result}<{@link PageInfo}<{@link UserProfileVO}>>
+     * @throws Exception 异常
      */
     @ApiOperation(value = "用户列表分页")
     @PostMapping(value = "/user/page")
@@ -87,6 +88,13 @@ public class AccountController extends BaseController {
         }
     }
 
+    /**
+     * 改变状态
+     *
+     * @param dto dto
+     * @return {@link Result}<{@link String}>
+     * @throws Exception 异常
+     */
     @ApiOperation(value = "修改用户状态")
     @PostMapping("/admin/status/change")
     public Result<String> changeStatus(@RequestBody StatusDTO dto) throws Exception {
