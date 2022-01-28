@@ -1,6 +1,7 @@
 package com.ms.blogserver.utils;
 
 
+import com.ms.blogserver.api.config.SmsConfig;
 import com.ms.blogserver.core.exception.ProgramException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,12 +16,6 @@ import java.util.Map;
 @Slf4j
 public class SmsVerify {
 
-    private static final String HOST = "http://dingxin.market.alicloudapi.com";
-    private static final String PATH = "/dx/sendSms";
-    private static final String METHOD = "POST";
-    private static final String APPCODE = "6416008baa3d495a94bb4944fb788259";
-    private static final Integer CODE_LENGTH = 6;
-
     /**
      * 发送短信
      *
@@ -28,16 +23,17 @@ public class SmsVerify {
      * @return {@link Integer}
      */
     public static Integer sendSms(String phone){
-        Integer code = RandomUtils.getRandomInt(CODE_LENGTH);
+        Integer code = RandomUtils.getRandomInt(SmsConfig.Api.getCodeLength());
         Map<String, String> headers = new HashMap<String, String>(12);
-        headers.put("Authorization", "APPCODE " + APPCODE);
+        headers.put("Authorization", "APPCODE " + SmsConfig.Api.getAppcode());
         Map<String, String> querys = new HashMap<String, String>(12);
         querys.put("mobile", phone);
         querys.put("param", "code:"+code);
         querys.put("tpl_id", "TP1711063");
         Map<String, String> bodys = new HashMap<String, String>(12);
         try {
-            HttpUtils.doPost(HOST, PATH, METHOD, headers, querys, bodys);
+            HttpUtils.doPost(SmsConfig.Api.getHost(), SmsConfig.Api.getPath(), SmsConfig.Api.getMethod(),
+                    headers, querys, bodys);
             log.debug("verify code:"+code);
             return code;
         } catch (Exception e) {

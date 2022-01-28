@@ -1,5 +1,6 @@
 package com.ms.blogserver.utils;
 
+import com.ms.blogserver.api.config.ServerConfig;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import javax.crypto.Cipher;
@@ -14,9 +15,9 @@ public class SecretUtils {
     /***
      * key和iv值可以随机生成
      */
-    private static final String KEY = "1234567890123456";
+    private static final String KEY = ServerConfig.Api.getKey();
 
-    private static final String IV = "1234567890123456";
+    private static final String IV = ServerConfig.Api.getIv();
 
     /***
      * 加密

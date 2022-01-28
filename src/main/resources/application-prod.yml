@@ -2,8 +2,19 @@ server: #配置server
   port: 8080
 
 data:
+  secret:
+    key: 1234567890123456
+    iv: 1234567890123456
   log:
     url: spring-log/ms-server
 
-test:
-  name: prod
+name: prod
+
+sms:
+  host: http://dingxin.market.alicloudapi.com
+  path: /dx/sendSms
+  method: POST
+  appcode: 6416008baa3d495a94bb4944fb788259
+  code-length: 6
+
+
