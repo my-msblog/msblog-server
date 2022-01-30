@@ -8,6 +8,7 @@ import com.ms.blogserver.core.constant.result.Result;
 import com.ms.blogserver.core.constant.result.ResultFactory;
 import com.ms.blogserver.core.base.BaseDTO;
 import com.ms.blogserver.model.dto.CommentSubmitDTO;
+import com.ms.blogserver.model.dto.GiveLikesDTO;
 import com.ms.blogserver.model.dto.IdDTO;
 import com.ms.blogserver.model.vo.*;
 import com.ms.blogserver.service.entity.ArticleService;
@@ -160,6 +161,7 @@ public class ArticleController extends BaseController {
 
     /**
      * 标签列表
+     *
      * @return
      * @throws Exception
      */
@@ -171,6 +173,17 @@ public class ArticleController extends BaseController {
             return ResultFactory.buildSuccessResult(list);
         } catch (Exception e){
            throw this.exceptionHandle(e);
+        }
+    }
+
+    @ApiOperation(value = "评论点赞接口")
+    @PostMapping(value = "/comment/like")
+    public Result<?> commentLike(@RequestBody GiveLikesDTO dto) throws Exception{
+        try {
+            commentService.
+            return ResultFactory.buildSuccessResult();
+        }catch (Exception e){
+            throw this.exceptionHandle(e);
         }
     }
 

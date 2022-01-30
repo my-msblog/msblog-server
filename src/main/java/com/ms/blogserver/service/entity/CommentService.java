@@ -3,6 +3,7 @@ package com.ms.blogserver.service.entity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.model.dto.CommentSubmitDTO;
+import com.ms.blogserver.model.dto.GiveLikesDTO;
 import com.ms.blogserver.model.dto.IdDTO;
 import com.ms.blogserver.model.entity.Comment;
 import com.ms.blogserver.model.vo.CommentItemVO;
@@ -18,15 +19,18 @@ public interface CommentService extends IService<Comment> {
 
     /**
      * 评论父级id
-     * @param pid
-     * @return
+     *
+     * @param pid pid
+     * @return {@link List}<{@link CommentItemVO}>
      */
     List<CommentItemVO> getByParentId(Long pid);
 
     /**
      * 文章评论分页
-     * @param dto
-     * @return
+     *
+     * @param dto   dto
+     * @param token 令牌
+     * @return {@link PageInfo}<{@link CommentItemVO}>
      */
     PageInfo<CommentItemVO> getPageByArticle(IdDTO dto, String token);
 
@@ -38,5 +42,11 @@ public interface CommentService extends IService<Comment> {
     void commentSubmit(CommentSubmitDTO dto, String token);
 
 
+    /**
+     * 评论等
+     *
+     * @param dto dto
+     */
+    void commentLike(GiveLikesDTO dto);
 
 }

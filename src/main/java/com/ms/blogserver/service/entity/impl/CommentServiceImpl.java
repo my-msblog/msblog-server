@@ -13,6 +13,7 @@ import com.ms.blogserver.core.exception.CustomException;
 import com.ms.blogserver.core.exception.ProgramException;
 import com.ms.blogserver.model.bo.CommentSubmitBO;
 import com.ms.blogserver.model.dto.CommentSubmitDTO;
+import com.ms.blogserver.model.dto.GiveLikesDTO;
 import com.ms.blogserver.model.dto.IdDTO;
 import com.ms.blogserver.model.entity.Comment;
 import com.ms.blogserver.model.bo.CommentBO;
@@ -97,6 +98,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         CommentSubmitBO commentSubmitBO = CommentSubmitBO.builder()
                 .commentId(dto.getCommentId()).context(dto.getContext()).replyTime(dto.getReplyTime())
                 .userId(curerUser.getId()).build();
+    }
+
+    @Override
+    public void commentLike(GiveLikesDTO dto) {
+
     }
 
     private void handle(List<CommentItemVO> list){
