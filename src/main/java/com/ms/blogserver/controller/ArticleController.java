@@ -180,7 +180,7 @@ public class ArticleController extends BaseController {
     @PostMapping(value = "/comment/like")
     public Result<?> commentLike(@RequestBody GiveLikesDTO dto) throws Exception{
         try {
-            commentService.
+            commentService.commentLike(dto);
             return ResultFactory.buildSuccessResult();
         }catch (Exception e){
             throw this.exceptionHandle(e);

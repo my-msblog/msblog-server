@@ -3,24 +3,25 @@ package com.ms.blogserver.service.entity.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.ms.blogserver.core.constant.contexts.DigitalContexts;
 import com.ms.blogserver.converter.bo.CommentBoConverter;
 import com.ms.blogserver.converter.vo.CommentVoConverter;
+import com.ms.blogserver.core.constant.contexts.DigitalContexts;
 import com.ms.blogserver.core.constant.contexts.ErrorContexts;
 import com.ms.blogserver.core.constant.contexts.LoginContexts;
 import com.ms.blogserver.core.exception.CustomException;
 import com.ms.blogserver.core.exception.ProgramException;
+import com.ms.blogserver.mapper.CommentMapper;
+import com.ms.blogserver.model.bo.CommentBO;
 import com.ms.blogserver.model.bo.CommentSubmitBO;
 import com.ms.blogserver.model.dto.CommentSubmitDTO;
 import com.ms.blogserver.model.dto.GiveLikesDTO;
 import com.ms.blogserver.model.dto.IdDTO;
 import com.ms.blogserver.model.entity.Comment;
-import com.ms.blogserver.model.bo.CommentBO;
 import com.ms.blogserver.model.entity.CommentLike;
 import com.ms.blogserver.model.entity.User;
 import com.ms.blogserver.model.vo.CommentItemVO;
-import com.ms.blogserver.mapper.CommentMapper;
 import com.ms.blogserver.service.entity.CommentLikeService;
 import com.ms.blogserver.service.entity.CommentService;
 import com.ms.blogserver.service.entity.UserService;
@@ -31,11 +32,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.github.pagehelper.PageHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @description:
@@ -102,7 +100,17 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public void commentLike(GiveLikesDTO dto) {
-
+        Map<String, Object> likeMap = redisUtils.hmget(dto.getCommentId().toString());
+        if (!likeMap.isEmpty()) {
+            GiveLikesDTO commentLikeItem = (GiveLikesDTO)likeMap.get(dto.getUserId().toString());
+            if (Objects.isNull(commentLikeItem)) {
+                likeMap.put(dto.getUserId().toString(), dto);
+            }else{
+                commentLikeItem.setIs(!commentLikeItem.getIs());
+                likeMap.put(dto.getUserId().toString(), commentLikeItem);
+            }
+        }
+        redisUtils.hmset(dto.getCommentId().toString(), likeMap);
     }
 
     private void handle(List<CommentItemVO> list){

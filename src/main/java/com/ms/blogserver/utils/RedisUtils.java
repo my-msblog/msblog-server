@@ -1,9 +1,7 @@
 package com.ms.blogserver.utils;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -172,7 +170,7 @@ public class RedisUtils {
      * @param key 键
      * @return 对应的多个键值
      */
-    public Map<Object,Object> hmget(String key){
+    public Map<String,Object> hmget(String key){
         return redisTemplate.opsForHash().entries(key);
     }
 
