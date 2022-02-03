@@ -30,7 +30,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     @Autowired
     private RedisUtils redisUtils;
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
      * 判断是否允许通过
      * @param request

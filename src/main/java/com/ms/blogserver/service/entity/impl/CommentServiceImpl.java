@@ -10,6 +10,7 @@ import com.ms.blogserver.converter.vo.CommentVoConverter;
 import com.ms.blogserver.core.constant.contexts.DigitalContexts;
 import com.ms.blogserver.core.constant.contexts.ErrorContexts;
 import com.ms.blogserver.core.constant.contexts.LoginContexts;
+import com.ms.blogserver.core.constant.contexts.RedisKeyContexts;
 import com.ms.blogserver.core.exception.CustomException;
 import com.ms.blogserver.core.exception.ProgramException;
 import com.ms.blogserver.mapper.CommentMapper;
@@ -25,6 +26,7 @@ import com.ms.blogserver.model.vo.CommentItemVO;
 import com.ms.blogserver.service.entity.CommentLikeService;
 import com.ms.blogserver.service.entity.CommentService;
 import com.ms.blogserver.service.entity.UserService;
+import com.ms.blogserver.utils.ClassUtils;
 import com.ms.blogserver.utils.PageInfoUtil;
 import com.ms.blogserver.utils.RedisUtils;
 import com.ms.blogserver.utils.TokenUtils;
@@ -100,17 +102,23 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public void commentLike(GiveLikesDTO dto) {
-        Map<String, Object> likeMap = redisUtils.hmget(dto.getCommentId().toString());
-        if (!likeMap.isEmpty()) {
-            GiveLikesDTO commentLikeItem = (GiveLikesDTO)likeMap.get(dto.getUserId().toString());
-            if (Objects.isNull(commentLikeItem)) {
-                likeMap.put(dto.getUserId().toString(), dto);
-            }else{
-                commentLikeItem.setIs(!commentLikeItem.getIs());
-                likeMap.put(dto.getUserId().toString(), commentLikeItem);
+        Map<String, Object> likeMap = redisUtils.hmget(RedisKeyContexts.COMMENT_LIKES);
+        List<GiveLikesDTO> resList = new ArrayList<>();
+        if (!likeMap.isEmpty()){
+            List<GiveLikesDTO> commentLikes = ClassUtils
+                    .castList(likeMap.get(dto.getCommentId().toString()), GiveLikesDTO.class);
+            if (CollectionUtils.isEmpty(commentLikes)){
+                resList.add(dto);
+                likeMap.put(dto.getCommentId().toString(), resList);
+            } else {
+                commentLikes.add(dto);
+                likeMap.put(dto.getCommentId().toString(), commentLikes);
             }
+        } else {
+            resList.add(dto);
+            likeMap.put(dto.getCommentId().toString(), resList);
         }
-        redisUtils.hmset(dto.getCommentId().toString(), likeMap);
+        redisUtils.hmset(RedisKeyContexts.COMMENT_LIKES,likeMap);
     }
 
     private void handle(List<CommentItemVO> list){

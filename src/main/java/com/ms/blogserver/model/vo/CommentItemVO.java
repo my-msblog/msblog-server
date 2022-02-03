@@ -18,6 +18,7 @@ import java.util.List;
 public class CommentItemVO implements BaseVO {
     private Long id;
     private String respondent;
+    private Long commenterId;
     private List<CommentItemVO> children;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime publishTime;

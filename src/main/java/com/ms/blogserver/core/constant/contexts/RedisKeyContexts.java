@@ -9,4 +9,6 @@ public interface RedisKeyContexts {
     String SMS_CODE = "verifyCode";
     String ARITHMETIC_CAPTCHA = "arithmeticCaptcha";
     String SPEC_CAPTCHA = "specCaptcha";
+
+    String COMMENT_LIKES = "commentLikeRedis";
 }
