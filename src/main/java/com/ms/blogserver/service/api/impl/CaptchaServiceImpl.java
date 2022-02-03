@@ -66,6 +66,7 @@ public class CaptchaServiceImpl implements CaptchaService {
         if (!redisCode.equals(code)){
             throw new CustomException(VerifyContexts.VERIFY_ERROR);
         }
+        redisUtils.del(key);
     }
 
     @Override
