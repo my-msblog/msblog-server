@@ -49,4 +49,12 @@ public interface CommentService extends IService<Comment> {
      */
     void commentLike(GiveLikesDTO dto);
 
+    /**
+     * 评论点赞列表
+     *
+     * @param id id
+     * @return {@link List}<{@link Long}>
+     */
+    List<Long> likeList(Long id);
+
 }

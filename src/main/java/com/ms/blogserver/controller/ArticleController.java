@@ -178,11 +178,22 @@ public class ArticleController extends BaseController {
 
     @ApiOperation(value = "评论点赞接口")
     @PostMapping(value = "/comment/like")
-    public Result<?> commentLike(@RequestBody GiveLikesDTO dto) throws Exception{
+    public Result<String> commentLike(@RequestBody GiveLikesDTO dto) throws Exception{
         try {
             commentService.commentLike(dto);
             return ResultFactory.buildSuccessResult();
         }catch (Exception e){
+            throw this.exceptionHandle(e);
+        }
+    }
+
+    @ApiOperation(value = "评论点赞列表")
+    @PostMapping(value = "/commen/like/list")
+    public Result<List<Long>> getCommentLikeIdList( @RequestBody IdDTO dto) throws Exception {
+        try {
+            List<Long> idList = commentService.likeList(dto.getId());
+            return ResultFactory.buildSuccessResult(idList);
+        } catch (Exception e) {
             throw this.exceptionHandle(e);
         }
     }

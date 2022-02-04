@@ -16,8 +16,8 @@ public enum LikeEnum {
      */
     UNLKIE(1, "未点赞/取消点赞");
 
-    public final Integer status;
-    public final String message;
+    public Integer status;
+    public String message;
 
     LikeEnum(Integer status, String message) {
         this.status = status;

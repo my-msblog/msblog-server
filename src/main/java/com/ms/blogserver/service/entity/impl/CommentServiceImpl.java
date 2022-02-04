@@ -11,6 +11,7 @@ import com.ms.blogserver.core.constant.contexts.DigitalContexts;
 import com.ms.blogserver.core.constant.contexts.ErrorContexts;
 import com.ms.blogserver.core.constant.contexts.LoginContexts;
 import com.ms.blogserver.core.constant.contexts.RedisKeyContexts;
+import com.ms.blogserver.core.constant.types.LikeEnum;
 import com.ms.blogserver.core.exception.CustomException;
 import com.ms.blogserver.core.exception.ProgramException;
 import com.ms.blogserver.mapper.CommentMapper;
@@ -35,7 +36,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @description:
@@ -50,6 +55,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Autowired
     private CommentLikeService commentLikeService;
+
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
     private RedisUtils redisUtils;
@@ -119,6 +127,24 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             likeMap.put(dto.getCommentId().toString(), resList);
         }
         redisUtils.hmset(RedisKeyContexts.COMMENT_LIKES,likeMap);
+    }
+
+    @Override
+    public List<Long> likeList(Long id) {
+        if (Objects.isNull(id)){
+            throw new CustomException(ErrorContexts.ID_IS_NULL);
+        }
+        List<Comment> commentList = commentService.lambdaQuery().eq(Comment::getArticleId, id).list();
+        if (CollectionUtils.isEmpty(commentList)){
+            return new ArrayList<>();
+        }
+        List<Long> commentIdList = commentList.stream().map(Comment::getCommenterId).collect(Collectors.toList());
+        List<CommentLike> likes = commentLikeService
+                .lambdaQuery()
+                .in(CommentLike::getCommentId, commentIdList)
+                .eq(CommentLike::getIsLike, LikeEnum.LIKE.status)
+                .list();
+        return likes.stream().map(CommentLike::getCommentId).collect(Collectors.toList());
     }
 
     private void handle(List<CommentItemVO> list){
