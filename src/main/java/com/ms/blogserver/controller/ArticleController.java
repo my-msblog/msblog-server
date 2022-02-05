@@ -49,9 +49,9 @@ public class ArticleController extends BaseController {
     /**
      * 获取指定id文章
      *
-     * @param id
-     * @return
-     * @throws Exception
+     * @param id id
+     * @return {@link Result}<{@link ArticleVO}>
+     * @throws Exception 异常
      */
     @ApiOperation(value="获取指定id文章")
     @PostMapping(value = "/get")
@@ -67,9 +67,9 @@ public class ArticleController extends BaseController {
     /**
      * 获取文章评论
      *
-     * @param dto
-     * @return
-     * @throws Exception
+     * @param dto dto
+     * @return {@link Result}<{@link PageInfo}<{@link CommentItemVO}>>
+     * @throws Exception 异常
      */
     @ApiOperation(value = "获取文章评论")
     @PostMapping(value = "/comment")
@@ -95,10 +95,11 @@ public class ArticleController extends BaseController {
     }
 
     /**
-     * 评论提交
-     * @param dto
-     * @return
-     * @throws Exception
+     * 提交评论
+     *
+     * @param dto dto
+     * @return {@link Result}<{@link String}>
+     * @throws Exception 异常
      */
     @ApiOperation(value = "评论提交接口")
     @PostMapping(value = "/comment/submit")
@@ -117,8 +118,9 @@ public class ArticleController extends BaseController {
     /**
      * 日期分页
      *
-     * @return
-     * @throws Exception
+     * @param dto dto
+     * @return {@link Result}<{@link PageInfo}<{@link ArchiveVO}>>
+     * @throws Exception 异常
      */
     @ApiOperation("日期分页")
     @PostMapping(value = "/date/page")
@@ -131,6 +133,12 @@ public class ArticleController extends BaseController {
         }
     }
 
+    /**
+     * 文章分类列表
+     *
+     * @return {@link Result}<{@link List}<{@link CategoryVO}>>
+     * @throws Exception 异常
+     */
     @ApiOperation(value="文章分类列表")
     @GetMapping(value = "/list/category")
     public Result<List<CategoryVO>> getCategory() throws Exception {
@@ -144,9 +152,10 @@ public class ArticleController extends BaseController {
 
     /**
      * 获取同一类别的文章
-     * @param id
-     * @return
-     * @throws Exception
+     *
+     * @param id id
+     * @return {@link Result}<{@link List}<{@link ArticleCategoryVO}>>
+     * @throws Exception 异常
      */
     @ApiOperation("获取同一类别的文章")
     @GetMapping(value = "/category/{id}")
@@ -162,8 +171,8 @@ public class ArticleController extends BaseController {
     /**
      * 标签列表
      *
-     * @return
-     * @throws Exception
+     * @return {@link Result}<{@link List}<{@link TagVO}>>
+     * @throws Exception 异常
      */
     @ApiOperation("标签列表")
     @GetMapping(value = "/list/tag")
@@ -176,6 +185,13 @@ public class ArticleController extends BaseController {
         }
     }
 
+    /**
+     * 评论点赞接口
+     *
+     * @param dto dto
+     * @return {@link Result}<{@link String}>
+     * @throws Exception 异常
+     */
     @ApiOperation(value = "评论点赞接口")
     @PostMapping(value = "/comment/like")
     public Result<String> commentLike(@RequestBody GiveLikesDTO dto) throws Exception{
@@ -187,8 +203,15 @@ public class ArticleController extends BaseController {
         }
     }
 
+    /**
+     * 评论点赞列表
+     *
+     * @param dto dto
+     * @return {@link Result}<{@link List}<{@link Long}>>
+     * @throws Exception 异常
+     */
     @ApiOperation(value = "评论点赞列表")
-    @PostMapping(value = "/commen/like/list")
+    @PostMapping(value = "/comment/like/list")
     public Result<List<Long>> getCommentLikeIdList( @RequestBody IdDTO dto) throws Exception {
         try {
             List<Long> idList = commentService.likeList(dto.getId());

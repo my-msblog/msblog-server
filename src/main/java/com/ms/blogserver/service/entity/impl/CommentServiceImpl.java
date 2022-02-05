@@ -27,7 +27,7 @@ import com.ms.blogserver.model.vo.CommentItemVO;
 import com.ms.blogserver.service.entity.CommentLikeService;
 import com.ms.blogserver.service.entity.CommentService;
 import com.ms.blogserver.service.entity.UserService;
-import com.ms.blogserver.utils.ClassUtils;
+import com.ms.blogserver.utils.JsonUtils;
 import com.ms.blogserver.utils.PageInfoUtil;
 import com.ms.blogserver.utils.RedisUtils;
 import com.ms.blogserver.utils.TokenUtils;
@@ -36,10 +36,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -110,23 +107,37 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public void commentLike(GiveLikesDTO dto) {
-        Map<String, Object> likeMap = redisUtils.hmget(RedisKeyContexts.COMMENT_LIKES);
-        List<GiveLikesDTO> resList = new ArrayList<>();
-        if (!likeMap.isEmpty()){
-            List<GiveLikesDTO> commentLikes = ClassUtils
-                    .castList(likeMap.get(dto.getCommentId().toString()), GiveLikesDTO.class);
-            if (CollectionUtils.isEmpty(commentLikes)){
-                resList.add(dto);
-                likeMap.put(dto.getCommentId().toString(), resList);
+        try {
+            Map<String, Object> likeMap = redisUtils.hmget(RedisKeyContexts.COMMENT_LIKES);
+            List<GiveLikesDTO> resList = new ArrayList<>();
+            if (!likeMap.isEmpty()) {
+                String likeJson = (String) likeMap.get(dto.getCommentId().toString());
+                List<GiveLikesDTO> commentLikes = JsonUtils.toList(likeJson, GiveLikesDTO.class);
+                if (CollectionUtils.isEmpty(commentLikes)) {
+                    resList.add(dto);
+                    likeMap.put(dto.getCommentId().toString(), JsonUtils.toJson(resList));
+                } else {
+                    boolean exists = false;
+                    for (GiveLikesDTO next : commentLikes) {
+                        if (next.getCommentId().equals(dto.getCommentId())) {
+                            next.setIs(!next.getIs());
+                            exists = true;
+                            break;
+                        }
+                    }
+                    if (!exists){
+                        commentLikes.add(dto);
+                    }
+                    likeMap.put(dto.getCommentId().toString(), JsonUtils.toJson(commentLikes));
+                }
             } else {
-                commentLikes.add(dto);
-                likeMap.put(dto.getCommentId().toString(), commentLikes);
+                resList.add(dto);
+                likeMap.put(dto.getCommentId().toString(), JsonUtils.toJson(resList));
             }
-        } else {
-            resList.add(dto);
-            likeMap.put(dto.getCommentId().toString(), resList);
+            redisUtils.hmset(RedisKeyContexts.COMMENT_LIKES, likeMap);
+        }catch(Exception e){
+            throw new CustomException(e);
         }
-        redisUtils.hmset(RedisKeyContexts.COMMENT_LIKES,likeMap);
     }
 
     @Override
