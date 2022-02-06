@@ -19,12 +19,16 @@
         <spring.boot.web.version>2.5.5</spring.boot.web.version>
        <!-- <tomcat.version>2.4.5</tomcat.version>-->
         <lombok.version>1.18.22</lombok.version>
+        <mysql.version>8.0.25</mysql.version>
         <mybatis-plus.version>3.4.3.4</mybatis-plus.version>
         <fastjson.version>1.2.78</fastjson.version>
         <springfox.swagger-ui.version>3.0.0</springfox.swagger-ui.version>
         <captcha.version>1.6.2</captcha.version>
         <shiro.version>1.7.1</shiro.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <jsr310.version>2.13.1</jsr310.version>
+        <pagehelper.version>1.4.1</pagehelper.version>
+
         <commons.codec.version>20041127.091804</commons.codec.version>
         <commons.logging.version>1.2</commons.logging.version>
         <commons.io.version>20030203.000550</commons.io.version>
@@ -73,7 +77,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.25</version>
+            <version>${mysql.version}</version>
             <scope>runtime</scope>
         </dependency>
         <!--lombok-->
@@ -141,6 +145,11 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jsr310.version}</version>
+        </dependency>
         <!--http (sms verify)-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -160,7 +169,7 @@
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.4.0</version>
+            <version>${pagehelper.version}</version>
         </dependency>
 
        <!-- &lt;!&ndash;数据源&ndash;&gt;

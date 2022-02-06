@@ -36,7 +36,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -71,31 +73,31 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public PageInfo<CommentItemVO> getPageByArticle(IdDTO dto, String token) {
-        if (token == null){
+        if (token == null) {
             userId = 0L;
-        }else {
+        } else {
             userId = Long.getLong(TokenUtils.getAccount(token));
         }
         PageHelper.startPage(dto.getPage(), dto.getSize());
         List<Comment> allComment = baseMapper.selectList(new QueryWrapper<Comment>()
                 .lambda().eq(Comment::getArticleId, dto.getId()).eq(Comment::getParentId, DigitalContexts.ZERO)
                 .orderByDesc(Comment::getCreateTime));
-        if (CollectionUtils.isEmpty(allComment)){
+        if (CollectionUtils.isEmpty(allComment)) {
             return new PageInfo<>(new ArrayList<>());
         }
         List<CommentBO> commentBOList = CommentBoConverter.INSTANCE.toDataList(allComment);
         commentBOList.forEach(this::handleInfo);
-        List<CommentItemVO> commentItemVOList =CommentVoConverter.INSTANCE.toDataList(commentBOList);
+        List<CommentItemVO> commentItemVOList = CommentVoConverter.INSTANCE.toDataList(commentBOList);
         handle(commentItemVOList);
         PageInfo<CommentItemVO> commentVoPageInfo = new PageInfo<>();
-        PageInfoUtil.transform(new PageInfo<>(allComment),commentVoPageInfo);
+        PageInfoUtil.transform(new PageInfo<>(allComment), commentVoPageInfo);
         commentVoPageInfo.setList(commentItemVOList);
         return commentVoPageInfo;
     }
 
     @Override
     public void commentSubmit(CommentSubmitDTO dto, String token) {
-        if (StringUtils.isEmpty(token)){
+        if (StringUtils.isEmpty(token)) {
             throw new CustomException(LoginContexts.TOKEN_INVALID);
         }
         Long account = Long.getLong(TokenUtils.getAccount(token));
@@ -107,46 +109,65 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public void commentLike(GiveLikesDTO dto) {
-        try {
-            Map<String, Object> likeMap = redisUtils.hmget(RedisKeyContexts.COMMENT_LIKES);
-            List<GiveLikesDTO> resList = new ArrayList<>();
-            if (!likeMap.isEmpty()) {
-                String likeJson = (String) likeMap.get(dto.getCommentId().toString());
-                List<GiveLikesDTO> commentLikes = JsonUtils.toList(likeJson, GiveLikesDTO.class);
-                if (CollectionUtils.isEmpty(commentLikes)) {
-                    resList.add(dto);
-                    likeMap.put(dto.getCommentId().toString(), JsonUtils.toJson(resList));
-                } else {
-                    boolean exists = false;
-                    for (GiveLikesDTO next : commentLikes) {
-                        if (next.getCommentId().equals(dto.getCommentId())) {
-                            next.setIs(!next.getIs());
-                            exists = true;
-                            break;
-                        }
-                    }
-                    if (!exists){
-                        commentLikes.add(dto);
-                    }
-                    likeMap.put(dto.getCommentId().toString(), JsonUtils.toJson(commentLikes));
+        String likeJson = (String) redisUtils.get(RedisKeyContexts.COMMENT_LIKES);
+        List<GiveLikesDTO> likeList = JsonUtils.toList(likeJson, GiveLikesDTO.class);
+        if (CollectionUtils.isEmpty(likeList)) {
+            likeList = new ArrayList<>();
+            likeList.add(dto);
+        } else {
+            boolean exists = false;
+            for (GiveLikesDTO next : likeList) {
+                if (next.getCommentId().equals(dto.getCommentId())) {
+                    next.setIs(!next.getIs());
+                    exists = true;
+                    break;
                 }
-            } else {
-                resList.add(dto);
-                likeMap.put(dto.getCommentId().toString(), JsonUtils.toJson(resList));
             }
-            redisUtils.hmset(RedisKeyContexts.COMMENT_LIKES, likeMap);
-        }catch(Exception e){
-            throw new CustomException(e);
+            if (!exists) {
+                likeList.add(dto);
+            }
         }
+        redisUtils.set(RedisKeyContexts.COMMENT_LIKES, JsonUtils.toJson(likeList));
+//        try {
+//            Map<String, Object> likeMap = redisUtils.hmget(RedisKeyContexts.COMMENT_LIKES);
+//            List<GiveLikesDTO> resList = new ArrayList<>();
+//            if (!likeMap.isEmpty()) {
+//                String likeJson = (String) likeMap.get(dto.getCommentId().toString());
+//                List<GiveLikesDTO> commentLikes = JsonUtils.toList(likeJson, GiveLikesDTO.class);
+//                if (CollectionUtils.isEmpty(commentLikes)) {
+//                    resList.add(dto);
+//                    likeMap.put(dto.getCommentId().toString(), JsonUtils.toJson(resList));
+//                } else {
+//                    boolean exists = false;
+//                    for (GiveLikesDTO next : commentLikes) {
+//                        if (next.getCommentId().equals(dto.getCommentId())) {
+//                            next.setIs(!next.getIs());
+//                            exists = true;
+//                            break;
+//                        }
+//                    }
+//                    if (!exists){
+//                        commentLikes.add(dto);
+//                    }
+//                    likeMap.put(dto.getCommentId().toString(), JsonUtils.toJson(commentLikes));
+//                }
+//            } else {
+//                resList.add(dto);
+//                likeMap.put(dto.getCommentId().toString(), JsonUtils.toJson(resList));
+//            }
+//            redisUtils.hmset(RedisKeyContexts.COMMENT_LIKES, likeMap);
+//        }catch(Exception e){
+//            throw new CustomException(e);
+//        }
     }
 
     @Override
     public List<Long> likeList(Long id) {
-        if (Objects.isNull(id)){
+        if (Objects.isNull(id)) {
             throw new CustomException(ErrorContexts.ID_IS_NULL);
         }
         List<Comment> commentList = commentService.lambdaQuery().eq(Comment::getArticleId, id).list();
-        if (CollectionUtils.isEmpty(commentList)){
+        if (CollectionUtils.isEmpty(commentList)) {
             return new ArrayList<>();
         }
         List<Long> commentIdList = commentList.stream().map(Comment::getCommenterId).collect(Collectors.toList());
@@ -158,7 +179,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return likes.stream().map(CommentLike::getCommentId).collect(Collectors.toList());
     }
 
-    private void handle(List<CommentItemVO> list){
+    private void handle(List<CommentItemVO> list) {
         list.forEach(commentVO -> {
             List<CommentItemVO> children = getByParentId(commentVO.getId());
             commentVO.setChildren(children);
@@ -166,9 +187,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         list.removeIf(commentVO -> !commentVO.getParentId().equals(DigitalContexts.ZERO_LONG));
     }
 
-    private void handleInfo(CommentBO item){
+    private void handleInfo(CommentBO item) {
         User commenter = userService.getById(item.getCommenterId());
-        if (Objects.isNull(commenter)){
+        if (Objects.isNull(commenter)) {
             throw new ProgramException(ErrorContexts.DATABASE_INNER_TABLE);
         }
         item.setCommenter(commenter.getUsername());
@@ -177,7 +198,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         } else {
             item.setRespondent(userService.getById(item.getRespondentId()).getUsername());
         }
-        Integer likeCount = (int)commentLikeService.count(new LambdaQueryWrapper<CommentLike>()
+        Integer likeCount = (int) commentLikeService.count(new LambdaQueryWrapper<CommentLike>()
                 .eq(CommentLike::getCommentId, item.getId()));
         item.setLikes(likeCount);
         CommentLike userLike = commentLikeService

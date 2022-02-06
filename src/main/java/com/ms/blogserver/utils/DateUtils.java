@@ -10,6 +10,14 @@ import java.util.Date;
  */
 public class DateUtils {
 
+    public static String now() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.YEAR)+"-"
+                +calendar.get(Calendar.MONTH)+"-"
+                +calendar.get(Calendar.DATE)+" "
+                +calendar.get(Calendar.HOUR)+":"+calendar.get(Calendar.MINUTE);
+    }
+
     /**
      * 获取当天初始时间
      * @param date

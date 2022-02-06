@@ -99,7 +99,7 @@ public class RedisUtils {
      */
     public boolean set(String key,Object value) {
         try {
-            redisTemplate.opsForValue().set(key, value,-1,TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(key, value);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -392,7 +392,7 @@ public class RedisUtils {
      * @param end 结束  0 到 -1代表所有值
      * @return
      */
-    public List<Object> lGet(String key, long start, long end){
+    public <T> List<T> lGet(String key, long start, long end){
         try {
             return redisTemplate.opsForList().range(key, start, end);
         } catch (Exception e) {
