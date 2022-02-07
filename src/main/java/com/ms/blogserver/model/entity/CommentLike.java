@@ -3,6 +3,8 @@ package com.ms.blogserver.model.entity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
@@ -16,6 +18,8 @@ import java.time.LocalDateTime;
  */
 @Data
 @ToString
+@AllArgsConstructor
+@Builder
 @TableName(value = "ms_comment_like")
 public class CommentLike implements Serializable {
     private Long id;
@@ -24,4 +28,7 @@ public class CommentLike implements Serializable {
     private Integer isLike;
     @TableField(value = "create_time",fill = FieldFill.INSERT)
     private LocalDateTime createTime;
+
+    public CommentLike() {}
+
 }

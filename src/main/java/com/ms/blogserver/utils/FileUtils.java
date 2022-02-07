@@ -89,5 +89,19 @@ public class FileUtils {
             log.error(e.getMessage(),e);
             throw new ProgramException(ErrorContexts.FILE_ERR);
         }
-    };
+    }
+
+    /**
+     * 写文件
+     *
+     * @param filepath filepath
+     * @param content  内容
+     */
+    public static void fileWriterMethod(String filepath, String content) {
+        try (FileWriter fileWriter = new FileWriter(filepath)) {
+            fileWriter.append(content);
+        } catch (Exception e){
+            throw new ProgramException(ErrorContexts.FILE_ERR);
+        }
+    }
 }

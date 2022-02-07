@@ -3,10 +3,7 @@ package com.ms.blogserver.model.entity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -20,6 +17,7 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @TableName(value = "ms_comment")
 public class Comment implements Serializable {
     private Long id;

@@ -14,7 +14,7 @@ public enum LikeEnum {
     /**
      * 未点赞/取消点赞
      */
-    UNLKIE(1, "未点赞/取消点赞");
+    UNLIKE(1, "未点赞/取消点赞");
 
     public Integer status;
     public String message;
