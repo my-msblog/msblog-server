@@ -11,4 +11,6 @@ public interface RedisKeyContexts {
     String SPEC_CAPTCHA = "specCaptcha";
 
     String COMMENT_LIKES = "commentLikeRedis";
+
+    String COMMENT_LIKES_LIST = "1393130419668688898";
 }

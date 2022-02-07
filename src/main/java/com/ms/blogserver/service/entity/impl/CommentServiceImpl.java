@@ -38,6 +38,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -109,56 +110,50 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public void commentLike(GiveLikesDTO dto) {
-        String likeJson = (String) redisUtils.get(RedisKeyContexts.COMMENT_LIKES);
-        List<GiveLikesDTO> likeList = JsonUtils.toList(likeJson, GiveLikesDTO.class);
-        if (CollectionUtils.isEmpty(likeList)) {
-            likeList = new ArrayList<>();
-            likeList.add(dto);
-        } else {
-            boolean exists = false;
-            for (GiveLikesDTO next : likeList) {
-                if (next.getCommentId().equals(dto.getCommentId())) {
-                    next.setIs(!next.getIs());
-                    exists = true;
-                    break;
-                }
-            }
-            if (!exists) {
-                likeList.add(dto);
-            }
-        }
-        redisUtils.set(RedisKeyContexts.COMMENT_LIKES, JsonUtils.toJson(likeList));
-//        try {
-//            Map<String, Object> likeMap = redisUtils.hmget(RedisKeyContexts.COMMENT_LIKES);
-//            List<GiveLikesDTO> resList = new ArrayList<>();
-//            if (!likeMap.isEmpty()) {
-//                String likeJson = (String) likeMap.get(dto.getCommentId().toString());
-//                List<GiveLikesDTO> commentLikes = JsonUtils.toList(likeJson, GiveLikesDTO.class);
-//                if (CollectionUtils.isEmpty(commentLikes)) {
-//                    resList.add(dto);
-//                    likeMap.put(dto.getCommentId().toString(), JsonUtils.toJson(resList));
-//                } else {
-//                    boolean exists = false;
-//                    for (GiveLikesDTO next : commentLikes) {
-//                        if (next.getCommentId().equals(dto.getCommentId())) {
-//                            next.setIs(!next.getIs());
-//                            exists = true;
-//                            break;
-//                        }
-//                    }
-//                    if (!exists){
-//                        commentLikes.add(dto);
-//                    }
-//                    likeMap.put(dto.getCommentId().toString(), JsonUtils.toJson(commentLikes));
+//        String likeJson = (String) redisUtils.get(RedisKeyContexts.COMMENT_LIKES);
+//        List<GiveLikesDTO> likeList = JsonUtils.toList(likeJson, GiveLikesDTO.class);
+//        if (CollectionUtils.isEmpty(likeList)) {
+//            likeList = new ArrayList<>();
+//            likeList.add(dto);
+//        } else {
+//            boolean exists = false;
+//            for (GiveLikesDTO next : likeList) {
+//                if (next.getCommentId().equals(dto.getCommentId())) {
+//                    next.setIs(!next.getIs());
+//                    exists = true;
+//                    break;
 //                }
-//            } else {
-//                resList.add(dto);
-//                likeMap.put(dto.getCommentId().toString(), JsonUtils.toJson(resList));
 //            }
-//            redisUtils.hmset(RedisKeyContexts.COMMENT_LIKES, likeMap);
-//        }catch(Exception e){
-//            throw new CustomException(e);
+//            if (!exists) {
+//                likeList.add(dto);
+//            }
 //        }
+//        redisUtils.set(RedisKeyContexts.COMMENT_LIKES, JsonUtils.toJson(likeList));
+        try {
+            Map<String, Object> likeMap = redisUtils.hmget(RedisKeyContexts.COMMENT_LIKES);
+            String likeJson = (String) likeMap.get(RedisKeyContexts.COMMENT_LIKES_LIST);
+            List<GiveLikesDTO> commentLikes = JsonUtils.toList(likeJson, GiveLikesDTO.class);
+            if (!likeMap.isEmpty() && !CollectionUtils.isEmpty(commentLikes)) {
+                boolean exists = false;
+                for (GiveLikesDTO next : commentLikes) {
+                    if (next.getCommentId().equals(dto.getCommentId())) {
+                        next.setIs(!next.getIs());
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists) {
+                    commentLikes.add(dto);
+                }
+            } else {
+                commentLikes = new ArrayList<GiveLikesDTO>();
+                commentLikes.add(dto);
+            }
+            likeMap.put(RedisKeyContexts.COMMENT_LIKES_LIST, JsonUtils.toJson(commentLikes));
+            redisUtils.hmset(RedisKeyContexts.COMMENT_LIKES, likeMap);
+        } catch (Exception e) {
+            throw new CustomException(e);
+        }
     }
 
     @Override
