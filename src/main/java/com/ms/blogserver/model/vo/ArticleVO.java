@@ -1,6 +1,5 @@
 package com.ms.blogserver.model.vo;
 
-import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.core.base.BaseVO;
 import lombok.Data;
 import lombok.ToString;
@@ -27,5 +26,5 @@ public class ArticleVO implements BaseVO {
     /**
      * 文章标签
      */
-    private List<TagVO> tagVoS;
+    private List<TagVO> tags;
 }

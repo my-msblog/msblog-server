@@ -42,10 +42,10 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public void userLogout(String token) {
         if(StringUtils.isEmpty(token)){
-            throw new CustomException(LoginContexts.TOKEN_INVALID);
+            throw new CustomException(LoginContexts.TOKEN_ERROR);
         }
         if (!tokenService.removeToken(token)) {
-            throw new CustomException(LoginContexts.NO_LOGIN_USER);
+            throw new CustomException(LoginContexts.TOKEN_INVALID);
         }
     }
 

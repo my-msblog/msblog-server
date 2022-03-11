@@ -10,13 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * 文件跑龙套
- *
- * @author maoshen5478
  * @description: 文件工具类
  * @author: zhh
  * @time: 2021/6/9
- * @date 2022/01/28
  */
 @Slf4j
 public class FileUtils {

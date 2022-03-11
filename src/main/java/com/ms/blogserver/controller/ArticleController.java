@@ -49,15 +49,15 @@ public class ArticleController extends BaseController {
     /**
      * 获取指定id文章
      *
-     * @param id id
+     * @param dto dto
      * @return {@link Result}<{@link ArticleVO}>
      * @throws Exception 异常
      */
     @ApiOperation(value="获取指定id文章")
     @PostMapping(value = "/get")
-    public Result<ArticleVO> getArticle(@RequestBody Long id) throws Exception {
+    public Result<ArticleVO> getArticle(@RequestBody IdDTO dto) throws Exception {
         try {
-            ArticleVO res = articleService.getArticleById(id);
+            ArticleVO res = articleService.getArticleById(dto.getId());
             return ResultFactory.buildSuccessResult(res);
         } catch (Exception e) {
             throw this.exceptionHandle(e);
