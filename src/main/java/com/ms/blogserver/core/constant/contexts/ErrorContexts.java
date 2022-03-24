@@ -25,6 +25,8 @@ public interface ErrorContexts {
 
     String INTERFACE_WIP = "接口开发中";
 
+    String NOT_FIND_ARTICLE = "未找到指定文章";
+
     // database error
 
     String DATABASE_INNER_TABLE = "系统内部异常：数据库链表关系异常，请联系管理员";

@@ -32,8 +32,8 @@ public class VerifyController {
     /**
      * 发送手机验证码
      *
-     * @param dto
-     * @return
+     * @param dto dto
+     * @return {@link Result}<{@link String}>
      */
     @ApiOperation(value = "发送手机验证码")
     @PostMapping(value = "/sms")
@@ -50,7 +50,7 @@ public class VerifyController {
     /**
      * 获取算式验证码
      *
-     * @return
+     * @return {@link Result}<{@link CaptchaVO}>
      */
     @ApiOperation(value = "获取算式验证码")
     @GetMapping(value = "/captcha/arithmetic")
@@ -64,9 +64,10 @@ public class VerifyController {
     }
 
     /**
+     * 规范
      * 获取验证码（字母+数字）
      *
-     * @return
+     * @return {@link Result}<{@link CaptchaVO}>
      */
     @ApiOperation(value = "获取验证码（字母+数字）")
     @GetMapping(value = "/captcha/spec")
