@@ -33,9 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -75,11 +73,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             if (StringUtils.isNotEmpty(watchStr)){
                 watches = JsonUtils.toList(watchStr, ArticleWatchBO.class);
             }
-            watches.add(ArticleWatchBO
-                    .builder()
-                    .articleId(article.getId())
-                    .time(new Date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())
-                    .build());
+            watches.add(ArticleWatchBO.builder().articleId(article.getId()).build());
             redisUtils.set(RedisKeyContexts.ARTICLE_WATCH,JsonUtils.toJson(watches));
             ArticleVO articleVO = ArticleVoConverter.INSTANCE.toData(article);
             articleVO.setTypeName(categoryService.getCategoryByCid(article.getType()));
@@ -88,7 +82,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             articleVO.setWordCount(article.getContentMd()
                     .replaceAll("<[^>]*>", "")
                     .length());
-            articleVO.setRead(articleVO.getRead() + watches.size());
+            int sum = watches.stream().mapToInt(item -> item.getArticleId().equals(article.getId()) ? 1 : 0).sum();
+            articleVO.setRead(articleVO.getRead() + sum);
             return articleVO;
         } catch (Exception e) {
            throw new CustomException(e.getMessage());
@@ -117,8 +112,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             String type = categoryService.getCategoryByCid(item.getType());
             item.setTypeName(type);
             List<Long> tagIds = articleTagService
-                    .list(new LambdaQueryWrapper<ArticleTag>()
-                            .eq(ArticleTag::getArticleId, item.getId()))
+                    .list(new LambdaQueryWrapper<ArticleTag>().eq(ArticleTag::getArticleId, item.getId()))
                     .stream()
                     .map(ArticleTag::getTagId)
                     .collect(Collectors.toList());
