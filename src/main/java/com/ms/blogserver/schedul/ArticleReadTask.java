@@ -41,14 +41,14 @@ public class ArticleReadTask {
         bos.forEach(item -> {
             Long id = item.getArticleId();
             if (articles.containsKey(id)){
-                articles.remove(id, articles.get(id) + 1);
+                articles.replace(id, articles.get(id) + 1);
             } else {
                 articles.put(id, DigitalContexts.ONE);
             }
         });
         for (Map.Entry<Long,Integer> entry: articles.entrySet()){
             Article article = articleService.getById(entry.getKey());
-            article.setRead(article.getRead() + entry.getValue());
+            article.setReading(article.getReading() + entry.getValue());
             boolean update = articleService.updateById(article);
             if (!update){
                 throw new ProgramException(ErrorContexts.DATABASE_UPDATED);

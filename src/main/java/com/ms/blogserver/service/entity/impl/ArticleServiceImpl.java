@@ -83,7 +83,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                     .replaceAll("<[^>]*>", "")
                     .length());
             int sum = watches.stream().mapToInt(item -> item.getArticleId().equals(article.getId()) ? 1 : 0).sum();
-            articleVO.setRead(articleVO.getRead() + sum);
+            articleVO.setReading(articleVO.getReading() + sum);
             return articleVO;
         } catch (Exception e) {
            throw new CustomException(e.getMessage());

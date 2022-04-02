@@ -33,7 +33,7 @@ public class ArticleVO implements BaseVO {
     /**
      * 阅读数量
      */
-    private Integer read;
+    private Integer reading;
     /**
      * 文章标签
      */
