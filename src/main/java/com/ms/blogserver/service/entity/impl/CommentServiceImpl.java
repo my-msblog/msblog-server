@@ -110,25 +110,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public void commentLike(GiveLikesDTO dto) {
-//        String likeJson = (String) redisUtils.get(RedisKeyContexts.COMMENT_LIKES);
-//        List<GiveLikesDTO> likeList = JsonUtils.toList(likeJson, GiveLikesDTO.class);
-//        if (CollectionUtils.isEmpty(likeList)) {
-//            likeList = new ArrayList<>();
-//            likeList.add(dto);
-//        } else {
-//            boolean exists = false;
-//            for (GiveLikesDTO next : likeList) {
-//                if (next.getCommentId().equals(dto.getCommentId())) {
-//                    next.setIs(!next.getIs());
-//                    exists = true;
-//                    break;
-//                }
-//            }
-//            if (!exists) {
-//                likeList.add(dto);
-//            }
-//        }
-//        redisUtils.set(RedisKeyContexts.COMMENT_LIKES, JsonUtils.toJson(likeList));
         try {
             Map<String, Object> likeMap = redisUtils.hmget(RedisKeyContexts.COMMENT_LIKES);
             String likeJson = (String) likeMap.get(RedisKeyContexts.COMMENT_LIKES_LIST);

@@ -47,6 +47,9 @@ import java.util.stream.Collectors;
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private CategoryService categoryService;
 
     @Autowired
@@ -84,6 +87,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                     .length());
             int sum = watches.stream().mapToInt(item -> item.getArticleId().equals(article.getId()) ? 1 : 0).sum();
             articleVO.setReading(articleVO.getReading() + sum);
+            articleVO.setWriter(userService.getById(article.getWriterId()).getUsername());
             return articleVO;
         } catch (Exception e) {
            throw new CustomException(e.getMessage());

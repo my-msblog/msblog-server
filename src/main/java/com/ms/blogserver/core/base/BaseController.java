@@ -36,7 +36,8 @@ public class BaseController {
      * @return
      */
     public String getHeaderToken(){
-        return getRequest().getHeader("token");
+        String token = getRequest().getHeader("token");
+        return "null".equals(token) ? null : token;
     }
 
     /**
