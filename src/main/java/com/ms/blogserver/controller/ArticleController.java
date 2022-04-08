@@ -221,4 +221,18 @@ public class ArticleController extends BaseController {
         }
     }
 
+    @GetMapping(value="/recommend")
+    @ApiOperation(value = "文章推荐")
+    public Result<List<ArticleRecommendVO>> getRecommend() {
+        List<ArticleRecommendVO> recommend = articleService.recommend();
+        return ResultFactory.buildSuccessResult(recommend);
+    }
+
+    @GetMapping(value = "/like/{id}")
+    @ApiOperation(value = "文章点赞")
+    public Result<String> articleLike(@PathVariable Long id){
+        articleService.like(id);
+        return ResultFactory.buildSuccessResult();
+    }
+
 }

@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.converter.bo.ArticleBoConverter;
-import com.ms.blogserver.converter.vo.ArchiveVoConverter;
-import com.ms.blogserver.converter.vo.ArticleCategoryVoConverter;
-import com.ms.blogserver.converter.vo.ArticleVoConverter;
-import com.ms.blogserver.converter.vo.TagVoConverter;
+import com.ms.blogserver.converter.vo.*;
 import com.ms.blogserver.core.base.BaseDTO;
 import com.ms.blogserver.core.constant.contexts.ErrorContexts;
 import com.ms.blogserver.core.constant.contexts.RedisKeyContexts;
@@ -20,10 +17,7 @@ import com.ms.blogserver.model.entity.Article;
 import com.ms.blogserver.model.entity.ArticleTag;
 import com.ms.blogserver.model.entity.Favorites;
 import com.ms.blogserver.model.entity.Tag;
-import com.ms.blogserver.model.vo.ArchiveVO;
-import com.ms.blogserver.model.vo.ArticleCategoryVO;
-import com.ms.blogserver.model.vo.ArticleVO;
-import com.ms.blogserver.model.vo.TagVO;
+import com.ms.blogserver.model.vo.*;
 import com.ms.blogserver.service.entity.*;
 import com.ms.blogserver.utils.JsonUtils;
 import com.ms.blogserver.utils.PageInfoUtil;
@@ -128,5 +122,24 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             item.setTagVOList(tagVOList);
         });
         return ArticleCategoryVoConverter.INSTANCE.toDataList(articleBOList);
+    }
+
+    @Override
+    public List<ArticleRecommendVO> recommend() {
+        List<Article> list = lambdaQuery()
+                .select(Article::getId, Article::getTitle, Article::getCover, Article::getCreateTime)
+                .orderByDesc(Article::getCreateTime).last("limit 5")
+                .list();
+        return RecommendVoConverter.INSTANCE.toDataList(list);
+    }
+
+    /**
+     * 文章点赞
+     *
+     * @param id id
+     */
+    @Override
+    public void like(Long id) {
+
     }
 }

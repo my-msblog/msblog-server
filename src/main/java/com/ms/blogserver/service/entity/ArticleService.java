@@ -6,6 +6,7 @@ import com.ms.blogserver.core.base.BaseDTO;
 import com.ms.blogserver.model.entity.Article;
 import com.ms.blogserver.model.vo.ArchiveVO;
 import com.ms.blogserver.model.vo.ArticleCategoryVO;
+import com.ms.blogserver.model.vo.ArticleRecommendVO;
 import com.ms.blogserver.model.vo.ArticleVO;
 
 import java.util.List;
@@ -37,5 +38,19 @@ public interface ArticleService extends IService<Article> {
      * @return
      */
     List<ArticleCategoryVO> getArticleListByCategory(Integer category);
+
+    /**
+     * 推荐
+     *
+     * @return {@link List}<{@link ArticleRecommendVO}>
+     */
+    List<ArticleRecommendVO> recommend();
+
+    /**
+     * 文章点赞
+     *
+     * @param id id
+     */
+    void like(Long id);
 
 }

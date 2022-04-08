@@ -43,7 +43,7 @@ public interface CommentService extends IService<Comment> {
 
 
     /**
-     * 评论等
+     * 评论点赞
      *
      * @param dto dto
      */
