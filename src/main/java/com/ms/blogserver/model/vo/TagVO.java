@@ -12,7 +12,7 @@ import lombok.ToString;
 @Data
 @ToString
 public class TagVO implements BaseVO {
-    private Long tageId;
+    private Long tagId;
     private String name;
     private String nameZh;
 }

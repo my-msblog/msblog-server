@@ -2,11 +2,11 @@ package com.ms.blogserver.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.core.base.BaseController;
+import com.ms.blogserver.core.base.BaseDTO;
 import com.ms.blogserver.core.constant.contexts.ErrorContexts;
 import com.ms.blogserver.core.constant.contexts.PermissionContexts;
 import com.ms.blogserver.core.constant.result.Result;
 import com.ms.blogserver.core.constant.result.ResultFactory;
-import com.ms.blogserver.core.base.BaseDTO;
 import com.ms.blogserver.model.dto.CommentSubmitDTO;
 import com.ms.blogserver.model.dto.GiveLikesDTO;
 import com.ms.blogserver.model.dto.IdDTO;
@@ -182,6 +182,17 @@ public class ArticleController extends BaseController {
             return ResultFactory.buildSuccessResult(list);
         } catch (Exception e){
            throw this.exceptionHandle(e);
+        }
+    }
+
+    @ApiOperation(value = "获取同一标签的文章")
+    @GetMapping(value = "/tag/{id}")
+    public Result<List<ArticleCategoryVO>> getTagByIdList(@PathVariable Long id) throws Exception{
+        try {
+            List<ArticleCategoryVO> tagListById = tagService.getTagListById(id);
+            return ResultFactory.buildSuccessResult(tagListById);
+        }catch (Exception e){
+            throw this.exceptionHandle(e);
         }
     }
 
