@@ -13,7 +13,6 @@ import java.util.Objects;
  * @time: 2021/11/2
  */
 @Data
-@ToString
 public class CardValueVO implements BaseVO {
     private Integer visit;
     private Integer user;

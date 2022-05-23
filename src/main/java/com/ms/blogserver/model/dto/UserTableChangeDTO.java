@@ -1,7 +1,6 @@
 package com.ms.blogserver.model.dto;
 
 import lombok.Data;
-import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -11,7 +10,6 @@ import java.io.Serializable;
  * @time: 2021/7/1
  */
 @Data
-@ToString
 public class UserTableChangeDTO implements Serializable {
     private Long id;
     private String username;

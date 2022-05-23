@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
  * @time: 2021/6/11
  */
 @Data
-@ToString
 @TableName(value = "ms_tag")
 public class Tag implements Serializable {
     private Long id;

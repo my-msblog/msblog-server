@@ -2,7 +2,6 @@ package com.ms.blogserver.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -12,7 +11,6 @@ import java.io.Serializable;
  * @time: 2021/6/11
  */
 @Data
-@ToString
 @TableName(value = "ms_article_tag")
 public class ArticleTag implements Serializable {
     private Long id;

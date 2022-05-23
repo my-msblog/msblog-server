@@ -3,7 +3,6 @@ package com.ms.blogserver.model.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ms.blogserver.core.base.BaseVO;
 import lombok.Data;
-import lombok.ToString;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +12,6 @@ import java.time.LocalDateTime;
  * @time: 2021/5/31
  */
 @Data
-@ToString
 public class UserVO implements BaseVO {
     private Long id ;
     private String username;

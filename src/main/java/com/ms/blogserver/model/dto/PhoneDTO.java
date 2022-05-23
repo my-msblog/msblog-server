@@ -12,7 +12,6 @@ import lombok.ToString;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@ToString
 public class PhoneDTO extends BaseDTO {
     private String phone;
 }

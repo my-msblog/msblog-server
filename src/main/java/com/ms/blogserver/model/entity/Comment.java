@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
  * @time: 2021/6/2
  */
 @Data
-@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

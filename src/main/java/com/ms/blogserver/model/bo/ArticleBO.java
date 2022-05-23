@@ -3,7 +3,6 @@ package com.ms.blogserver.model.bo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ms.blogserver.model.vo.TagVO;
 import lombok.Data;
-import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -15,7 +14,6 @@ import java.util.List;
  * @time: 2021/11/4
  */
 @Data
-@ToString
 public class ArticleBO implements Serializable {
     private Long id;
     private String title;

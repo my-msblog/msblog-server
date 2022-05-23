@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.ToString;
 
 import java.util.Date;
 
@@ -15,7 +14,6 @@ import java.util.Date;
  * @time: 2021/11/16
  */
 @Data
-@ToString
 @TableName("ms_announcement")
 public class Announcement {
     private Long id;

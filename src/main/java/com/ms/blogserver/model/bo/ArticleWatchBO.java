@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
  * @time: 2022/3/24
  */
 @Data
-@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

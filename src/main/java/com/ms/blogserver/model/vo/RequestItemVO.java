@@ -3,7 +3,6 @@ package com.ms.blogserver.model.vo;
 import com.ms.blogserver.core.base.BaseVO;
 import lombok.Builder;
 import lombok.Data;
-import lombok.ToString;
 
 import java.util.Map;
 
@@ -14,8 +13,6 @@ import java.util.Map;
  */
 @Data
 @Builder
-
-@ToString
 public class RequestItemVO implements BaseVO {
 
     /**

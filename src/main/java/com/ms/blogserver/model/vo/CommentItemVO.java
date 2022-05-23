@@ -14,7 +14,6 @@ import java.util.List;
  * @time: 2021/6/2
  */
 @Data
-@ToString
 public class CommentItemVO implements BaseVO {
     private Long id;
     private String respondent;

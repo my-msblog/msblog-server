@@ -3,7 +3,6 @@ package com.ms.blogserver.model.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -13,7 +12,6 @@ import java.io.Serializable;
  * @time: 2021/5/27
  */
 @Data
-@ToString
 @TableName(value = "ms_permission")
 public class Permission implements Serializable {
     private Long id;

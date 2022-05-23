@@ -2,7 +2,8 @@ package com.ms.blogserver.model.bo;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.ToString;
+
+import java.io.Serializable;
 
 /**
  * @description:
@@ -10,9 +11,8 @@ import lombok.ToString;
  * @time: 2022/1/24
  */
 @Data
-@ToString
 @Builder
-public class CommentSubmitBO {
+public class CommentSubmitBO implements Serializable {
     private Long commentId;
     private String context;
     private String replyTime;

@@ -1,7 +1,6 @@
 package com.ms.blogserver.model.dto;
 
 import lombok.Data;
-import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -10,7 +9,6 @@ import java.io.Serializable;
  * @author: zhh
  * @time: 2021/10/22
  */
-@ToString
 @Data
 public class StatusDTO implements Serializable {
     private Long id;

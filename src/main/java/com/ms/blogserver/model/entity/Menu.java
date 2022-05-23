@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.ToString;
-
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,7 +14,6 @@ import java.util.List;
  * @time: 2021/5/21
  */
 @Data
-@ToString
 @TableName(value = "ms_menu")
 public class Menu implements Serializable {
 

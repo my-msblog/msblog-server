@@ -14,7 +14,6 @@ import java.util.List;
  * @time: 2021/11/4
  */
 @Data
-@ToString
 public class ArticleCardVO implements BaseVO {
     private Long id;
     private String title;
