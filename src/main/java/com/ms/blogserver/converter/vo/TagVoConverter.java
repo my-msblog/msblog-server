@@ -20,6 +20,18 @@ public interface TagVoConverter extends Converter<Tag, TagVO> {
     TagVoConverter INSTANCE = Mappers.getMapper(TagVoConverter.class);
 
     /**
+     * 数据
+     *
+     * @param tag 标签
+     * @return {@link TagVO}
+     */
+    @Override
+    @Mappings({
+            @Mapping(source="id",target="tagId")
+    })
+    TagVO toData(Tag tag);
+
+    /**
      * 重写vo转化
      *
      * @param tags 标签
