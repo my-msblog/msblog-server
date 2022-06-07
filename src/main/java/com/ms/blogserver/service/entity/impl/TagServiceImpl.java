@@ -59,7 +59,10 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         if (CollectionUtils.isEmpty(articleIdList)) {
             return new ArrayList<>();
         }
-        List<Article> articleList = articleService.lambdaQuery().in(Article::getId, articleTagList).list();
+        List<Article> articleList = articleService.lambdaQuery().in(Article::getId, articleIdList).list();
+        if (CollectionUtils.isEmpty(articleList)){
+            return new ArrayList<>();
+        }
         List<ArticleBO> articleBOList = ArticleBoConverter.INSTANCE.toDataList(articleList);
         articleBOList.forEach(item ->{
             String type = categoryService.getCategoryByCid(item.getType());
