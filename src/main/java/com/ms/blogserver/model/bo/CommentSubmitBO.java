@@ -13,6 +13,7 @@ import java.io.Serializable;
 @Data
 @Builder
 public class CommentSubmitBO implements Serializable {
+    private static final long serialVersionUID = 5297097845253121808L;
     private Long commentId;
     private String context;
     private String replyTime;

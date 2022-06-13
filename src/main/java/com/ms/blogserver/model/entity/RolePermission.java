@@ -1,5 +1,6 @@
 package com.ms.blogserver.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -13,6 +14,8 @@ import java.io.Serializable;
 @Data
 @TableName(value = "ms_role_permission")
 public class RolePermission implements Serializable {
+    private static final long serialVersionUID = 7716761213309575475L;
+    @TableId
     private Long id;
     private Long rid;
     private Long pid;

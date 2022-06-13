@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @TableName(value = "ms_user")
 public class User implements Serializable {
 
+    private static final long serialVersionUID = -8727723255082076014L;
     @TableId(type = IdType.ASSIGN_ID)
     private Long id ;
     private String username;

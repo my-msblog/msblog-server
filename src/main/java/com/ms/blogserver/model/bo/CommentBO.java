@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
  */
 @Data
 public class CommentBO implements Serializable {
+    private static final long serialVersionUID = -4165423125362968073L;
     private Long id;
     private String content;
     private Long articleId;

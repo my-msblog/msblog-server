@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Data
 public class ArticleBO implements Serializable {
+    private static final long serialVersionUID = 4110106224293694597L;
     private Long id;
     private String title;
     private String content;

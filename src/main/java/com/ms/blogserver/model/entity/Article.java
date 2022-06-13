@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Data
 @TableName(value = "ms_article")
 public class Article implements Serializable {
+    private static final long serialVersionUID = 609371007308965968L;
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
     private String title;

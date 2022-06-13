@@ -1,5 +1,6 @@
 package com.ms.blogserver.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -14,7 +15,9 @@ import java.util.Date;
 @Data
 @TableName("ms_flow")
 public class Flow implements Serializable {
+    private static final long serialVersionUID = -2415954874038185527L;
+    @TableId
     private Long id;
     private Date time;
-    private int flow;
+    private Integer flow;
 }

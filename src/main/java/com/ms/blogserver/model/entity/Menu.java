@@ -1,6 +1,7 @@
 package com.ms.blogserver.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -17,6 +18,8 @@ import java.util.List;
 @TableName(value = "ms_menu")
 public class Menu implements Serializable {
 
+    private static final long serialVersionUID = -8911958141094981098L;
+    @TableId
     private Integer id;
     private String path;
     private String name;

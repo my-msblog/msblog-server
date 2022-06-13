@@ -49,7 +49,7 @@ public class FileServiceImpl implements FileService {
             res.setList(resList);
             return res;
         } catch (Exception e) {
-            throw new CustomException(e.getMessage());
+            throw new CustomException(e);
         }
     }
 
@@ -77,7 +77,7 @@ public class FileServiceImpl implements FileService {
                     throw new CustomException(ErrorContexts.FILE_NO_DELETE);
                 }
             } catch (Exception e) {
-                throw new CustomException(e.getMessage());
+                throw new CustomException(e);
             }
         }else {
             throw new CustomException(ErrorContexts.NO_FILE);
