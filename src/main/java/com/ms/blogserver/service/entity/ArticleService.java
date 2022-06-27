@@ -1,8 +1,9 @@
 package com.ms.blogserver.service.entity;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.core.base.BaseDTO;
+import com.ms.blogserver.core.base.EntityService;
+import com.ms.blogserver.mapper.ArticleMapper;
 import com.ms.blogserver.model.entity.Article;
 import com.ms.blogserver.model.vo.ArchiveVO;
 import com.ms.blogserver.model.vo.ArticleCategoryVO;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author: zhh
  * @time: 2021/6/1
  */
-public interface ArticleService extends IService<Article> {
+public interface ArticleService extends EntityService<Article, ArticleMapper> {
 
     /**
      * 获取id文章

@@ -1,6 +1,7 @@
 package com.ms.blogserver.service.entity;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.ms.blogserver.core.base.EntityService;
+import com.ms.blogserver.mapper.UserMapper;
 import com.ms.blogserver.model.dto.UserTableChangeDTO;
 import com.ms.blogserver.model.entity.User;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @time: 2021/6/11
  */
 
-public interface UserService extends IService<User> {
+public interface UserService extends EntityService<User, UserMapper> {
     /**
      *  判断用户名是否存在
      * @param username

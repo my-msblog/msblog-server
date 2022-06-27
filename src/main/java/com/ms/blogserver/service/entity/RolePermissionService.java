@@ -1,6 +1,7 @@
 package com.ms.blogserver.service.entity;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.ms.blogserver.core.base.EntityService;
+import com.ms.blogserver.mapper.RolePermissionMapper;
 import com.ms.blogserver.model.entity.RolePermission;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * @author: zhh
  * @time: 2021/5/21
  */
-public interface RolePermissionService extends IService<RolePermission> {
+public interface RolePermissionService extends EntityService<RolePermission, RolePermissionMapper> {
     /**
      * 获取角色权限列表
      * @param roleId

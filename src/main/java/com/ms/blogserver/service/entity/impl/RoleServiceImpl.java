@@ -1,10 +1,10 @@
 package com.ms.blogserver.service.entity.impl;
 
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ms.blogserver.core.base.EntityServiceImpl;
 import com.ms.blogserver.core.constant.contexts.ErrorContexts;
 import com.ms.blogserver.core.exception.ProgramException;
-import com.ms.blogserver.model.entity.Role;
 import com.ms.blogserver.mapper.RoleMapper;
+import com.ms.blogserver.model.entity.Role;
 import com.ms.blogserver.service.entity.RoleService;
 import com.ms.blogserver.service.entity.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.Objects;
  * @time: 2021/5/21
  */
 @Service
-public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements RoleService {
+public class RoleServiceImpl extends EntityServiceImpl<Role,RoleMapper> implements RoleService {
 
     @Autowired
     private UserRoleService userRoleService;

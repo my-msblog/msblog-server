@@ -3,7 +3,8 @@ package com.ms.blogserver.model.dto;
 import com.ms.blogserver.core.base.BaseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
+
+import java.io.Serializable;
 
 /**
  * @description:
@@ -12,6 +13,7 @@ import lombok.ToString;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class PhoneDTO extends BaseDTO {
+public class PhoneDTO extends BaseDTO implements Serializable {
+    private static final long serialVersionUID = 6462880228083813162L;
     private String phone;
 }

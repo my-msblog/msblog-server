@@ -1,6 +1,7 @@
 package com.ms.blogserver.service.entity;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.ms.blogserver.core.base.EntityService;
+import com.ms.blogserver.mapper.RoleMapper;
 import com.ms.blogserver.model.entity.Role;
 
 /**
@@ -8,7 +9,7 @@ import com.ms.blogserver.model.entity.Role;
  * @author: zhh
  * @time: 2021/5/21
  */
-public interface RoleService extends IService<Role> {
+public interface RoleService extends EntityService<Role, RoleMapper> {
 
     /**
      * 根据用户id获取角色信息

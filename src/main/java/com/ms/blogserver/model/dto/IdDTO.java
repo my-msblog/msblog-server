@@ -15,6 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class IdDTO extends BaseDTO implements Serializable {
+    private static final long serialVersionUID = -5817000475347190300L;
     private Long id;
     private List<Long> idList;
 

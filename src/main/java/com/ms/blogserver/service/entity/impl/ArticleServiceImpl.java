@@ -1,12 +1,12 @@
 package com.ms.blogserver.service.entity.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.converter.bo.ArticleBoConverter;
 import com.ms.blogserver.converter.vo.*;
 import com.ms.blogserver.core.base.BaseDTO;
+import com.ms.blogserver.core.base.EntityServiceImpl;
 import com.ms.blogserver.core.constant.contexts.ErrorContexts;
 import com.ms.blogserver.core.constant.contexts.RedisKeyContexts;
 import com.ms.blogserver.core.exception.CustomException;
@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
  * @time: 2021/6/1
  */
 @Service
-public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
+public class ArticleServiceImpl extends EntityServiceImpl<Article,ArticleMapper> implements ArticleService {
 
     @Autowired
     private UserService userService;

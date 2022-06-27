@@ -1,7 +1,8 @@
 package com.ms.blogserver.service.entity;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
+import com.ms.blogserver.core.base.EntityService;
+import com.ms.blogserver.mapper.CommentMapper;
 import com.ms.blogserver.model.dto.CommentSubmitDTO;
 import com.ms.blogserver.model.dto.GiveLikesDTO;
 import com.ms.blogserver.model.dto.IdDTO;
@@ -15,7 +16,7 @@ import java.util.List;
  * @author: zhh
  * @time: 2021/6/2
  */
-public interface CommentService extends IService<Comment> {
+public interface CommentService extends EntityService<Comment, CommentMapper> {
 
     /**
      * 评论父级id

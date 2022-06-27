@@ -2,6 +2,7 @@ package com.ms.blogserver.service.api;
 
 import com.github.pagehelper.PageInfo;
 import com.ms.blogserver.core.base.BaseDTO;
+import com.ms.blogserver.core.base.BaseService;
 import com.ms.blogserver.model.vo.AnnouncementVO;
 import com.ms.blogserver.model.vo.ArticleCardVO;
 import com.ms.blogserver.model.vo.HomeCardVO;
@@ -11,24 +12,27 @@ import com.ms.blogserver.model.vo.HomeCardVO;
  * @author: zhh
  * @time: 2021/11/4
  */
-public interface HomeService {
+public interface HomeService extends BaseService {
 
     /**
      * 文章分页
-     * @param dto
-     * @return
+     *
+     * @param dto dto
+     * @return {@link PageInfo}<{@link ArticleCardVO}>
      */
     PageInfo<ArticleCardVO> getPage(BaseDTO dto);
 
     /**
      * 获取主页信息
-     * @return
+     *
+     * @return {@link HomeCardVO}
      */
     HomeCardVO getHomeCard();
 
     /**
      * 获取最新公告
-     * @return
+     *
+     * @return {@link AnnouncementVO}
      */
     AnnouncementVO getAnnouncement();
 }

@@ -1,6 +1,6 @@
 package com.ms.blogserver.service.entity;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.ms.blogserver.core.base.EntityService;
 import com.ms.blogserver.mapper.AnnouncementMapper;
 import com.ms.blogserver.model.entity.Announcement;
 
@@ -9,5 +9,5 @@ import com.ms.blogserver.model.entity.Announcement;
  * @author: zhh
  * @time: 2021/11/16
  */
-public interface AnnouncementService extends IService<Announcement> {
+public interface AnnouncementService extends EntityService<Announcement, AnnouncementMapper> {
 }

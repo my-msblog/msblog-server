@@ -1,6 +1,7 @@
 package com.ms.blogserver.service.entity;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.ms.blogserver.core.base.EntityService;
+import com.ms.blogserver.mapper.CategoryMapper;
 import com.ms.blogserver.model.entity.Category;
 import com.ms.blogserver.model.vo.CategoryVO;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author: zhh
  * @time: 2021/6/4
  */
-public interface CategoryService extends IService<Category> {
+public interface CategoryService extends EntityService<Category, CategoryMapper> {
 
     /**
      * 获取文章分类

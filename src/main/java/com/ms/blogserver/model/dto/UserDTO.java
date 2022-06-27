@@ -4,6 +4,8 @@ import com.ms.blogserver.core.base.BaseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+
 /**
  * @description:
  * @author: zhh
@@ -11,7 +13,8 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class UserDTO extends BaseDTO {
+public class UserDTO extends BaseDTO implements Serializable {
+    private static final long serialVersionUID = -2518369316766231780L;
     private Long id;
     private String username;
     private String pwd;

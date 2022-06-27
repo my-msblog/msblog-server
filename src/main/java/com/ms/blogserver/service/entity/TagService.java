@@ -1,6 +1,7 @@
 package com.ms.blogserver.service.entity;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.ms.blogserver.core.base.EntityService;
+import com.ms.blogserver.mapper.TagMapper;
 import com.ms.blogserver.model.entity.Tag;
 import com.ms.blogserver.model.vo.ArticleCategoryVO;
 import com.ms.blogserver.model.vo.TagVO;
@@ -12,7 +13,7 @@ import java.util.List;
  * @author: zhh
  * @time: 2021/6/11
  */
-public interface TagService extends IService<Tag> {
+public interface TagService extends EntityService<Tag, TagMapper> {
 
     /**
      * 获取标签列表

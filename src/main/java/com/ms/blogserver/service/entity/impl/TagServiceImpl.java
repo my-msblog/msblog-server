@@ -1,15 +1,17 @@
 package com.ms.blogserver.service.entity.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.toolkit.SimpleQuery;
 import com.ms.blogserver.converter.bo.ArticleBoConverter;
 import com.ms.blogserver.converter.vo.ArticleCategoryVoConverter;
 import com.ms.blogserver.converter.vo.TagVoConverter;
+import com.ms.blogserver.core.base.EntityServiceImpl;
 import com.ms.blogserver.mapper.TagMapper;
 import com.ms.blogserver.model.bo.ArticleBO;
 import com.ms.blogserver.model.entity.Article;
 import com.ms.blogserver.model.entity.ArticleTag;
+import com.ms.blogserver.model.entity.Category;
 import com.ms.blogserver.model.entity.Tag;
 import com.ms.blogserver.model.vo.ArticleCategoryVO;
 import com.ms.blogserver.model.vo.TagVO;
@@ -21,9 +23,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  * @time: 2021/6/11
  */
 @Service
-public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagService {
+public class TagServiceImpl extends EntityServiceImpl<Tag,TagMapper> implements TagService {
 
     @Autowired
     private ArticleTagService articleTagService;
@@ -64,18 +64,25 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
             return new ArrayList<>();
         }
         List<ArticleBO> articleBOList = ArticleBoConverter.INSTANCE.toDataList(articleList);
+        Map<Integer, String> typeMap = SimpleQuery.map(categoryService.lambdaQueryWrapper().in(Category::getCategoryId,
+                        articleBOList.stream().map(ArticleBO::getType).collect(Collectors.toList())),
+                Category::getCategoryId,
+                Category::getCategory);
+        Map<Long, List<Long>> tagIdMap = SimpleQuery.group(Wrappers.<ArticleTag>lambdaQuery()
+                        .in(ArticleTag::getArticleId, articleIdList),
+                ArticleTag::getArticleId, Collectors.mapping(ArticleTag::getTagId, Collectors.toList()));
+        Set<Long> idSet = new HashSet<>();
+        tagIdMap.forEach((k,v) -> idSet.addAll(v));
+        Map<Long, Tag> tagMap = SimpleQuery.keyMap(lambdaQueryWrapper(Tag.class).in(Tag::getId, idSet), Tag::getId);
         articleBOList.forEach(item ->{
-            String type = categoryService.getCategoryByCid(item.getType());
+            String type = typeMap.get(item.getType());
             item.setTypeName(type);
-            List<Long> tagIds = articleTagService
-                    .list(new LambdaQueryWrapper<ArticleTag>().eq(ArticleTag::getArticleId, item.getId()))
-                    .stream()
-                    .map(ArticleTag::getTagId)
-                    .collect(Collectors.toList());
-            List<TagVO> tagVOList = new ArrayList<>();
-            if (CollectionUtils.isNotEmpty(tagIds)){
-                List<Tag> tagList = list(new LambdaQueryWrapper<Tag>().in(Tag::getId, tagIds));
-                tagVOList = TagVoConverter.INSTANCE.toDataList(tagList);
+            List<Long> tagIds = tagIdMap.get(item.getId());
+            List<TagVO> tagVOList = new LinkedList<>();
+            for (Long tagId : tagIds){
+                Tag tag = tagMap.get(tagId);
+                TagVO tagVO = TagVoConverter.INSTANCE.toData(tag);
+                tagVOList.add(tagVO);
             }
             item.setTagVOList(tagVOList);
         });

@@ -3,15 +3,13 @@ package com.ms.blogserver.core.base;
 import com.ms.blogserver.core.constant.contexts.DigitalContexts;
 import lombok.ToString;
 
-import java.io.Serializable;
-
 /**
  * @description:
  * @author: zhh
  * @time: 2021/6/2
  */
 @ToString
-public class BaseDTO implements Serializable {
+public class BaseDTO {
 
     private Integer page;
     private Integer size;

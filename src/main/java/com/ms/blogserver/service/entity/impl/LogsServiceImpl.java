@@ -1,7 +1,7 @@
 package com.ms.blogserver.service.entity.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ms.blogserver.core.base.EntityServiceImpl;
 import com.ms.blogserver.mapper.LogsMapper;
 import com.ms.blogserver.model.bo.FileSimpleBO;
 import com.ms.blogserver.model.entity.Logs;
@@ -20,8 +20,7 @@ import java.util.Objects;
  * @time: 2021/9/20
  */
 @Service
-public class LogsServiceImpl extends ServiceImpl<LogsMapper, Logs> implements LogsService{
-
+public class LogsServiceImpl extends EntityServiceImpl<Logs,LogsMapper> implements LogsService{
 
     @Override
     public void filterLogs(List<FileSimpleBO> list) {

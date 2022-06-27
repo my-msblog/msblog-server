@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
 
-import java.io.Serializable;
-
 /**
  * @description:
  * @author: zhh
@@ -14,7 +12,7 @@ import java.io.Serializable;
 @Data
 @ToString
 @AllArgsConstructor
-public class BaseOptions <R, T> implements Serializable {
+public class BaseOptions <R, T> {
     private R value;
     private T label;
 

@@ -1,20 +1,20 @@
 package com.ms.blogserver.service.entity.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ms.blogserver.core.constant.contexts.LoginContexts;
 import com.ms.blogserver.converter.dto.UserTableChangeDtoConverter;
-import com.ms.blogserver.core.exception.CustomException;
+import com.ms.blogserver.core.base.EntityServiceImpl;
+import com.ms.blogserver.core.constant.contexts.LoginContexts;
 import com.ms.blogserver.core.constant.contexts.RoleContexts;
+import com.ms.blogserver.core.exception.CustomException;
 import com.ms.blogserver.core.exception.ProgramException;
+import com.ms.blogserver.mapper.UserMapper;
 import com.ms.blogserver.model.dto.UserTableChangeDTO;
+import com.ms.blogserver.model.entity.User;
 import com.ms.blogserver.model.entity.UserRole;
 import com.ms.blogserver.service.entity.UserRoleService;
-import com.ms.blogserver.utils.RegularUtils;
-import com.ms.blogserver.utils.EncryptPassword;
-import com.ms.blogserver.model.entity.User;
-import com.ms.blogserver.mapper.UserMapper;
 import com.ms.blogserver.service.entity.UserService;
+import com.ms.blogserver.utils.EncryptPassword;
+import com.ms.blogserver.utils.RegularUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +28,7 @@ import java.util.Objects;
  * @time: 2021/6/11
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+public class UserServiceImpl extends EntityServiceImpl<User, UserMapper> implements UserService {
 
     @Autowired
     private UserRoleService userRoleService;

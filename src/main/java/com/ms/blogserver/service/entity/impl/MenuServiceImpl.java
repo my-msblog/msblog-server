@@ -1,11 +1,11 @@
 package com.ms.blogserver.service.entity.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ms.blogserver.core.base.EntityServiceImpl;
+import com.ms.blogserver.mapper.MenuMapper;
 import com.ms.blogserver.model.entity.Menu;
 import com.ms.blogserver.model.entity.PermissionMenu;
 import com.ms.blogserver.model.entity.RolePermission;
-import com.ms.blogserver.mapper.MenuMapper;
 import com.ms.blogserver.model.vo.MenuVO;
 import com.ms.blogserver.service.entity.MenuService;
 import com.ms.blogserver.service.entity.PermissionMenuService;
@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  * @time: 2021/5/21
  */
 @Service
-public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements MenuService {
+public class MenuServiceImpl extends EntityServiceImpl<Menu,MenuMapper> implements MenuService {
 
     @Autowired
     private UserRoleService userRoleService;

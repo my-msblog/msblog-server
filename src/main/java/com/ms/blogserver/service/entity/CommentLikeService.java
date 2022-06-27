@@ -1,6 +1,7 @@
 package com.ms.blogserver.service.entity;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.ms.blogserver.core.base.EntityService;
+import com.ms.blogserver.mapper.CommentLikeMapper;
 import com.ms.blogserver.model.entity.CommentLike;
 
 /**
@@ -8,5 +9,5 @@ import com.ms.blogserver.model.entity.CommentLike;
  * @author: zhh
  * @time: 2022/1/25
  */
-public interface CommentLikeService extends IService<CommentLike> {
+public interface CommentLikeService extends EntityService<CommentLike, CommentLikeMapper> {
 }

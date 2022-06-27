@@ -1,6 +1,7 @@
 package com.ms.blogserver.service.api;
 
 import com.ms.blogserver.core.base.BaseOptions;
+import com.ms.blogserver.core.base.BaseService;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @author: zhh
  * @time: 2022/3/13
  */
-public interface ContextService {
+public interface ContextService extends BaseService {
 
 
     /**
