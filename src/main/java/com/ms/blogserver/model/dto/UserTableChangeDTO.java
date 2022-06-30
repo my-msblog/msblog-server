@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 @Data
 public class UserTableChangeDTO implements Serializable {
+    private static final long serialVersionUID = 8171209167250546877L;
     private Long id;
     private String username;
     private String pwd;

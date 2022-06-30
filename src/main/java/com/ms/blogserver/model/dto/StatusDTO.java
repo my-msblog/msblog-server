@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 @Data
 public class StatusDTO implements Serializable {
+    private static final long serialVersionUID = -2509644708780575401L;
     private Long id;
     private String username;
     private Integer status;

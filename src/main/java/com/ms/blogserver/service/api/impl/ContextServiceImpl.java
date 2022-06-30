@@ -1,13 +1,16 @@
 package com.ms.blogserver.service.api.impl;
 
 import com.ms.blogserver.core.base.BaseOptions;
+import com.ms.blogserver.model.dto.ArticleCommitDTO;
 import com.ms.blogserver.model.entity.Category;
 import com.ms.blogserver.model.entity.Tag;
 import com.ms.blogserver.service.api.ContextService;
+import com.ms.blogserver.service.entity.ArticleService;
 import com.ms.blogserver.service.entity.CategoryService;
 import com.ms.blogserver.service.entity.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,9 @@ public class ContextServiceImpl implements ContextService {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private ArticleService articleService;
 
     @Override
     public List<BaseOptions<Integer, String>> getCategory() {
@@ -44,9 +50,20 @@ public class ContextServiceImpl implements ContextService {
         List<BaseOptions<Long, String>> resList = new ArrayList<>();
         List<Tag> tagList = tagService.list();
         tagList.forEach(tag -> {
-            resList.add(new BaseOptions<Long, String>(tag.getId(),tag.getNameZh()));
+            resList.add(new BaseOptions<>(tag.getId(), tag.getNameZh()));
         });
         return resList;
+    }
+
+    /**
+     * 文章提交
+     *
+     * @param dto dto
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void commit(ArticleCommitDTO dto) {
+
     }
 
 }

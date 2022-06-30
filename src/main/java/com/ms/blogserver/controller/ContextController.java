@@ -4,12 +4,11 @@ import com.ms.blogserver.core.base.BaseController;
 import com.ms.blogserver.core.base.BaseOptions;
 import com.ms.blogserver.core.constant.result.Result;
 import com.ms.blogserver.core.constant.result.ResultFactory;
+import com.ms.blogserver.model.dto.ArticleCommitDTO;
 import com.ms.blogserver.service.api.ContextService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,16 +30,26 @@ public class ContextController extends BaseController {
         try {
             List<BaseOptions<Integer, String>> category = contextService.getCategory();
             return ResultFactory.buildSuccessResult(category);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw exceptionHandle(e);
         }
     }
 
     @GetMapping("/tag/list")
     public Result<List<BaseOptions<Long, String>>> tagList() throws Exception {
-        try{
+        try {
             return ResultFactory.buildSuccessResult(contextService.getTag());
-        }catch (Exception e) {
+        } catch (Exception e) {
+            throw exceptionHandle(e);
+        }
+    }
+
+    @PostMapping("/article/commit")
+    public Result<String> commit(@RequestBody ArticleCommitDTO dto) throws Exception {
+        try {
+            contextService.commit(dto);
+            return ResultFactory.buildSuccessResult();
+        } catch (Exception e) {
             throw exceptionHandle(e);
         }
     }

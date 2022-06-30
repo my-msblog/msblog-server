@@ -2,6 +2,7 @@ package com.ms.blogserver.service.api;
 
 import com.ms.blogserver.core.base.BaseOptions;
 import com.ms.blogserver.core.base.BaseService;
+import com.ms.blogserver.model.dto.ArticleCommitDTO;
 
 import java.util.List;
 
@@ -26,4 +27,11 @@ public interface ContextService extends BaseService {
      * @return {@link List}<{@link BaseOptions}<{@link Integer}, {@link String}>>
      */
     List<BaseOptions<Long, String>> getTag();
+
+    /**
+     * 文章提交
+     *
+     * @param dto dto
+     */
+    void commit(ArticleCommitDTO dto);
 }
