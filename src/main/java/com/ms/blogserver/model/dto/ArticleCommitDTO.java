@@ -13,10 +13,12 @@ import java.util.List;
 @Data
 public class ArticleCommitDTO implements Serializable {
     private static final long serialVersionUID = 1314161094854596066L;
+
     private String text;
+    private String title;
     private List<Long> tagList;
     private String context;
-    private Long category;
+    private Integer category;
     private Long writerId;
     private String cover;
 }

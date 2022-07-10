@@ -1,7 +1,10 @@
 package com.ms.blogserver.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -14,6 +17,9 @@ import java.time.LocalDateTime;
  */
 @Data
 @TableName(value = "ms_article")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Article implements Serializable {
     private static final long serialVersionUID = 609371007308965968L;
     @TableId(type = IdType.ASSIGN_ID)
