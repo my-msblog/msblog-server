@@ -1,6 +1,8 @@
 package com.ms.blogserver.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.ms.blogserver.core.base.BaseVO;
 import lombok.Data;
 
@@ -14,6 +16,7 @@ import java.util.List;
  */
 @Data
 public class ArticleVO implements BaseVO {
+    @JsonSerialize(using= ToStringSerializer.class)
     private Long id;
     private String title;
     private String content;

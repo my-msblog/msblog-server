@@ -71,7 +71,12 @@ public class ContextServiceImpl implements ContextService {
                 .cover(dto.getCover()).reading(DigitalContexts.ZERO)
                 .type(dto.getCategory()).build();
         articleService.save(article);
-        Long articleId = articleService.lambdaQuery().select(Article::getId).orderByDesc(Article::getCreateTime).one().getId();
+        Long articleId = articleService.lambdaQuery()
+                .select(Article::getId)
+                .orderByDesc(Article::getCreateTime)
+                .last("limit 1")
+                .one()
+                .getId();
         List<ArticleTag> articleTagList = new LinkedList<>();
         dto.getTagList().forEach(item -> articleTagList.add(ArticleTag.builder().articleId(articleId).tagId(item).build()));
         articleTagService.saveBatch(articleTagList);

@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @Builder
 public class Article implements Serializable {
     private static final long serialVersionUID = 609371007308965968L;
-    @TableId(type = IdType.ASSIGN_ID)
+    @TableId(type = IdType.AUTO)
     private Long id;
     private String title;
     private String content;

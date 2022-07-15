@@ -84,7 +84,7 @@ public class ArticleServiceImpl extends EntityServiceImpl<Article,ArticleMapper>
             articleVO.setWriter(userService.getById(article.getWriterId()).getUsername());
             return articleVO;
         } catch (Exception e) {
-           throw new CustomException(e.getMessage());
+           throw new CustomException(e);
         }
     }
 
