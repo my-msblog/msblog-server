@@ -3,6 +3,8 @@ package com.ms.blogserver.service.api;
 import com.ms.blogserver.core.base.BaseOptions;
 import com.ms.blogserver.core.base.BaseService;
 import com.ms.blogserver.model.dto.ArticleCommitDTO;
+import com.ms.blogserver.model.dto.IdDTO;
+import com.ms.blogserver.model.vo.ArticleEditVO;
 
 import java.util.List;
 
@@ -34,4 +36,12 @@ public interface ContextService extends BaseService {
      * @param dto dto
      */
     void commit(ArticleCommitDTO dto);
+
+    /**
+     * 获取编辑文章
+     *
+     * @param dto dto
+     * @return {@link ArticleEditVO}
+     */
+    ArticleEditVO getEditArticle(IdDTO dto);
 }

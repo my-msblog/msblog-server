@@ -81,6 +81,17 @@ public class ArticleServiceImpl extends EntityServiceImpl<Article,ArticleMapper>
                     .length());
             int sum = watches.stream().mapToInt(item -> item.getArticleId().equals(article.getId()) ? 1 : 0).sum();
             articleVO.setReading(articleVO.getReading() + sum);
+            List<Long> tagIds = articleTagService
+                    .list(new LambdaQueryWrapper<ArticleTag>().eq(ArticleTag::getArticleId, article.getId()))
+                    .stream()
+                    .map(ArticleTag::getTagId)
+                    .collect(Collectors.toList());
+            List<TagVO> tagVOList = new ArrayList<>();
+            if (CollectionUtils.isNotEmpty(tagIds)){
+                List<Tag> tagList = tagService.list(new LambdaQueryWrapper<Tag>().in(Tag::getId, tagIds));
+                tagVOList = TagVoConverter.INSTANCE.toDataList(tagList);
+            }
+            articleVO.setTags(tagVOList);
             articleVO.setWriter(userService.getById(article.getWriterId()).getUsername());
             return articleVO;
         } catch (Exception e) {

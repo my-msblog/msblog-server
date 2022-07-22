@@ -5,6 +5,8 @@ import com.ms.blogserver.core.base.BaseOptions;
 import com.ms.blogserver.core.constant.result.Result;
 import com.ms.blogserver.core.constant.result.ResultFactory;
 import com.ms.blogserver.model.dto.ArticleCommitDTO;
+import com.ms.blogserver.model.dto.IdDTO;
+import com.ms.blogserver.model.vo.ArticleEditVO;
 import com.ms.blogserver.service.api.ContextService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +53,16 @@ public class ContextController extends BaseController {
             return ResultFactory.buildSuccessResult();
         } catch (Exception e) {
             throw exceptionHandle(e);
+        }
+    }
+
+    @PostMapping(value = "/get/edit/article")
+    public Result<ArticleEditVO> getEditArticle(@RequestBody IdDTO dto) throws Exception{
+        try {
+            ArticleEditVO editArticle = contextService.getEditArticle(dto);
+            return ResultFactory.buildSuccessResult(editArticle);
+        } catch (Exception e) {
+            throw this.exceptionHandle(e);
         }
     }
 }

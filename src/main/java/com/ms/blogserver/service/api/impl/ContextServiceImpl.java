@@ -1,23 +1,32 @@
 package com.ms.blogserver.service.api.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.ms.blogserver.converter.vo.ArticleEditVoConverter;
+import com.ms.blogserver.converter.vo.TagVoConverter;
 import com.ms.blogserver.core.base.BaseOptions;
 import com.ms.blogserver.core.constant.contexts.DigitalContexts;
 import com.ms.blogserver.model.dto.ArticleCommitDTO;
+import com.ms.blogserver.model.dto.IdDTO;
 import com.ms.blogserver.model.entity.Article;
 import com.ms.blogserver.model.entity.ArticleTag;
 import com.ms.blogserver.model.entity.Category;
 import com.ms.blogserver.model.entity.Tag;
+import com.ms.blogserver.model.vo.ArticleEditVO;
+import com.ms.blogserver.model.vo.TagVO;
 import com.ms.blogserver.service.api.ContextService;
 import com.ms.blogserver.service.entity.ArticleService;
 import com.ms.blogserver.service.entity.ArticleTagService;
 import com.ms.blogserver.service.entity.CategoryService;
 import com.ms.blogserver.service.entity.TagService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @description:
@@ -82,4 +91,22 @@ public class ContextServiceImpl implements ContextService {
         articleTagService.saveBatch(articleTagList);
     }
 
+    @Override
+    public ArticleEditVO getEditArticle(IdDTO dto) {
+        Article article = articleService.getById(dto.getId());
+        ArticleEditVO res = ArticleEditVoConverter.INSTANCE.toData(article);
+        List<Long> tagIds = articleTagService
+                .list(new LambdaQueryWrapper<ArticleTag>().eq(ArticleTag::getArticleId, article.getId()))
+                .stream()
+                .map(ArticleTag::getTagId)
+                .collect(Collectors.toList());
+        List<TagVO> tagVOList = new ArrayList<>();
+        if (CollectionUtils.isNotEmpty(tagIds)){
+            List<Tag> tagList = tagService.list(new LambdaQueryWrapper<Tag>().in(Tag::getId, tagIds));
+            tagVOList = TagVoConverter.INSTANCE.toDataList(tagList);
+        }
+        res.setTags(tagVOList);
+
+        return null;
+    }
 }
